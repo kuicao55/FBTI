@@ -10,8 +10,8 @@
 
 ## Current Position
 - milestone_id: milestone-1
-- task_id: task-3
-- tasks_completed: [task-1, task-2]
+- task_id: task-4
+- tasks_completed: [task-1, task-2, task-3]
 
 ## Session History
 - session-2026-04-11-001: Task 1 DONE, Task 2 DONE (SPEC_COMPLIANT → PASS). Focus-visible states on buttons deferred to Task 10.

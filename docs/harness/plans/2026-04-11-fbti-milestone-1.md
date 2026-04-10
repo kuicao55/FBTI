@@ -25,7 +25,7 @@
 
 - [x] Task 1: HTML scaffold — three-screen structure + CSS token definitions + font imports
 - [x] Task 2: CSS styling — Anthropic design tokens, layout, typography, animations
-- [ ] Task 3: Welcome screen — FBTI logo, title, tagline, CTA button
+- [x] Task 3: Welcome screen — FBTI logo, title, tagline, CTA button
 - [ ] Task 4: Quiz screen — progress bar, question display, option buttons, question transition
 - [ ] Task 5: Quiz data — embed all 16 questions, 16 type descriptions, 16 SVG avatars
 - [ ] Task 6: Quiz state machine — answer collection, scoring algorithm, navigation

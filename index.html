@@ -3,6 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="16道情景题，发现你的味觉人格。TasteType 口味人格测试。">
+  <meta property="og:title" content="口味人格测试 · TasteType">
+  <meta property="og:description" content="16道情景题，发现你的味觉人格。">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="assets/FBTI_logo.svg" type="image/svg+xml">
   <title>FBT Intelligence Quiz</title>
 
   <!-- Google Fonts preconnect -->
@@ -118,6 +123,11 @@
     .btn-secondary:hover {
       background: rgba(217,119,87,0.06);
       transform: translateY(-1px);
+    }
+    .btn-primary:focus-visible,
+    .btn-secondary:focus-visible {
+      outline: 2px solid var(--color-accent);
+      outline-offset: 2px;
     }
 
     /* Option Cards */
@@ -405,7 +415,7 @@
       SCTP: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#827717" stroke="#5D4037" stroke-width="4"/><rect x="60" y="65" width="80" height="70" rx="8" fill="#9E9D24" opacity="0.4"/><circle cx="75" cy="80" r="4" fill="white"/><circle cx="95" cy="75" r="5" fill="white"/><circle cx="85" cy="100" r="4" fill="white"/><circle cx="115" cy="90" r="5" fill="white"/><circle cx="125" cy="110" r="4" fill="white"/><path d="M75 85 Q85 70 95 85 Q105 70 115 85" fill="none" stroke="#D32F2F" stroke-width="3"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SCTP</text></svg>',
       SWNU: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#C2185B" stroke="#880E4F" stroke-width="4"/><path d="M60 130 Q80 100 100 120 Q120 100 140 130 Q130 150 100 145 Q70 150 60 130Z" fill="#FF5722"/><ellipse cx="100" cy="130" rx="20" ry="12" fill="#FF8A65"/><circle cx="90" cy="125" r="6" fill="#FFCC80"/><circle cx="110" cy="128" r="5" fill="#FFCC80"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWNU</text></svg>',
       SWNP: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#AD1457" stroke="#4A0024" stroke-width="4"/><path d="M65 85 Q65 55 100 55 Q135 55 135 85 L130 120 Q100 130 70 120Z" fill="#6D4C41" stroke="#3E2723" stroke-width="3"/><ellipse cx="100" cy="85" rx="32" ry="10" fill="#D32F2F" opacity="0.9"/><path d="M75 95 Q100 110 125 95" fill="none" stroke="#FF8A65" stroke-width="3"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWNP</text></svg>',
-      SWTU: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#AD1457" stroke="#4A0024" stroke-width="4"/><path d="M65 85 Q65 55 100 55 Q135 55 135 85 L130 120 Q100 130 70 120Z" fill="#6D4C41" stroke="#3E2723" stroke-width="3"/><ellipse cx="100" cy="85" rx="32" ry="10" fill="#D32F2F" opacity="0.9"/><path d="M75 95 Q100 110 125 95" fill="none" stroke="#FF8A65" stroke-width="3"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWTU</text></svg>',
+      SWTU: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#2E7D32" stroke="#1B5E20" stroke-width="4"/><path d="M65 85 Q65 55 100 55 Q135 55 135 85 L130 120 Q100 130 70 120Z" fill="#5D4037" stroke="#3E2723" stroke-width="3"/><ellipse cx="100" cy="85" rx="32" ry="10" fill="#8D6E63" opacity="0.9"/><path d="M75 95 Q100 110 125 95" fill="none" stroke="#A1887F" stroke-width="3"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWTU</text></svg>',
       SWTP: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#6A1B9A" stroke="#38006B" stroke-width="4"/><path d="M70 70 Q100 50 130 70 L120 100 Q100 110 80 100Z" fill="#FFF9C4" opacity="0.8"/><path d="M75 75 Q100 60 125 75" fill="none" stroke="#D32F2F" stroke-width="4" stroke-linecap="round"/><circle cx="90" cy="80" r="5" fill="#D32F2F"/><circle cx="110" cy="85" r="4" fill="#D32F2F"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWTP</text></svg>',
       MCNU: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#1565C0" stroke="#0D47A1" stroke-width="4"/><ellipse cx="100" cy="85" rx="25" ry="18" fill="#8D6E63"/><ellipse cx="100" cy="85" rx="20" ry="14" fill="#D84315"/><line x1="100" y1="103" x2="100" y2="125" stroke="#5D4037" stroke-width="4"/><path d="M75 70 Q80 50 90 55 Q85 65 80 70" fill="none" stroke="#4CAF50" stroke-width="3"/><path d="M115 75 Q120 55 110 50 Q115 65 112 75" fill="none" stroke="#4CAF50" stroke-width="3"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">MCNU</text></svg>',
       MCNP: '<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"><circle cx="100" cy="100" r="90" fill="#00838F" stroke="#004D40" stroke-width="4"/><circle cx="85" cy="70" r="15" fill="#FFF59D"/><circle cx="115" cy="70" r="15" fill="#FFF59D"/><rect x="75" y="90" width="50" height="35" rx="6" fill="#FFCC80" transform="rotate(-10 100 105)"/><line x1="80" y1="95" x2="90" y2="115" stroke="#5D4037" stroke-width="2"/><line x1="95" y1="92" x2="100" y2="115" stroke="#5D4037" stroke-width="2"/><line x1="108" y1="90" x2="110" y2="112" stroke="#5D4037" stroke-width="2"/><text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">MCNP</text></svg>',
@@ -437,7 +447,14 @@
         const card = document.createElement('div');
         card.className = 'option-card fade-in-up';
         card.style.animationDelay = (i * 80) + 'ms';
-        card.innerHTML = '<span class="option-letter">' + letters[i] + '.</span><span class="option-text">' + opt + '</span>';
+        var letterSpan = document.createElement('span');
+        letterSpan.className = 'option-letter';
+        letterSpan.textContent = letters[i] + '.';
+        var textSpan = document.createElement('span');
+        textSpan.className = 'option-text';
+        textSpan.textContent = opt;
+        card.appendChild(letterSpan);
+        card.appendChild(textSpan);
         card.addEventListener('click', function() { selectOption(index, letters[i]); });
         optionsEl.appendChild(card);
       });
@@ -462,6 +479,9 @@
     }
 
     function calculateType(answers) {
+      if (!answers || answers.length < 16) {
+        return 'SCNU'; // fallback
+      }
       // Dim1 S/M (Q1-Q4, indices 0-3): A=+1, D=+0.5, B/C=+0 → S if score >= 2.5, else M
       var dim1 = 0;
       for (var i = 0; i <= 3; i++) {
@@ -529,11 +549,30 @@
     document.getElementById('btn-retake').addEventListener('click', retakeQuiz);
 
     function copyLink() {
-      navigator.clipboard.writeText(window.location.href).then(function() {
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(window.location.href).then(function() {
+          showToast('链接已复制 ✓');
+        }).catch(function() {
+          fallbackCopy();
+        });
+      } else {
+        fallbackCopy();
+      }
+    }
+    function fallbackCopy() {
+      var textArea = document.createElement('textarea');
+      textArea.value = window.location.href;
+      textArea.style.position = 'fixed';
+      textArea.style.opacity = '0';
+      document.body.appendChild(textArea);
+      textArea.select();
+      try {
+        document.execCommand('copy');
         showToast('链接已复制 ✓');
-      }).catch(function() {
+      } catch(err) {
         showToast('复制失败，请长按复制');
-      });
+      }
+      document.body.removeChild(textArea);
     }
 
     function retakeQuiz() {

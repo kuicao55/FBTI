@@ -4,5 +4,5 @@
   <path d="M65 85 Q65 55 100 55 Q135 55 135 85 L130 120 Q100 130 70 120Z" fill="#6D4C41" stroke="#3E2723" stroke-width="3"/>
   <ellipse cx="100" cy="85" rx="32" ry="10" fill="#D32F2F" opacity="0.9"/>
   <path d="M75 95 Q100 110 125 95" fill="none" stroke="#FF8A65" stroke-width="3"/>
-  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWTU</text>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWNP</text>
 </svg>

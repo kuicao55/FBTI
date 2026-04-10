@@ -10,8 +10,11 @@
 
 ## Current Position
 - milestone_id: milestone-1
-- task_id: task-6
-- tasks_completed: [task-1, task-2, task-3, task-4, task-5]
+- task_id: task-7
+- tasks_completed: [task-1, task-2, task-3, task-4, task-5, task-6]
+
+## Session History
+- session-2026-04-11-001: Tasks 1-6 DONE. Scoring, state machine, result container, URL parsing. Retake button, array validation, focus-visible deferred to Task 10.
 
 ## Session History
 - session-2026-04-11-001: Tasks 1-5 DONE. All 16 questions, types, SVGs embedded. Duplicate SWNP/SWTU SVG noted.

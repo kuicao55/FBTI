@@ -234,6 +234,45 @@
       background: var(--color-bg-inverted);
       color: white;
     }
+
+    /* === QUIZ SCREEN === */
+    .quiz-wrap {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: var(--space-16) 0;
+    }
+    .quiz-header {
+      margin-bottom: var(--space-10);
+    }
+    .quiz-question-text {
+      font-family: var(--font-body);
+      font-size: 20px;
+      color: var(--color-text-primary);
+      line-height: 1.6;
+      margin-bottom: var(--space-8);
+    }
+    .quiz-options { display: flex; flex-direction: column; }
+
+    /* Question transition */
+    #screen-quiz { overflow-x: hidden; }
+    .quiz-panel {
+      transition: transform var(--duration-normal) var(--ease-default),
+                  opacity var(--duration-normal);
+    }
+    .quiz-panel.exit-left {
+      transform: translateX(-40px);
+      opacity: 0;
+    }
+    .quiz-panel.enter-right {
+      transform: translateX(40px);
+      opacity: 0;
+    }
+    .quiz-panel.enter-center {
+      transform: translateX(0);
+      opacity: 1;
+    }
   </style>
 </head>
 <body>
@@ -247,7 +286,24 @@
       <button id="btn-start" class="btn-primary fade-in-up stagger-4" style="max-width: 320px;">开始测试</button>
     </div>
   </section>
-  <section id="screen-quiz" class="screen"></section>
+  <section id="screen-quiz" class="screen">
+    <div class="container" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
+      <div class="quiz-wrap">
+        <div class="quiz-header fade-in-up stagger-1">
+          <div class="progress-wrap">
+            <div class="progress-track">
+              <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+            </div>
+            <span class="progress-label" id="progress-label">1 / 16</span>
+          </div>
+          <p class="quiz-question-text" id="question-text">题目加载中…</p>
+        </div>
+        <div class="quiz-options" id="quiz-options">
+          <!-- Options populated by JS -->
+        </div>
+      </div>
+    </div>
+  </section>
   <section id="screen-result" class="screen"></section>
 
   <!-- Placeholder script for later -->
@@ -261,7 +317,64 @@
 
     document.getElementById('btn-start').addEventListener('click', function() {
       showScreen('quiz');
+      showQuestion(0);
     });
+
+    let currentQuestion = 0;
+    let answers = [];
+
+    // Placeholder — will be replaced with full questions in Task 5
+    const questions = [
+      { text: '题目加载中…', options: ['选项A', '选项B', '选项C', '选项D'] }
+    ];
+
+    function showQuestion(index) {
+      const q = questions[index];
+      const total = questions.length;
+
+      // Update progress
+      document.getElementById('progress-fill').style.width = ((index) / total * 100) + '%';
+      document.getElementById('progress-label').textContent = (index + 1) + ' / ' + total;
+
+      // Update question text
+      const questionText = document.getElementById('question-text');
+      questionText.textContent = q.text;
+
+      // Render options
+      const optionsEl = document.getElementById('quiz-options');
+      optionsEl.innerHTML = '';
+      const letters = ['A', 'B', 'C', 'D'];
+      q.options.forEach(function(opt, i) {
+        const card = document.createElement('div');
+        card.className = 'option-card fade-in-up';
+        card.style.animationDelay = (i * 80) + 'ms';
+        card.innerHTML = '<span class="option-letter">' + letters[i] + '.</span><span class="option-text">' + opt + '</span>';
+        card.addEventListener('click', function() { selectOption(index, letters[i]); });
+        optionsEl.appendChild(card);
+      });
+    }
+
+    function selectOption(questionIndex, letter) {
+      answers[questionIndex] = letter;
+      if (questionIndex < questions.length - 1) {
+        // Transition to next question
+        const panel = document.querySelector('#screen-quiz .quiz-wrap');
+        panel.classList.add('exit-left');
+        setTimeout(function() {
+          showQuestion(questionIndex + 1);
+          panel.classList.remove('exit-left');
+          panel.classList.add('enter-center');
+          setTimeout(function() { panel.classList.remove('enter-center'); }, 300);
+        }, 200);
+      } else {
+        // Last question — show result
+        showResult();
+      }
+    }
+
+    function showResult() {
+      alert('Quiz complete! (Result screen comes in Task 7)');
+    }
   </script>
 </body>
 </html>

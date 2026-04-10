@@ -1,0 +1,9 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#2E7D32" stroke="#1B5E20" stroke-width="4"/>
+  <!-- 烧鹅 -->
+  <path d="M70 70 Q100 40 130 70 Q135 100 120 115 Q100 125 80 115 Q65 100 70 70Z" fill="#D84315" stroke="#BF360C" stroke-width="2"/>
+  <path d="M90 50 L100 30 L110 50" fill="none" stroke="#BF360C" stroke-width="3"/>
+  <!-- 脆皮高光 -->
+  <path d="M80 75 Q100 60 120 75" fill="none" stroke="#FFAB91" stroke-width="3" stroke-linecap="round"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">MCTU</text>
+</svg>

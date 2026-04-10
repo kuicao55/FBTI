@@ -1,0 +1,10 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#E65100" stroke="#BF360C" stroke-width="4"/>
+  <!-- 烧瓶 + 辣椒分子 -->
+  <rect x="80" y="45" width="15" height="50" rx="3" fill="none" stroke="white" stroke-width="3"/>
+  <circle cx="87.5" cy="105" r="12" fill="none" stroke="white" stroke-width="3"/>
+  <path d="M87.5 95 L87.5 55" stroke="white" stroke-width="3"/>
+  <path d="M95 80 Q105 70 110 80 Q115 70 120 80 Q115 90 110 85 Q105 90 100 80Z" fill="#FFC107"/>
+  <circle cx="108" cy="75" r="3" fill="#FFC107"/>
+  <text x="100" y="150" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SCNP</text>
+</svg>

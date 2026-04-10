@@ -1,0 +1,11 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#90A4AE" stroke="#607D8B" stroke-width="4"/>
+  <!-- 白粥碗 -->
+  <path d="M65 80 Q65 60 100 55 Q135 60 135 80 L130 115 Q100 125 70 115Z" fill="white" stroke="#CFD8DC" stroke-width="2"/>
+  <ellipse cx="100" cy="80" rx="32" ry="8" fill="#ECEFF1"/>
+  <!-- 几粒米 -->
+  <ellipse cx="85" cy="85" rx="4" ry="2" fill="#B0BEC5" transform="rotate(30 85 85)"/>
+  <ellipse cx="110" cy="90" rx="4" ry="2" fill="#B0BEC5" transform="rotate(-20 110 90)"/>
+  <ellipse cx="95" cy="100" rx="3" ry="1.5" fill="#B0BEC5" transform="rotate(15 95 100)"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">MWTP</text>
+</svg>

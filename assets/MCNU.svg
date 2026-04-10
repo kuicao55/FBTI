@@ -1,0 +1,10 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#1565C0" stroke="#0D47A1" stroke-width="4"/>
+  <!-- 烤鸡腿 + 迷迭香 -->
+  <ellipse cx="100" cy="85" rx="25" ry="18" fill="#8D6E63"/>
+  <ellipse cx="100" cy="85" rx="20" ry="14" fill="#D84315"/>
+  <line x1="100" y1="103" x2="100" y2="125" stroke="#5D4037" stroke-width="4"/>
+  <path d="M75 70 Q80 50 90 55 Q85 65 80 70" fill="none" stroke="#4CAF50" stroke-width="3"/>
+  <path d="M115 75 Q120 55 110 50 Q115 65 112 75" fill="none" stroke="#4CAF50" stroke-width="3"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">MCNU</text>
+</svg>

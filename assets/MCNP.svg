@@ -1,0 +1,11 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#00838F" stroke="#004D40" stroke-width="4"/>
+  <!-- 柚子 + 脆片 -->
+  <circle cx="85" cy="70" r="15" fill="#FFF59D"/>
+  <circle cx="115" cy="70" r="15" fill="#FFF59D"/>
+  <rect x="75" y="90" width="50" height="35" rx="6" fill="#FFCC80" transform="rotate(-10 100 105)"/>
+  <line x1="80" y1="95" x2="90" y2="115" stroke="#5D4037" stroke-width="2"/>
+  <line x1="95" y1="92" x2="100" y2="115" stroke="#5D4037" stroke-width="2"/>
+  <line x1="108" y1="90" x2="110" y2="112" stroke="#5D4037" stroke-width="2"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">MCNP</text>
+</svg>

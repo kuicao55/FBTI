@@ -1,0 +1,9 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#C2185B" stroke="#880E4F" stroke-width="4"/>
+  <!-- 火山熔岩 + 软质食物 -->
+  <path d="M60 130 Q80 100 100 120 Q120 100 140 130 Q130 150 100 145 Q70 150 60 130Z" fill="#FF5722"/>
+  <ellipse cx="100" cy="130" rx="20" ry="12" fill="#FF8A65"/>
+  <circle cx="90" cy="125" r="6" fill="#FFCC80"/>
+  <circle cx="110" cy="128" r="5" fill="#FFCC80"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWNU</text>
+</svg>

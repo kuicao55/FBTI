@@ -1,0 +1,10 @@
+<svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="100" cy="100" r="90" fill="#4E342E" stroke="#3E2723" stroke-width="4"/>
+  <!-- 巧克力熔岩蛋糕 -->
+  <path d="M70 90 L130 90 L120 125 Q100 135 80 125Z" fill="#3E2723"/>
+  <ellipse cx="100" cy="90" rx="28" ry="10" fill="#5D4037"/>
+  <path d="M85 95 Q100 115 115 95" fill="none" stroke="#8D6E63" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="95" cy="100" r="4" fill="#D7CCC8" opacity="0.8"/>
+  <circle cx="110" cy="102" r="3" fill="#D7CCC8" opacity="0.8"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">MWNU</text>
+</svg>

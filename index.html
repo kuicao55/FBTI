@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FBT Intelligence Quiz</title>
+
+  <!-- Google Fonts preconnect -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <!-- Google Fonts link -->
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;1,400&family=Noto+Serif+SC:wght@400;600&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* CSS Reset */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    /* CSS Custom Properties (Design Tokens) */
+    :root {
+      /* Colors */
+      --color-bg-base: #ECE9E0;
+      --color-bg-raised: #F5F3EC;
+      --color-bg-inverted: #141413;
+      --color-accent: #D97757;
+      --color-text-primary: #141413;
+      --color-text-secondary: #6B6860;
+      --color-border: #D8D5CC;
+
+      /* Typography */
+      --font-display: 'Lora', serif;
+      --font-heading: 'Poppins', sans-serif;
+      --font-body: 'Lora', serif;
+
+      /* Spacing */
+      --space-4: 16px;
+      --space-6: 24px;
+      --space-8: 32px;
+      --space-10: 40px;
+      --space-16: 64px;
+
+      /* Border Radius */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 20px;
+      --radius-full: 9999px;
+
+      /* Transitions */
+      --duration-fast: 150ms;
+      --duration-normal: 250ms;
+      --duration-slow: 400ms;
+      --ease-default: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Base Body Styles */
+    body {
+      font-family: var(--font-body);
+      background-color: var(--color-bg-base);
+      color: var(--color-text-primary);
+      min-height: 100vh;
+    }
+
+    /* Screen Classes */
+    .screen {
+      display: none;
+      min-height: 100vh;
+    }
+
+    .screen.active {
+      display: flex;
+      flex-direction: column;
+    }
+  </style>
+</head>
+<body>
+  <section id="screen-welcome" class="screen active"></section>
+  <section id="screen-quiz" class="screen"></section>
+  <section id="screen-result" class="screen"></section>
+
+  <!-- Placeholder script for later -->
+  <script></script>
+</body>
+</html>

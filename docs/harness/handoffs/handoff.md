@@ -10,8 +10,11 @@
 
 ## Current Position
 - milestone_id: milestone-1
-- task_id: task-4
-- tasks_completed: [task-1, task-2, task-3]
+- task_id: task-5
+- tasks_completed: [task-1, task-2, task-3, task-4]
+
+## Session History
+- session-2026-04-11-001: Task 1-4 DONE. Focus-visible, bounds check, textContent, progress alignment deferred to Task 10.
 
 ## Session History
 - session-2026-04-11-001: Task 1 DONE, Task 2 DONE (SPEC_COMPLIANT → PASS). Focus-visible states on buttons deferred to Task 10.

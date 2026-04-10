@@ -30,7 +30,7 @@
 - [x] Task 5: Quiz data — embed all 16 questions, 16 type descriptions, 16 SVG avatars
 - [x] Task 6: Quiz state machine — answer collection, scoring algorithm, navigation
 - [x] Task 7: Result screen — avatar, type code, name, tagline, share buttons
-- [ ] Task 8: URL sharing — parse `?type=` on load, pushState on result, copy link
+- [x] Task 8: URL sharing — parse `?type=` on load, pushState on result, copy link
 - [ ] Task 9: Image sharing — Canvas-based 900×1200 PNG with QR code (qrcode.js CDN)
 - [ ] Task 10: Integration + browser testing
 

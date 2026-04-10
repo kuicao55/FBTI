@@ -329,7 +329,10 @@
   <!-- Toast element -->
   <div id="toast" class="toast">链接已复制 ✓</div>
 
-  <!-- Placeholder script for later -->
+  <!-- qrcode.js CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+
+  <!-- Main script -->
   <script>
     function showScreen(name) {
       document.querySelectorAll('.screen').forEach(function(s) {
@@ -540,8 +543,159 @@
       showScreen('welcome');
     }
 
-    function generateShareImage() {
-      showToast('图片生成中...');
+    async function generateShareImage() {
+      var typeCode;
+      if (answers.length !== 16) {
+        var urlParams = new URLSearchParams(window.location.search);
+        typeCode = urlParams.get('type') || 'SCNU';
+      } else {
+        typeCode = calculateType(answers);
+      }
+      if (!typeData[typeCode]) typeCode = 'SCNU';
+
+      var data = typeData[typeCode];
+      var W = 900, H = 1200;
+      var canvas = document.createElement('canvas');
+      canvas.width = W; canvas.height = H;
+      var ctx = canvas.getContext('2d');
+
+      // 1. Background
+      ctx.fillStyle = '#ECE9E0';
+      ctx.fillRect(0, 0, W, H);
+
+      // 2. Radial gradient overlay
+      var grad = ctx.createRadialGradient(W * 0.2, H * 0.1, 0, W * 0.2, H * 0.1, W * 0.8);
+      grad.addColorStop(0, 'rgba(217,119,87,0.08)');
+      grad.addColorStop(1, 'transparent');
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, W, H);
+
+      // 3. FBTI Logo (top center)
+      var logoImg = new Image();
+      logoImg.src = 'assets/FBTI_logo.svg';
+      await Promise.race([
+        new Promise(function(r) { logoImg.onload = r; }),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('logo timeout')); }, 5000); })
+      ]).catch(function() {}); // If logo fails, continue without it
+      var logoW = 100, logoH = 100;
+      ctx.drawImage(logoImg, (W - logoW) / 2, 60, logoW, logoH);
+
+      // 4. SVG Avatar (circular clip)
+      var avatarSVG = typeSVGs[typeCode];
+      var avatarImg = new Image();
+      avatarImg.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(avatarSVG)));
+      await Promise.race([
+        new Promise(function(r) { avatarImg.onload = r; }),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('avatar timeout')); }, 5000); })
+      ]).catch(function() {}); // If avatar fails, continue without it
+      var avatarSize = 200;
+      var avatarX = (W - avatarSize) / 2;
+      var avatarY = 200;
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(W / 2, avatarY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
+      ctx.closePath();
+      ctx.clip();
+      ctx.drawImage(avatarImg, avatarX, avatarY, avatarSize, avatarSize);
+      ctx.restore();
+      // Ring
+      ctx.strokeStyle = 'rgba(20,20,19,0.15)';
+      ctx.lineWidth = 6;
+      ctx.beginPath();
+      ctx.arc(W / 2, avatarY + avatarSize / 2, avatarSize / 2 + 3, 0, Math.PI * 2);
+      ctx.stroke();
+
+      // 5. Type code
+      var spacedCode = typeCode.split('').join(' ');
+      ctx.font = '700 64px Poppins, Arial, sans-serif';
+      ctx.fillStyle = '#141413';
+      ctx.textAlign = 'center';
+      ctx.fillText(spacedCode, W / 2, avatarY + avatarSize + 80);
+
+      // 6. Personality name
+      ctx.font = 'italic 600 28px Lora, "Noto Serif SC", serif';
+      ctx.fillStyle = '#141413';
+      ctx.textAlign = 'center';
+      ctx.fillText(data.name, W / 2, avatarY + avatarSize + 130);
+
+      // 7. Tagline (word-wrap)
+      ctx.font = '400 16px Lora, "Noto Serif SC", serif';
+      ctx.fillStyle = '#6B6860';
+      ctx.textAlign = 'center';
+      var tagline = data.tagline;
+      var maxWidth = W - 80;
+      var lineHeight = 26;
+      var lines = wrapText(ctx, tagline, maxWidth);
+      var tagY = avatarY + avatarSize + 170;
+      lines.forEach(function(line, i) {
+        ctx.fillText(line, W / 2, tagY + i * lineHeight);
+      });
+
+      // 8. Decorative line
+      ctx.strokeStyle = '#D97757';
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(W / 2 - 40, tagY + lines.length * lineHeight + 20);
+      ctx.lineTo(W / 2 + 40, tagY + lines.length * lineHeight + 20);
+      ctx.stroke();
+
+      // 9. QR Code
+      var qrUrl = 'https://fbti.app/result?type=' + typeCode;
+      var qrCanvas = document.createElement('canvas');
+      qrCanvas.width = 160; qrCanvas.height = 160;
+      if (typeof QRCode === 'undefined') {
+        showToast('图片生成失败，请重试');
+        return;
+      }
+      var qrOk = false;
+      try {
+        await Promise.race([
+          new Promise(function(resolve, reject) {
+            QRCode.toCanvas(qrCanvas, qrUrl, { width: 160, margin: 1 }, function(err) {
+              if (!err) resolve(); else reject(err);
+            });
+          }),
+          new Promise(function(_, reject) { setTimeout(function() { reject(new Error('qr timeout')); }, 5000); })
+        ]);
+        qrOk = true;
+      } catch(e) {
+        showToast('图片生成失败，请重试');
+      }
+      if (!qrOk) return;
+
+      // Continue with drawing QR and download only if qrOk is true
+      var qrX = (W - 160) / 2;
+      var qrY = H - 160 - 60;
+      ctx.drawImage(qrCanvas, qrX, qrY, 160, 160);
+      // QR label
+      ctx.font = '400 12px Poppins, Arial, sans-serif';
+      ctx.fillStyle = '#6B6860';
+      ctx.textAlign = 'center';
+      ctx.fillText('fbti.app/result', W / 2, qrY + 170);
+
+      // 10. Download
+      var link = document.createElement('a');
+      link.download = 'fbti-' + typeCode.toLowerCase() + '.png';
+      link.href = canvas.toDataURL('image/png');
+      link.click();
+      showToast('图片已保存 ✓');
+    }
+
+    function wrapText(ctx, text, maxWidth) {
+      var words = text.split('');
+      var lines = [];
+      var current = '';
+      for (var i = 0; i < words.length; i++) {
+        var test = current + words[i];
+        if (ctx.measureText(test).width > maxWidth && current.length > 0) {
+          lines.push(current);
+          current = words[i];
+        } else {
+          current = test;
+        }
+      }
+      if (current.length > 0) lines.push(current);
+      return lines;
     }
 
     function showToast(msg) {

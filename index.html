@@ -237,11 +237,31 @@
   </style>
 </head>
 <body>
-  <section id="screen-welcome" class="screen active"></section>
+  <section id="screen-welcome" class="screen active">
+    <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:var(--space-16);padding-bottom:var(--space-16);">
+      <div class="fade-in-up stagger-1">
+        <img src="assets/FBTI_logo.svg" alt="FBTI Logo" width="80" height="80">
+      </div>
+      <h1 class="fade-in-up stagger-2" style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-4); line-height: 1.2;">口味人格测试</h1>
+      <p class="fade-in-up stagger-3" style="font-family: var(--font-heading); font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--space-10); max-width: 360px; line-height: 1.6;">16道情景题 · 发现你的味觉人格</p>
+      <button id="btn-start" class="btn-primary fade-in-up stagger-4" style="max-width: 320px;">开始测试</button>
+    </div>
+  </section>
   <section id="screen-quiz" class="screen"></section>
   <section id="screen-result" class="screen"></section>
 
   <!-- Placeholder script for later -->
-  <script></script>
+  <script>
+    function showScreen(name) {
+      document.querySelectorAll('.screen').forEach(function(s) {
+        s.classList.remove('active');
+      });
+      document.getElementById('screen-' + name).classList.add('active');
+    }
+
+    document.getElementById('btn-start').addEventListener('click', function() {
+      showScreen('quiz');
+    });
+  </script>
 </body>
 </html>

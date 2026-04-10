@@ -10,8 +10,17 @@
 
 ## Current Position
 - milestone_id: milestone-1
-- task_id: null (no task started yet)
-- tasks_completed: [none]
+- task_id: task-3
+- tasks_completed: [task-1, task-2]
+
+## Session History
+- session-2026-04-11-001: Task 1 DONE, Task 2 DONE (SPEC_COMPLIANT → PASS). Focus-visible states on buttons deferred to Task 10.
+
+## Key Decisions
+Single HTML file (vanilla). Anthropic design language (warm cream #ECE9E0 + orange #D97757). 逐题前进 (one question at a time). URL sharing via pushState. Image sharing via Canvas API + QRCode.js CDN. FBTI logo at /Users/kuicao/Applications/FBTI/assets/FBTI_logo.svg.
+
+## Session History
+- session-2026-04-11-001: Task 1 DONE (SPEC_COMPLIANT → PASS). CSS tokens, three screens, Google Fonts. Note: display=swap deferred to Task 10.
 
 ## Deferred Items
 None

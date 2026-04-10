@@ -1,8 +1,10 @@
 <svg width="80" height="80" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-  <circle cx="100" cy="100" r="90" fill="#AD1457" stroke="#4A0024" stroke-width="4"/>
-  <!-- 砂锅红汤 -->
-  <path d="M65 85 Q65 55 100 55 Q135 55 135 85 L130 120 Q100 130 70 120Z" fill="#6D4C41" stroke="#3E2723" stroke-width="3"/>
-  <ellipse cx="100" cy="85" rx="32" ry="10" fill="#D32F2F" opacity="0.9"/>
-  <path d="M75 95 Q100 110 125 95" fill="none" stroke="#FF8A65" stroke-width="3"/>
+  <circle cx="100" cy="100" r="90" fill="#8E24AA" stroke="#4A148C" stroke-width="4"/>
+  <!-- 冰淇淋 + 奇怪搭配 -->
+  <path d="M85 50 Q100 30 115 50 L110 75 Q100 80 90 75Z" fill="#FFF9C4"/>
+  <circle cx="100" cy="55" r="12" fill="#FFAB91"/>
+  <circle cx="90" cy="50" r="4" fill="#E91E63"/>
+  <circle cx="108" cy="52" r="4" fill="#4CAF50"/>
+  <line x1="100" y1="75" x2="100" y2="90" stroke="#8D6E63" stroke-width="4"/>
   <text x="100" y="160" font-family="Arial, sans-serif" font-size="26" font-weight="bold" fill="white" text-anchor="middle">SWNP</text>
 </svg>

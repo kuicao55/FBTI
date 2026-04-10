@@ -306,12 +306,28 @@
   </section>
   <section id="screen-result" class="screen">
   <div class="container" style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:var(--space-16);padding-bottom:var(--space-16);">
-    <div id="result-avatar"></div>
-    <div id="result-type-code"></div>
-    <div id="result-name"></div>
-    <div id="result-tagline"></div>
+    <!-- Avatar -->
+    <div id="result-avatar" class="fade-in-up stagger-1" style="width:200px;height:200px;border-radius:50%;overflow:hidden;margin:0 auto var(--space-8);box-shadow:0 0 0 6px rgba(255,255,255,0.15);"></div>
+    <!-- Type code -->
+    <div id="result-type-code" class="fade-in-up stagger-2" style="font-family:var(--font-heading);font-size:56px;font-weight:700;color:white;letter-spacing:8px;margin-bottom:var(--space-4);line-height:1;"></div>
+    <!-- Personality name -->
+    <div id="result-name" class="fade-in-up stagger-3" style="font-family:var(--font-display);font-size:28px;font-weight:600;font-style:italic;color:white;margin-bottom:var(--space-6);"></div>
+    <!-- Tagline -->
+    <div id="result-tagline" class="fade-in-up stagger-4" style="font-family:var(--font-body);font-size:16px;color:rgba(255,255,255,0.8);max-width:480px;line-height:1.7;margin-bottom:var(--space-10);"></div>
+    <!-- Share buttons -->
+    <div class="fade-in-up stagger-5" style="display:flex;gap:var(--space-4);width:100%;max-width:360px;margin-bottom:var(--space-4);">
+      <button id="btn-copy-link" class="btn-primary" style="flex:1;">复制链接</button>
+      <button id="btn-share-image" class="btn-primary" style="flex:1;">保存图片</button>
+    </div>
+    <!-- Retake button -->
+    <div class="fade-in-up stagger-6" style="width:100%;max-width:360px;">
+      <button id="btn-retake" class="btn-secondary" style="color:white;border-color:rgba(255,255,255,0.4);">重新测试</button>
+    </div>
   </div>
 </section>
+
+  <!-- Toast element -->
+  <div id="toast" class="toast">链接已复制 ✓</div>
 
   <!-- Placeholder script for later -->
   <script>
@@ -502,6 +518,43 @@
       var url = new URL(window.location.href);
       url.searchParams.set('type', typeCode);
       window.history.pushState({ type: typeCode }, '', url.toString());
+    }
+
+    // Result screen button handlers
+    document.getElementById('btn-copy-link').addEventListener('click', copyLink);
+    document.getElementById('btn-share-image').addEventListener('click', generateShareImage);
+    document.getElementById('btn-retake').addEventListener('click', retakeQuiz);
+
+    function copyLink() {
+      navigator.clipboard.writeText(window.location.href).then(function() {
+        showToast('链接已复制 ✓');
+      }).catch(function() {
+        showToast('复制失败，请长按复制');
+      });
+    }
+
+    function retakeQuiz() {
+      currentQuestion = 0;
+      answers = [];
+      window.history.pushState({}, '', window.location.pathname);
+      showScreen('welcome');
+    }
+
+    function generateShareImage() {
+      showToast('图片生成中...');
+    }
+
+    function showToast(msg) {
+      var toast = document.getElementById('toast');
+      if (!toast) {
+        toast = document.createElement('div');
+        toast.id = 'toast';
+        toast.className = 'toast';
+        document.body.appendChild(toast);
+      }
+      toast.textContent = msg;
+      toast.classList.add('visible');
+      setTimeout(function() { toast.classList.remove('visible'); }, 2000);
     }
   </script>
 </body>

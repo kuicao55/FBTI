@@ -18,6 +18,14 @@
 
 ---
 
+<p align="center">
+  <a href="https://kuicao55.github.io/FBTI/">
+    <img src="https://img.shields.io/badge/🚀%20Live%20Demo-在线体验-27C93D?style=for-the-badge&logo=firefox" alt="Live Demo">
+  </a>
+</p>
+
+---
+
 ## 什么是 TasteType？
 
 TasteType（口味人格测试）是一个 MBTI 风格的食物人格测试，通过 **16 道情景选择题**识别你的四维味觉人格类型。

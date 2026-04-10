@@ -32,7 +32,7 @@
 - [x] Task 7: Result screen — avatar, type code, name, tagline, share buttons
 - [x] Task 8: URL sharing — parse `?type=` on load, pushState on result, copy link
 - [x] Task 9: Image sharing — Canvas-based 900×1200 PNG with QR code (qrcode.js CDN)
-- [ ] Task 10: Integration + browser testing
+- [x] Task 10: Integration + browser testing
 
 ---
 

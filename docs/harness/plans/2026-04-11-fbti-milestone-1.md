@@ -27,7 +27,7 @@
 - [x] Task 2: CSS styling — Anthropic design tokens, layout, typography, animations
 - [x] Task 3: Welcome screen — FBTI logo, title, tagline, CTA button
 - [x] Task 4: Quiz screen — progress bar, question display, option buttons, question transition
-- [ ] Task 5: Quiz data — embed all 16 questions, 16 type descriptions, 16 SVG avatars
+- [x] Task 5: Quiz data — embed all 16 questions, 16 type descriptions, 16 SVG avatars
 - [ ] Task 6: Quiz state machine — answer collection, scoring algorithm, navigation
 - [ ] Task 7: Result screen — avatar, type code, name, tagline, share buttons
 - [ ] Task 8: URL sharing — parse `?type=` on load, pushState on result, copy link

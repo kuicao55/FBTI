@@ -1,7 +1,7 @@
 {
   "project": "FBTI Web Quiz",
   "created_at": "2026-04-11T01:38:43Z",
-  "updated_at": "2026-04-11T01:40:23Z",
+  "updated_at": "2026-04-11T15:50:43Z",
   "spec_file": "docs/harness/specs/2026-04-11-fbti-web-design.md",
   "current_session_handoff": "docs/harness/handoffs/handoff.md",
   "milestones": [
@@ -15,6 +15,17 @@
       "plan_file": "docs/harness/plans/2026-04-11-fbti-milestone-1.md",
       "session_date": "2026-04-11T01:38:49Z",
       "notes": "All 10 tasks completed. milestone-1 PASS."
+    },
+    {
+      "id": "milestone-2",
+      "title": "Modularize FBTI into independent modules",
+      "description": "Modularize FBTI into independent modules",
+      "depends_on": [],
+      "passed": false,
+      "spec_file": "docs/harness/specs/2026-04-11-fbti-modular-design.md",
+      "plan_file": "docs/harness/plans/2026-04-11-milestone-2.md",
+      "session_date": "2026-04-11T15:48:56Z",
+      "notes": null
     }
   ]
 }

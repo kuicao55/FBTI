@@ -1,0 +1,181 @@
+{
+  "dimensions": ["stimulus", "crunch", "neophilic", "umami"],
+  "questions": [
+    {
+      "id": 1,
+      "text": "一碗刚出锅的红油抄手端上来，你的第一注意力落在哪里？",
+      "dimension": "stimulus",
+      "options": [
+        { "label": "A", "text": "那层亮红色的辣椒油和漂浮的芝麻，已经自动分泌口水了", "value": 1 },
+        { "label": "B", "text": "先把辣椒拨开一点，看看里面的肉馅和汤底清不清", "value": 0 },
+        { "label": "C", "text": "我更关心抄手皮是薄是厚、是软是脆", "value": 0 },
+        { "label": "D", "text": "我会先闻味道，判断这是单纯的辣还是有花椒、香料等复合香气", "value": 0.5 }
+      ]
+    },
+    {
+      "id": 2,
+      "text": "吃火锅调蘸料时，你的碗里通常是什么画风？",
+      "dimension": "stimulus",
+      "options": [
+        { "label": "A", "text": "小米辣、蒜泥、香油、蚝油、香菜葱花都要堆满", "value": 1 },
+        { "label": "B", "text": "酱油底，最多加一点点辣椒圈提味", "value": 0 },
+        { "label": "C", "text": "芝麻酱+腐乳+韭菜花，或沙茶酱+蛋黄，不太放辣椒", "value": 0 },
+        { "label": "D", "text": "看锅底决定，牛油锅就蘸干碟，清汤锅就蘸海鲜汁", "value": 0.5 }
+      ]
+    },
+    {
+      "id": 3,
+      "text": "当你看到菜单上有\"魔鬼辣挑战成功免单\"的活动时，你的想法是？",
+      "dimension": "stimulus",
+      "options": [
+        { "label": "A", "text": "让我来，这是我的主场", "value": 1 },
+        { "label": "B", "text": "除非朋友起哄，否则我不想折磨自己", "value": 0 },
+        { "label": "C", "text": "我觉得会影响品尝食物本身的味道，不参加", "value": 0 },
+        { "label": "D", "text": "先研究一下辣椒品种，如果是纯工业辣精就不玩，天然辣椒可以试试", "value": 0.5 }
+      ]
+    },
+    {
+      "id": 4,
+      "text": "吃完一顿重辣餐后，你的身体通常是什么反应？",
+      "dimension": "stimulus",
+      "options": [
+        { "label": "A", "text": "嘴巴肿了但心里爽了，第二天继续", "value": 1 },
+        { "label": "B", "text": "肠胃可能会抗议，我尽量控制频率", "value": 0 },
+        { "label": "C", "text": "我会大量喝水，并且下一顿一定要吃清淡的缓一缓", "value": 0 },
+        { "label": "D", "text": "看辣椒品质，好辣椒只辣嘴不烧心，坏辣椒会让我难受很久", "value": 0.5 }
+      ]
+    },
+    {
+      "id": 5,
+      "text": "一份炸鸡摆在面前，哪个瞬间让你觉得\"这顿值了\"？",
+      "dimension": "crunch",
+      "options": [
+        { "label": "A", "text": "牙齿咬下去发出\"咔嚓\"声，脆皮碎屑掉下来", "value": 1 },
+        { "label": "B", "text": "里面的肉汁瞬间烫到舌头，肉质嫩滑到不用怎么嚼", "value": -0.5 },
+        { "label": "C", "text": "我喜欢先吃皮再吃肉，皮必须脆，肉可以稍干", "value": 1 },
+        { "label": "D", "text": "我其实不爱油炸，我更爱红烧或炖煮的口感", "value": 0 }
+      ]
+    },
+    {
+      "id": 6,
+      "text": "如果一碗红烧肉让你评价，你觉得最不能忍受的缺点是？",
+      "dimension": "crunch",
+      "options": [
+        { "label": "A", "text": "瘦肉部分太柴，塞牙", "value": 1 },
+        { "label": "B", "text": "肥肉部分没有炖烂，咬起来像肥油块", "value": -0.5 },
+        { "label": "C", "text": "皮上的毛没去干净", "value": 1 },
+        { "label": "D", "text": "汤汁不够浓稠，挂不住肉", "value": 0 }
+      ]
+    },
+    {
+      "id": 7,
+      "text": "你对\"软糯\"类食物（如土豆泥、年糕、烩饭）的态度是？",
+      "dimension": "crunch",
+      "options": [
+        { "label": "A", "text": "可以吃，但不能连续吃，否则觉得嘴巴没劲", "value": 1 },
+        { "label": "B", "text": "这是我的舒适区，我可以天天吃软软的东西", "value": -0.5 },
+        { "label": "C", "text": "看搭配，如果是软糯主食配脆的小菜，我就很爱", "value": 1 },
+        { "label": "D", "text": "我更关心调味，软或硬没那么重要", "value": 0 }
+      ]
+    },
+    {
+      "id": 8,
+      "text": "吃拉面时，你对\"面条硬度\"的选择通常是？",
+      "dimension": "crunch",
+      "options": [
+        { "label": "A", "text": "必须点\"超硬\"或\"硬\"，喜欢吃有嚼劲的", "value": 1 },
+        { "label": "B", "text": "点\"普通\"或\"偏软\"，好嚼好消化", "value": -0.5 },
+        { "label": "C", "text": "第一次去会点普通，之后再根据汤头调整", "value": 1 },
+        { "label": "D", "text": "我不吃拉面，或者我不关心这个细节", "value": 0 }
+      ]
+    },
+    {
+      "id": 9,
+      "text": "去一家没去过的异国餐厅，菜单上有一道\"香菜菠萝披萨\"和一道\"玛格丽特披萨\"，你会？",
+      "dimension": "neophilic",
+      "options": [
+        { "label": "A", "text": "绝对点香菜菠萝的，没吃过的东西才有意思", "value": 1 },
+        { "label": "B", "text": "保险起见点玛格丽特，不踩雷最重要", "value": -1 },
+        { "label": "C", "text": "先问服务员哪个是招牌，如果是香菜菠萝就试，如果不是就点玛格丽特", "value": 0 },
+        { "label": "D", "text": "我都不点，我会找菜单上看起来最熟悉的肉菜", "value": 0 }
+      ]
+    },
+    {
+      "id": 10,
+      "text": "朋友向你安利一家\"用巧克力蘸辣椒面吃\"的店，你的第一反应是？",
+      "dimension": "neophilic",
+      "options": [
+        { "label": "A", "text": "听起来很暗黑，但我必须去验证一下", "value": 1 },
+        { "label": "B", "text": "谢谢，这搭配超出了我的认知范围，我不去", "value": -1 },
+        { "label": "C", "text": "如果是黑巧克力我可能考虑，牛奶巧克力就算了", "value": 0 },
+        { "label": "D", "text": "我要先看看大众点评上的图片再决定", "value": 0 }
+      ]
+    },
+    {
+      "id": 11,
+      "text": "你对\"正宗\"这个词的态度是？",
+      "dimension": "neophilic",
+      "options": [
+        { "label": "A", "text": "正宗很重要，那是文化和风味的根基", "value": 1 },
+        { "label": "B", "text": "好吃就行，我不在乎正不正宗，改良得好我也爱", "value": -1 },
+        { "label": "C", "text": "有些菜必须正宗（比如我妈做的），有些菜可以乱来", "value": 0 },
+        { "label": "D", "text": "我分不清什么是正宗，只要对胃口就是好菜", "value": 0 }
+      ]
+    },
+    {
+      "id": 12,
+      "text": "在自助餐厅，你的取餐策略通常是？",
+      "dimension": "neophilic",
+      "options": [
+        { "label": "A", "text": "每样没见过的都拿一点点尝尝", "value": 1 },
+        { "label": "B", "text": "直奔我最爱吃的那几样，拿满一盘吃到爽", "value": -1 },
+        { "label": "C", "text": "第一轮拿熟悉的，第二轮再探索新菜", "value": 0 },
+        { "label": "D", "text": "看排队人数，人多的一定好吃，先拿那个", "value": 0 }
+      ]
+    },
+    {
+      "id": 13,
+      "text": "你觉得一碗\"清汤寡水\"的阳春面（只有酱油汤底和葱花）最大的问题是什么？",
+      "dimension": "umami",
+      "options": [
+        { "label": "A", "text": "不够鲜，需要加一勺猪油或者高汤料包", "value": 1 },
+        { "label": "B", "text": "没有浇头，吃起来太单调", "value": -1 },
+        { "label": "C", "text": "其实我觉得挺好吃的，能吃到面粉的香气", "value": 0 },
+        { "label": "D", "text": "面条本身的口感比汤更重要", "value": 0 }
+      ]
+    },
+    {
+      "id": 14,
+      "text": "对于\"味精/鸡精/蚝油\"这类调味品，你的态度是？",
+      "dimension": "umami",
+      "options": [
+        { "label": "A", "text": "做饭必备，少了它们菜就没有灵魂", "value": 1 },
+        { "label": "B", "text": "能不放就不放，我更喜欢食材本身的味道", "value": -1 },
+        { "label": "C", "text": "在外面吃无所谓，自己在家做会尽量少放", "value": 0 },
+        { "label": "D", "text": "我吃不出来区别", "value": 0 }
+      ]
+    },
+    {
+      "id": 15,
+      "text": "吃日料刺身时，你会怎么蘸酱油？",
+      "dimension": "umami",
+      "options": [
+        { "label": "A", "text": "酱油里一定会加现磨山葵，还要蘸很多下", "value": 1 },
+        { "label": "B", "text": "轻轻蘸一点酱油，甚至有的鱼不蘸直接吃", "value": -1 },
+        { "label": "C", "text": "我其实不太吃生鱼片，觉得腥", "value": 0 },
+        { "label": "D", "text": "我会把山葵直接融进酱油里搅浑了蘸", "value": 0 }
+      ]
+    },
+    {
+      "id": 16,
+      "text": "你觉得\"老火靓汤\"和\"生滚汤\"哪个更对你胃口？",
+      "dimension": "umami",
+      "options": [
+        { "label": "A", "text": "老火靓汤，那口浓郁鲜甜是时间的味道", "value": 1 },
+        { "label": "B", "text": "生滚汤，清清爽爽，食材新鲜就好", "value": -1 },
+        { "label": "C", "text": "看季节，冬天老火汤夏天生滚汤", "value": 0 },
+        { "label": "D", "text": "我不怎么喝汤", "value": 0 }
+      ]
+    }
+  ]
+}

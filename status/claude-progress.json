@@ -1,7 +1,7 @@
 {
   "project": "FBTI Web Quiz",
   "created_at": "2026-04-11T01:38:43Z",
-  "updated_at": "2026-04-11T15:50:43Z",
+  "updated_at": "2026-04-11T16:45:00Z",
   "spec_file": "docs/harness/specs/2026-04-11-fbti-web-design.md",
   "current_session_handoff": "docs/harness/handoffs/handoff.md",
   "milestones": [
@@ -12,7 +12,7 @@
       "depends_on": [],
       "passed": true,
       "spec_file": "docs/harness/specs/2026-04-11-fbti-web-design.md",
-      "plan_file": "docs/harness/plans/2026-04-11-fbti-milestone-1.md",
+      "plan_file": "docs/harness/plans/2026-04-11-milestone-1.md",
       "session_date": "2026-04-11T01:38:49Z",
       "notes": "All 10 tasks completed. milestone-1 PASS."
     },
@@ -21,11 +21,11 @@
       "title": "Modularize FBTI into independent modules",
       "description": "Modularize FBTI into independent modules",
       "depends_on": [],
-      "passed": false,
-      "spec_file": "docs/harness/specs/2026-04-11-fbti-modular-design.md",
+      "passed": true,
+      "spec_file": "docs/harness/specs/2026-04-11-fbti-web-design.md",
       "plan_file": "docs/harness/plans/2026-04-11-milestone-2.md",
       "session_date": "2026-04-11T15:48:56Z",
-      "notes": null
+      "notes": "All 6 tasks completed. milestone-2 PASS. Modules: loader.js (TTL cache), scoring.js (SCNU fallback), render.js (XSS fixed). index.html refactored to ES Module (critical: btn-start race condition fixed)."
     }
   ]
 }

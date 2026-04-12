@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="16道情景题，发现你的味觉人格。TasteType 口味人格测试。">
+  <meta name="description" content="24道情景题，发现你的味觉人格。TasteType 口味人格测试。">
   <meta property="og:title" content="口味人格测试 · TasteType">
-  <meta property="og:description" content="16道情景题，发现你的味觉人格。">
+  <meta property="og:description" content="24道情景题，发现你的味觉人格。">
   <meta property="og:type" content="website">
   <link rel="icon" href="assets/FBTI_logo.svg" type="image/svg+xml">
   <title>FBT Intelligence Quiz</title>
@@ -283,6 +283,61 @@
       transform: translateX(0);
       opacity: 1;
     }
+
+    /* === RESULT SCREEN NEW ELEMENTS === */
+    .taste-tag {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-size: 13px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .taste-tag:first-child {
+      background: rgba(217,119,87,0.25);
+      border-color: rgba(217,119,87,0.4);
+    }
+
+    .details-panel {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .details-panel .radar-section {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+    }
+    .details-panel .bars-section {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .dimension-bar {
+      margin-bottom: 8px;
+    }
+    .dimension-title {
+      font-family: var(--font-heading);
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 8px;
+    }
+    .bar-track {
+      display: flex;
+      height: 24px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin: 6px 0;
+    }
+    .bar-legend {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 12px;
+    }
   </style>
 </head>
 <body>
@@ -292,7 +347,7 @@
         <img src="assets/FBTI_logo.svg" alt="FBTI Logo" width="80" height="80">
       </div>
       <h1 class="fade-in-up stagger-2" style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-4); line-height: 1.2;">口味人格测试</h1>
-      <p class="fade-in-up stagger-3" style="font-family: var(--font-heading); font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--space-10); max-width: 360px; line-height: 1.6;">16道情景题 · 发现你的味觉人格</p>
+      <p class="fade-in-up stagger-3" style="font-family: var(--font-heading); font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--space-10); max-width: 360px; line-height: 1.6;">24道情景题 · 发现你的味觉人格</p>
       <button id="btn-start" class="btn-primary fade-in-up stagger-4" style="max-width: 320px;">开始测试</button>
     </div>
   </section>
@@ -304,7 +359,7 @@
             <div class="progress-track">
               <div class="progress-fill" id="progress-fill" style="width:0%"></div>
             </div>
-            <span class="progress-label" id="progress-label">1 / 16</span>
+            <span class="progress-label" id="progress-label">1 / 24</span>
           </div>
           <p class="quiz-question-text" id="question-text">题目加载中…</p>
         </div>
@@ -318,12 +373,22 @@
   <div class="container" style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:var(--space-16);padding-bottom:var(--space-16);">
     <!-- Avatar -->
     <div id="result-avatar" class="fade-in-up stagger-1" style="width:200px;height:200px;border-radius:50%;overflow:hidden;margin:0 auto var(--space-8);box-shadow:0 0 0 6px rgba(255,255,255,0.15);"></div>
-    <!-- Type code -->
-    <div id="result-type-code" class="fade-in-up stagger-2" style="font-family:var(--font-heading);font-size:56px;font-weight:700;color:white;letter-spacing:8px;margin-bottom:var(--space-4);line-height:1;"></div>
+    <!-- Type code (main) -->
+    <div id="result-type-code" class="fade-in-up stagger-2" style="font-family:var(--font-heading);font-size:56px;font-weight:700;color:white;letter-spacing:8px;margin-bottom:4px;line-height:1;"></div>
+    <!-- Type code (sub) -->
+    <div id="result-type-code-sub" class="fade-in-up stagger-2" style="font-size:24px;opacity:0.4;letter-spacing:2px;margin-bottom:var(--space-6);line-height:1;font-family:var(--font-heading);"></div>
     <!-- Personality name -->
-    <div id="result-name" class="fade-in-up stagger-3" style="font-family:var(--font-display);font-size:28px;font-weight:600;font-style:italic;color:white;margin-bottom:var(--space-6);"></div>
-    <!-- Tagline -->
-    <div id="result-tagline" class="fade-in-up stagger-4" style="font-family:var(--font-body);font-size:16px;color:rgba(255,255,255,0.8);max-width:480px;line-height:1.7;margin-bottom:var(--space-10);"></div>
+    <div id="result-name" class="fade-in-up stagger-3" style="font-family:var(--font-display);font-size:28px;font-weight:600;font-style:italic;color:white;margin-bottom:16px;"></div>
+    <!-- Taste signature tags -->
+    <div id="result-taste-signature" class="fade-in-up stagger-3" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;"></div>
+    <!-- Self description (with orange left border) -->
+    <div id="result-self-description" class="fade-in-up stagger-4" style="border-left:3px solid #D97757;padding-left:16px;max-width:480px;text-align:left;font-style:italic;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.85);"></div>
+    <!-- Analysis -->
+    <div id="result-analysis" class="fade-in-up stagger-4" style="max-width:480px;text-align:left;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.75);"></div>
+    <!-- Details toggle button -->
+    <button id="btn-details" class="fade-in-up stagger-5" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:10px 20px;border-radius:20px;cursor:pointer;margin-bottom:16px;font-family:var(--font-heading);font-size:14px;" aria-expanded="false" aria-controls="details-panel">查看详细分析 ▼</button>
+    <!-- Collapsed details panel -->
+    <div id="details-panel" class="fade-in-up" style="display:none;width:100%;max-width:640px;margin:0 auto 32px;text-align:left;" role="region" aria-label="详细分析"></div>
     <!-- Share buttons -->
     <div class="fade-in-up stagger-5" style="display:flex;gap:var(--space-4);width:100%;max-width:360px;margin-bottom:var(--space-4);">
       <button id="btn-copy-link" class="btn-primary" style="flex:1;">复制链接</button>
@@ -345,7 +410,7 @@
   <!-- Main script -->
   <script type="module">
     import { loadTypes, loadQuestions } from './modules/loader.js';
-    import { calculateType } from './modules/scoring.js';
+    import { selectQuestions, calculateType } from './modules/scoring.js';
     import { renderQuestion, renderResult, loadTypeSVG } from './modules/render.js';
 
     function showScreen(name) {
@@ -356,28 +421,36 @@
     }
 
     document.addEventListener('DOMContentLoaded', async function() {
-      const [typesData, questionsData] = await Promise.all([loadTypes(), loadQuestions()]);
-      window.types = typesData.types;
-      window.questions = questionsData.questions;
+      try {
+        const [typesData, questionsData] = await Promise.all([loadTypes(), loadQuestions()]);
+        window.types = typesData.types;
+        window.questions = questionsData.questions;
+        // Stratified selection of 24 questions for this session
+        window.selectedQuestions = selectQuestions(questionsData);
 
-      // Attach btn-start AFTER data is loaded (fixes race condition)
-      document.getElementById('btn-start').addEventListener('click', function() {
-        showScreen('quiz');
-        showQuestion(0);
-      });
+        // Attach btn-start AFTER data is loaded (fixes race condition)
+        document.getElementById('btn-start').addEventListener('click', function() {
+          showScreen('quiz');
+          showQuestion(0);
+        });
 
-      // Attach result screen button handlers (depend on window.types/window.questions)
-      document.getElementById('btn-copy-link').addEventListener('click', copyLink);
-      document.getElementById('btn-share-image').addEventListener('click', generateShareImage);
-      document.getElementById('btn-retake').addEventListener('click', retakeQuiz);
+        // Attach result screen button handlers (depend on window.types/window.selectedQuestions)
+        document.getElementById('btn-copy-link').addEventListener('click', copyLink);
+        document.getElementById('btn-share-image').addEventListener('click', generateShareImage);
+        document.getElementById('btn-retake').addEventListener('click', retakeQuiz);
 
-      var urlParams = new URLSearchParams(window.location.search);
-      var urlType = urlParams.get('type');
-      if (urlType && window.types[urlType]) {
-        showScreen('result');
-        renderResult(urlType, window.types[urlType]);
-      } else {
-        showScreen('welcome');
+        var urlParams = new URLSearchParams(window.location.search);
+        var urlType = urlParams.get('type');
+        if (urlType && window.types[urlType]) {
+          showScreen('result');
+          renderResult(urlType, window.types[urlType], null); // null for dimensionResults (URL-only view)
+        } else {
+          showScreen('welcome');
+        }
+      } catch (err) {
+        console.error('Failed to initialize quiz:', err);
+        showToast('加载失败，请刷新重试');
+        // btn-start not wired up — user stays on welcome screen
       }
     });
 
@@ -388,8 +461,8 @@
 
 
     function showQuestion(index) {
-      const q = window.questions[index];
-      renderQuestion(q, index, window.questions.length);
+      const q = window.selectedQuestions[index];
+      renderQuestion(q, index, window.selectedQuestions.length);
       // Re-attach click handlers to newly rendered option cards
       const optionsEl = document.getElementById('quiz-options');
       const letters = ['A', 'B', 'C', 'D'];
@@ -400,7 +473,7 @@
 
     function selectOption(questionIndex, letter) {
       answers[questionIndex] = letter;
-      if (questionIndex < window.questions.length - 1) {
+      if (questionIndex < window.selectedQuestions.length - 1) {
         // Transition to next question
         const panel = document.querySelector('#screen-quiz .quiz-wrap');
         panel.classList.add('exit-left');
@@ -417,9 +490,20 @@
     }
 
     function showResult() {
-      var typeCode = calculateType(answers, window.questions, window.types).typeCode;
+      var result = calculateType(answers, window.selectedQuestions, window.types);
       showScreen('result');
-      renderResult(typeCode, window.types[typeCode]);
+      renderResult(result.typeCode, window.types[result.typeCode], result.dimensionResults);
+      // Wire up details panel toggle
+      var detailsBtn = document.getElementById('btn-details');
+      var detailsPanel = document.getElementById('details-panel');
+      if (detailsBtn && detailsPanel) {
+        detailsBtn.addEventListener('click', function() {
+          var isVisible = detailsPanel.style.display !== 'none';
+          detailsPanel.style.display = isVisible ? 'none' : 'block';
+          detailsBtn.textContent = isVisible ? '查看详细分析 ▼' : '收起详细分析 ▲';
+          detailsBtn.setAttribute('aria-expanded', isVisible ? 'false' : 'true');
+        });
+      }
     }
 
     function copyLink() {
@@ -458,11 +542,11 @@
 
     async function generateShareImage() {
       var typeCode;
-      if (answers.length !== 16) {
+      if (answers.length !== (window.selectedQuestions ? window.selectedQuestions.length : 24)) {
         var urlParams = new URLSearchParams(window.location.search);
         typeCode = urlParams.get('type') || 'SCNU';
       } else {
-        typeCode = calculateType(answers, window.questions, window.types).typeCode;
+        typeCode = calculateType(answers, window.selectedQuestions, window.types).typeCode;
       }
       if (!window.types[typeCode]) typeCode = 'SCNU';
 
@@ -542,7 +626,7 @@
       ctx.font = '400 16px Lora, "Noto Serif SC", serif';
       ctx.fillStyle = '#6B6860';
       ctx.textAlign = 'center';
-      var tagline = data.tagline;
+      var tagline = data.selfDescription || data.tagline || '';
       var maxWidth = W - 80;
       var lineHeight = 26;
       var lines = wrapText(ctx, tagline, maxWidth);

@@ -1,179 +1,1363 @@
 {
   "types": {
-    "SCNU": {
-      "name": "烈焰暴君",
-      "tagline": "人类味觉边疆的拓荒者",
-      "desc": "此类型是人类味觉边疆的拓荒者。追求极致的复合型感官轰炸——必须辣到流汗、脆到出声、鲜到掉眉毛。他们热衷于寻找\"变态辣脆皮肥肠\"或\"烟熏辣椒巧克力脆片\"。推荐信源可信度极高，但普通人跟上需要勇气。避雷区：清蒸、白灼、汤羹类食物。W型人的软烂推荐对他们来说如同\"婴儿辅食\"。",
+    "HUAE": {
+      "name": "山野炼金士",
+      "selfDescription": "辣是明火，鲜是底蕴。没经过时间沉淀的味道，不配入我的口。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "此类型是饮食界的“时间旅行者”。他们追求的辣不是工业辣精的粗暴刺激，而是与发酵鲜味、烟熏风味交织的复杂灼烧。他们对“锅气”和“手工感”有近乎偏执的信任，米其林摆盘在他们眼中远不如菜市场吊龙动人。折耳根、木姜子等野性香料是他们的快乐星球。推荐信源对于寻找地方性长尾美食极具价值，但对环境有要求者需谨慎跟随。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "C",
-        "neophilic": "N",
-        "umami": "U"
+        "stimulus": "H",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "E"
       }
     },
-    "SCNP": {
-      "name": "硬核极客",
-      "tagline": "追求纯粹的化学刺激与物理脆度",
-      "desc": "他们追求纯粹的化学刺激与物理脆度，但对\"鲜\"非常苛刻，讨厌味精感和过度的发酵味。他们可能爱吃\"死神辣椒薯片\"但极度厌恶鸡精。他们推荐的辣馆子通常\"干净利落、辣得纯粹\"。避雷区：浓汤宝、松露油、老火靓汤。",
+    "HUAC": {
+      "name": "红汤原教旨",
+      "selfDescription": "我只吃我认可的辣。改良融合菜？你这是在亵渎我的信仰。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "深耕于特定辣味菜系（如川湘云贵），对其正宗做法如数家珍，但对跨出舒适圈的探索兴趣有限。可能拒绝尝试“泰式酸辣”或“墨西哥辣椒”，认为只有家乡的发酵辣味才是正统。在他们擅长的领域，推荐权威性极高；超出领域范围，请勿咨询。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "C",
-        "neophilic": "N",
-        "umami": "P"
+        "stimulus": "H",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "C"
       }
     },
-    "SCTU": {
-      "name": "江湖老饕",
-      "tagline": "地方菜系的坚定捍卫者",
-      "desc": "地方菜系的坚定捍卫者。只认可\"正宗\"的辣脆结合，比如重庆火锅里的毛肚黄喉、湖南小炒里的脆骨。拒绝为了猎奇而改良的融合菜。他们对特定菜系的推荐具有权威性。避雷区：任何\"新派\"或\"分子料理\"版本的家乡菜。",
+    "HUSE": {
+      "name": "都会熔炉",
+      "selfDescription": "辣要标准，鲜要精确，环境别太破，拍照要好看。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们爱吃辣，也懂鲜，但信任的是食材本味与精准技艺的结合而非重料堆砌。愿意为一家环境优雅、辣度控制精确、食材新鲜的川菜馆买单。探索新菜系时通常选择该菜系的“精致版本”。推荐餐厅时在“味道不错”和“环境尚可”之间取得平衡。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "C",
-        "neophilic": "T",
-        "umami": "U"
+        "stimulus": "H",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "E"
       }
     },
-    "SCTP": {
-      "name": "盐系刺客",
-      "tagline": "纯粹的重口味盐分爱好者",
-      "desc": "纯粹的重口味盐分爱好者。比起鲜，更爱直接的咸辣。他们热爱的是夜市里的\"疯狂烤翅\"、校门口的\"油炸淀粉肠\"。他们对环境不挑，只看\"味道够不够劲儿\"。避雷区：精致日料、需要细品的本味食材。",
+    "HUSC": {
+      "name": "鲜辣清教徒",
+      "selfDescription": "辣和鲜都要，但调料别太多，让我吃到食材的味道。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们爱吃辣也追求鲜，但讨厌过度的调味堆砌。对他们来说，最好的辣菜是“辣椒炝锅后清炒的时蔬”或“只用盐和辣椒煮的鱼汤”。他们坚守熟悉的辣味框架，不愿冒险尝试异域辣味。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "C",
-        "neophilic": "T",
-        "umami": "P"
+        "stimulus": "H",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "C"
       }
     },
-    "SWNU": {
-      "name": "熔岩核心",
-      "tagline": "渴望\"内在的燃烧\"",
-      "desc": "这种类型渴望\"内在的燃烧\"。他们最爱的食物是：炖得软烂入味的辣卤鸡爪、入口即化的水煮脑花、吸饱汤汁的臭豆腐。追求辣与鲜在绵密口感中的缓慢释放。避雷区：沙拉、干煎、任何需要用力咀嚼的食物。",
+    "HSAE": {
+      "name": "盐火游侠",
+      "selfDescription": "辣要痛，咸要狠。别跟我谈什么清淡养生，我口味重。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "重口味双修选手。辣椒负责多巴胺，咸味负责安全感。他们热爱江湖菜、大排档、腌腊制品，对“入味”二字有极高标准。与山野炼金士的区别在于：他们更在意直接的咸辣冲击，对鲜味的微妙层次要求稍低，但咸度一旦不到位直接给差评。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "W",
-        "neophilic": "N",
-        "umami": "U"
+        "stimulus": "H",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "E"
       }
     },
-    "SWNP": {
-      "name": "味蕾实验员",
-      "tagline": "喜欢新奇辣味带来的趣味性",
-      "desc": "他们可能为了尝试\"辣椒冰淇淋\"而去排队，或者喜欢吃\"软糯的韩式辣年糕\"。他们喜欢新奇辣味带来的趣味性，但不希望菜里有\"药膳味\"或\"高汤味\"。避雷区：药材炖汤、浓郁菌菇锅底。",
+    "HSAC": {
+      "name": "老卤死忠",
+      "selfDescription": "一锅老卤，几把辣椒，就是我的快乐星球。别整新花样。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对“卤味”或“酱辣”有宗教般的虔诚。认准一家卤菜店可以吃十年，认为新开的网红店都是花架子。推荐范围极窄但权威性极高，是他们活动半径内重口味小店的人肉地图。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "W",
-        "neophilic": "N",
-        "umami": "P"
+        "stimulus": "H",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "C"
       }
     },
-    "SWTU": {
-      "name": "红汤居士",
-      "tagline": "软烂入味的辣味是归宿",
-      "desc": "四川火锅里的\"耙牛肉\"、湖南的\"口味虾\"汤汁拌饭是他们的归宿。他们是那种会因为一道\"老妈蹄花汤不够软烂\"而给差评的人。他们对\"软\"和\"辣\"的比例有严格的审美标准。避雷区：西式牛排、生硬的沙拉菜。",
+    "HSSE": {
+      "name": "极简辣客",
+      "selfDescription": "辣就行，别给我整那些复杂的。简简单单辣得纯粹。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "爱吃辣，但讨厌复合调味的“工业感”。他们更欣赏“辣椒本身的味道”或“盐+辣椒”的直接组合。喜欢探索不同品种辣椒的风味差异，但对八角、桂皮等香料持保留态度。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "W",
-        "neophilic": "T",
-        "umami": "U"
+        "stimulus": "H",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "E"
       }
     },
-    "SWTP": {
-      "name": "刺激渴求者",
-      "tagline": "吃辣只是为了爽，为了多巴胺",
-      "desc": "他们吃辣只是为了爽，为了多巴胺。最喜欢的食物是：软糯的麻辣烫宽粉、吸满辣椒油的凉皮。对于食材本身是否高级、是否有鲜味不感兴趣。避雷区：价格昂贵但辣度不足的餐厅。",
+    "HSSC": {
+      "name": "干碟党",
+      "selfDescription": "辣椒面加盐，蘸啥都香。别跟我提火锅底料。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们是干碟蘸料的忠实粉丝。吃火锅只蘸辣椒面花椒面盐，拒绝麻酱香油。对“调味”的理解停留在最原始的物理混合，坚守这一习惯，对新式蘸料嗤之以鼻。",
       "dimensions": {
-        "stimulus": "S",
-        "crunch": "W",
-        "neophilic": "T",
-        "umami": "P"
+        "stimulus": "H",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "C"
       }
     },
-    "MCNU": {
-      "name": "风味猎人",
-      "tagline": "不辣但追求极高风味浓度",
-      "desc": "完全不吃辣，但追求极高风味浓度。他们热爱焦脆的芝士脆皮、美拉德反应极致的煎烤、复杂的香料组合（不含辣）。推荐非辣菜系的异国料理极准。避雷区：白水煮菜、寡淡的减肥餐。",
+    "HWAE": {
+      "name": "甜辣发明家",
+      "selfDescription": "辣完必须来口甜的，这是宇宙法则。甜辣门永存！",
+      "tasteSignature": [
+        "H(灼烧)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢甜辣交织的刺激，韩式炸鸡、辣味巧克力、宫保虾球都是心头好。不排斥复合调味带来的层次感，甚至会主动尝试各种新奇的甜辣跨界零食。推荐信源对于寻找“新奇口味零食”和“改良融合菜”有帮助。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "HWAC": {
+      "name": "糖醋辣星人",
+      "selfDescription": "鱼香肉丝、宫保鸡丁、荔枝味型……甜辣酸组合才是王道。别乱创新。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们钟情于经典川菜中的“荔枝味”“鱼香味”等复合甜辣味型，但仅限经典做法。对“甜辣炸鸡”等外来甜辣组合态度谨慎，认为老祖宗的搭配才是黄金比例。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "HWSE": {
+      "name": "果辣探险家",
+      "selfDescription": "芒果蘸辣椒、菠萝配辣酱……水果的甜和辣是天生一对。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们痴迷于水果天然的甜与辣椒碰撞产生的火花。热衷于探索东南亚、云南等地的水果辣味吃法，但对工业甜辣酱兴趣不大。追求的是“自然的甜”与“天然的辣”的直接对话。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "HWSC": {
+      "name": "本味甜辣派",
+      "selfDescription": "辣椒炒肉，肉要带点甜味，但别给我放糖，要用好肉本身的甜。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们欣赏的是食材本身的清甜与辣椒的碰撞，拒绝额外加糖。比如“辣椒炒肉”中土猪肉的甜、“剁椒鱼头”中鱼肉的回甘。他们对这种搭配有固定的审美，不愿尝试怪异的甜辣组合。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "HBAE": {
+      "name": "苦辣隐士",
+      "selfDescription": "辣是门槛，苦是深度。甜品？婉拒了哈。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "此类型对甜味耐受度极低，热爱黑咖啡、高纯度巧克力、烤焦边缘的肉类。他们将辣视为一种“清醒剂”，与苦味结合形成独特的精神享受。可能热爱“辣椒巧克力”或“烟熏辣椒波特啤酒”。对甜品店的推荐应当反向参考。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "HBAC": {
+      "name": "焦香辣味控",
+      "selfDescription": "肉要烤到微焦，辣椒要焙过。那种焦苦香才是灵魂。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们迷恋美拉德反应的焦边、辣椒在火上焙烤后的糊辣味。认为这种微苦是风味深度的来源。对烧烤、干煸类菜品有极高要求，但对其他辣味形式探索欲不强。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "HBSE": {
+      "name": "黑巧辣客",
+      "selfDescription": "黑巧的苦醇和辣椒的灼烧，是给味蕾做深度清洁。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢简单直接的苦辣组合：黑巧配辣椒碎、纯可可粉拌辣椒面。不需要过多的糖和香料来干扰，追求的是两种强烈风味对撞的纯粹体验。喜欢探索全球各地的辣椒与可可搭配方式。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "HBSC": {
+      "name": "纯粹苦辣修行者",
+      "selfDescription": "苦瓜炒辣椒，咖啡配辣椒粉。别加糖，别加肉。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们的味觉世界朴素而坚定：就是苦与辣的二元组合。他们可能几十年如一日地吃“豆豉辣椒炒苦瓜”或“清炒苦瓜放干辣椒”。饮食极简，拒绝花哨。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "HOAE": {
+      "name": "酸辣游民",
+      "selfDescription": "没酸味我吃不下饭，没辣味我吃不饱饭。酸辣永动机，懂？",
+      "tasteSignature": [
+        "H(灼烧)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们是酸辣味的忠实追随者——冬阴功、酸汤鱼、酸辣粉是生命之光。与普通吃辣者不同，他们对酸的依赖极强，尤其是果酸和发酵酸（通常讨厌白醋）。探索性让他们成为东南亚菜、云南菜、贵州菜的活地图，跟着他们吃酸辣准没错。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "HOAC": {
+      "name": "发酵酸辣原教旨",
+      "selfDescription": "酸汤必须用米汤发酵，醋溜白菜都是异端。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对“酸”的来源有严格要求，只认自然发酵的酸（酸菜、酸汤、泡菜），对醋酸持鄙视态度。在酸辣菜系内部极度保守，只吃自己认定的那几种经典做法。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "HOSE": {
+      "name": "清新酸辣使",
+      "selfDescription": "柠檬辣椒、百香果蘸水……清新酸辣才是夏天的神。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们偏爱果酸与辣椒的直接结合，不喜欢过度的香料和油腻。柠檬撒撇、傣味柠檬鸡、百香果蘸水是他们的舒适区。追求的是酸辣带来的开胃清爽感，而非厚重的复合调味。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "HOSC": {
+      "name": "简单酸辣党",
+      "selfDescription": "醋和油泼辣子，拌面拌菜足矣。",
+      "tasteSignature": [
+        "H(灼烧)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对酸辣的要求不高，一碗“酸辣面”或“醋+辣椒油的蘸水”就能满足。不会主动探索复杂的酸辣味型，坚守最简单的搭配。",
+      "dimensions": {
+        "stimulus": "H",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "NUAE": {
+      "name": "麻感萨满",
+      "selfDescription": "辣只是前戏，麻才是高潮。嘴唇不跳舞，这顿算白吃。",
+      "tasteSignature": [
+        "N(麻感)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们是花椒的信徒，追求嘴唇跳动的震颤快感。一道菜如果没有花椒的参与，风味便不完整。热衷于寻找最地道的汉源花椒、藤椒油，甚至可能在吃非川菜时自带花椒粉。推荐信源对于“麻”这个维度的理解远超常人。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "NUAC": {
+      "name": "麻味守门人",
+      "selfDescription": "我只吃川渝的花椒，其他地方的麻，差点意思。",
+      "tasteSignature": [
+        "N(麻感)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们执着于特定产地花椒的风土特征，认为汉源花椒或江津花椒才是正统。对其他地区的麻味持怀疑态度，不愿尝试藤椒以外的麻源。在麻味领域内极度专业且保守。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "NUSE": {
+      "name": "清麻雅士",
+      "selfDescription": "藤椒油几滴，清汤挂面瞬间升华。麻要清新，不要油腻。",
+      "tasteSignature": [
+        "N(麻感)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们欣赏麻味但不喜重油重辣。藤椒油拌时蔬、花椒水饺、清汤花椒鸡是他们的爱。追求的是花椒香气与食材本鲜的优雅结合，探索各地清淡麻味做法。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "NUSC": {
+      "name": "清麻隐士",
+      "selfDescription": "麻要纯粹，汤要清鲜。别让重油重盐毁了花椒的香气。",
+      "tasteSignature": [
+        "N(麻感)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "偏爱藤椒油拌的清爽小菜、清汤花椒鸡。他们欣赏麻味的香气和震颤感，但不希望被厚重的牛油或豆瓣酱掩盖。对创新麻味菜兴趣不大，坚守经典搭配。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "NSAE": {
+      "name": "咸麻猎手",
+      "selfDescription": "麻和咸是绝配，盐帮菜是我的精神故乡。",
+      "tasteSignature": [
+        "N(麻感)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们热爱自贡盐帮菜那种“咸得鲜明、麻得跳脚”的重口冲击。花椒对他们来说是咸味的放大器。热衷于探索各地将咸味与麻感结合到极致的江湖菜。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "NSAC": {
+      "name": "传统咸麻匠",
+      "selfDescription": "麻婆豆腐、椒麻鸡，咸麻口的经典不容篡改。",
+      "tasteSignature": [
+        "N(麻感)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对经典的咸麻味型如数家珍，但拒绝任何创新。认为麻婆豆腐加奶酪是灾难，椒麻鸡里放柠檬是邪教。是传统咸麻菜的忠实卫士。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "NSSE": {
+      "name": "极简麻盐派",
+      "selfDescription": "盐和花椒，就这两样，能蘸一切。",
+      "tasteSignature": [
+        "N(麻感)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们是花椒盐的狂热粉丝。吃炸鸡、烧烤、甚至水果都可能蘸椒盐。喜欢探索不同品种花椒与盐的配比，但对其他复合调料兴趣寥寥。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "NSSC": {
+      "name": "椒盐原教旨",
+      "selfDescription": "椒盐就是椒盐，别给我加什么孜然五香粉。",
+      "tasteSignature": [
+        "N(麻感)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对“椒盐”这个味型有执念，必须是纯粹的花椒与盐。任何添加了其他香料的椒盐都会被他们识别并批判。饮食范围窄但专注度极高。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "NWAE": {
+      "name": "甜麻炼金师",
+      "selfDescription": "甜和麻的碰撞会上头，怪味胡豆就是证据。",
+      "tasteSignature": [
+        "N(麻感)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们着迷于甜味与麻感交织的复杂体验。怪味胡豆、甜水面、韩式甜麻炸鸡都是他们的研究对象。乐于探索各种文化中甜麻结合的创意料理。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "NWAC": {
+      "name": "怪味坚守者",
+      "selfDescription": "怪味必须是咸甜麻辣酸鲜兼备，少一味都不行。",
+      "tasteSignature": [
+        "N(麻感)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对川菜“怪味”味型有近乎学术的严谨。认为怪味胡豆、怪味鸡丝是神圣不可侵犯的，对打着“怪味”旗号的简化版或改良版深恶痛绝。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "NWSE": {
+      "name": "果麻探索者",
+      "selfDescription": "花椒菠萝、藤椒蜜桃，水果的甜和花椒的麻是天生CP。",
+      "tasteSignature": [
+        "N(麻感)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们热衷尝试各种水果与花椒的搭配，认为果糖的甜能中和麻的刺激并放大果香。喜欢寻找各地将水果与麻味结合的清爽料理。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "NWSC": {
+      "name": "本甜麻味派",
+      "selfDescription": "带点甜味的青椒炒肉，放几颗花椒，绝了。",
+      "tasteSignature": [
+        "N(麻感)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们欣赏食材本身的清甜与花椒的麻香结合，比如“青花椒炒甜笋”或“花椒炝炒带甜味的青菜”。不需要额外加糖，坚守这种朴素的搭配。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "NBAE": {
+      "name": "震颤苦行僧",
+      "selfDescription": "麻与苦，是我味觉的冥想。油腻甜腻都别来沾边。",
+      "tasteSignature": [
+        "N(麻感)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "极为罕见的类型。追求花椒的震颤感与咖啡/黑巧的苦醇结合，形成一种清醒的感官体验。对油腻和甜味极度排斥，饮食带有禁欲主义色彩。推荐信源极小众，但在此领域内是绝对权威。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "NBAC": {
+      "name": "焦麻隐修者",
+      "selfDescription": "花椒要焙过，苦味才出得来。这种深度你不懂。",
+      "tasteSignature": [
+        "N(麻感)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们钟爱将花椒干焙或烤过后产生的焦苦香气与麻感。认为这是花椒风味的终极形态。对未焙过的花椒兴趣不大，坚守这种独特的加工方式。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "NBSE": {
+      "name": "黑咖麻客",
+      "selfDescription": "黑咖啡加几颗花椒，苦醇与震颤的双重奏。",
+      "tasteSignature": [
+        "N(麻感)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢最简单的苦麻搭配：咖啡配花椒粉、黑巧碎拌花椒。不喜欢糖和奶的干扰。探索各种产地咖啡与花椒品种的组合。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "NBSC": {
+      "name": "纯粹苦麻人",
+      "selfDescription": "苦瓜炒的时候放花椒，我吃了二十年。",
+      "tasteSignature": [
+        "N(麻感)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "饮食极其朴素，就是苦味食材与花椒的固定搭配。可能是“花椒炒苦瓜”或“花椒拌苦菊”。数十年如一日，对新事物毫无兴趣。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "NOAE": {
+      "name": "酸麻浪人",
+      "selfDescription": "酸和麻，是让味蕾苏醒的组合拳。",
+      "tasteSignature": [
+        "N(麻感)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们沉迷于酸味与麻感的交织，如酸菜鱼、金汤肥牛、傣味酸麻凉拌。尤其欣赏发酵酸与花椒的结合。是各地酸麻料理的活点地图。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "NOAC": {
+      "name": "老坛酸麻守卫",
+      "selfDescription": "酸菜必须老坛，花椒必须大红袍。其他免谈。",
+      "tasteSignature": [
+        "N(麻感)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "对“老坛酸菜鱼”这类经典有苛刻的要求。酸菜的发酵程度、花椒的产地和品种，都必须在他们的认知范围内。拒绝创新，守护传统。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "NOSE": {
+      "name": "果酸麻使",
+      "selfDescription": "柠檬、百香果加藤椒，拌什么都好吃。",
+      "tasteSignature": [
+        "N(麻感)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们热爱用新鲜果酸搭配藤椒或花椒油制作清爽的凉拌菜或蘸水。认为这种搭配能最大程度保留食材原味并激发麻香。积极探索各种水果与花椒的组合。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "NOSC": {
+      "name": "醋麻小清新",
+      "selfDescription": "醋和花椒油，拌个黄瓜就够了。",
+      "tasteSignature": [
+        "N(麻感)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对酸麻的要求很简单：醋加花椒油（或藤椒油）。凉拌菜、蘸饺子都靠这一招。不愿尝试复杂的酸麻味型，坚守自己的小确幸。",
+      "dimensions": {
+        "stimulus": "N",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "CUAE": {
+      "name": "冰鲜炼金士",
+      "selfDescription": "食物要凉，鲜味要足。冰与鲜的碰撞，妙不可言。",
+      "tasteSignature": [
+        "C(清凉)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们热爱冰镇但风味浓郁的食物，如冰醉小龙虾、冷吃兔、日式冷面蘸汁。追求清凉触感与复合鲜味的结合。喜欢探索各地将“冷”与“鲜”结合到极致的料理。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "CUAC": {
+      "name": "凉卤死忠",
+      "selfDescription": "卤味必须凉吃，热卤没有灵魂。",
+      "tasteSignature": [
+        "C(清凉)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们是凉卤的坚定拥护者。认为卤菜冷却后风味才凝聚。对热卤或创新凉菜兴趣不大，坚守传统凉卤的阵地。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "CUSE": {
+      "name": "冰鲜探险家",
+      "selfDescription": "食物要凉，鲜味要足，热菜退散。冰门。",
+      "tasteSignature": [
+        "C(清凉)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "热爱凉菜、冰镇海鲜、冷汤、沙拉。对薄荷、冰草等清凉食材有天然好感。一年四季喝冰饮，吃寿司只吃鱼生，追求食材本身的清鲜。推荐信源适合寻找夏日清凉美食或生食料理。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "CUSC": {
+      "name": "纯粹冰鲜派",
+      "selfDescription": "刺身、冰镇海鲜，蘸点酱油就够。别搞花里胡哨的酱汁。",
+      "tasteSignature": [
+        "C(清凉)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对冰镇海鲜或冷吃的本味有极致追求，拒绝复杂的调味。坚守“冰镇+本鲜”的原则，对融合冷菜兴趣不大。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "CSAE": {
+      "name": "咸凉探险家",
+      "selfDescription": "冷吃兔、凉拌鸡、椒麻鸡……凉菜要够味才过瘾。",
+      "tasteSignature": [
+        "C(清凉)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢味道浓烈的凉菜，重咸重麻重辣但必须是冷的。热衷于探索各地的风味凉菜，尤其是四川的冷吃系列。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "CSAC": {
+      "name": "传统凉菜卫道士",
+      "selfDescription": "蒜泥白肉、凉拌耳片，传统凉菜才是王道。",
+      "tasteSignature": [
+        "C(清凉)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对经典中式凉菜有深厚感情，不接受创新。认为蒜泥白肉里加芥末是亵渎。在传统凉菜领域有很高的话语权。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "CSSE": {
+      "name": "极简盐凉派",
+      "selfDescription": "盐巴凉拌一切，黄瓜、番茄、萝卜……简单清爽。",
+      "tasteSignature": [
+        "C(清凉)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢用最少的调料制作凉菜：盐、一点香油或醋。追求食材本身的清甜与咸味的直接碰撞。乐于尝试各国简单的凉拌蔬菜做法。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "CSSC": {
+      "name": "凉拌黄瓜党",
+      "selfDescription": "拍黄瓜，多放蒜和盐，我能吃一辈子。",
+      "tasteSignature": [
+        "C(清凉)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们的凉菜世界可能只有“拍黄瓜”“凉拌西红柿”等几样。口味固定，不愿尝试新凉菜，但对自己喜欢的这几样极度忠诚。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "CWAE": {
+      "name": "甜凉魔术师",
+      "selfDescription": "冰淇淋火锅、冰镇甜水面……甜和凉的结合有无尽可能。",
+      "tasteSignature": [
+        "C(清凉)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们痴迷于各种冷冻甜点与复合调味的结合，如冰淇淋配辣椒油、冰粉加跳跳糖。喜欢探索冷与甜、与其他风味碰撞的边界。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "CWAC": {
+      "name": "传统冰品守护人",
+      "selfDescription": "冰粉、凉虾、杏仁豆腐，传统冰品无可替代。",
+      "tasteSignature": [
+        "C(清凉)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对传统中式冰品有深厚感情，对“红糖冰粉”“三鲜冰粉”等如数家珍，但对冰淇淋、雪花冰等外来冰品兴趣一般。坚守传统清凉甜品的阵地。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "CWSE": {
+      "name": "薄荷甜心",
+      "selfDescription": "冰凉凉，甜丝丝。薄荷巧克力是我的本命。",
+      "tasteSignature": [
+        "C(清凉)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "热爱一切薄荷与甜味的结合体——薄荷冰淇淋、薄荷巧克力、薄荷奶昔。喜欢尝试各地不同的清凉甜点，但对咸辣食物兴趣缺缺。推荐信源适合寻找夏日冰品和猎奇甜品。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "CWSC": {
+      "name": "单纯甜冰派",
+      "selfDescription": "冰淇淋，香草味就行。冰沙，糖水就行。",
+      "tasteSignature": [
+        "C(清凉)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对冰品的要求很简单：甜、凉。不喜欢复杂的口味和花哨的配料。可能是“老冰棍”或“白糖冰沙”的忠实粉丝。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "CBAE": {
+      "name": "苦凉炼金士",
+      "selfDescription": "冰咖啡加薄荷、冻苦瓜配蘸水……苦和凉是绝配。",
+      "tasteSignature": [
+        "C(清凉)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢将苦味食材与清凉感结合，如冰镇苦瓜、冷萃咖啡加冰、薄荷拌苦菊。并乐于探索复合调味如何提升这种苦凉体验。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "CBAC": {
+      "name": "凉茶原教旨",
+      "selfDescription": "癍痧、二十四味，凉茶必须苦，冰镇后一口闷。",
+      "tasteSignature": [
+        "C(清凉)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们是传统凉茶的死忠，认为凉茶的核心就是苦和凉。对市面上甜味的“凉茶饮料”极度鄙视。坚守老字号凉茶铺的苦味信仰。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "CBSE": {
+      "name": "纯粹冰苦客",
+      "selfDescription": "冰美式、冰啤酒、冰镇苦瓜原味。简单直接。",
+      "tasteSignature": [
+        "C(清凉)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢不经过多调味的苦凉之物。乐于探索不同产地咖啡豆做冰美式的区别，或不同啤酒花的苦味在冰镇后的表现。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "CBSC": {
+      "name": "苦瓜刺身党",
+      "selfDescription": "苦瓜切片冰镇，直接吃，或者蘸点酱油。人间美味。",
+      "tasteSignature": [
+        "C(清凉)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们的味觉极简主义达到了某种高度。可能最爱的就是冰镇苦瓜蘸酱油，或者是纯饮冰镇凉茶。对新奇的苦味组合毫无兴趣。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "COAE": {
+      "name": "酸凉游侠",
+      "selfDescription": "冰镇酸梅汤、冷泡柠檬茶、酸辣凉粉……酸和凉是夏日救星。",
+      "tasteSignature": [
+        "C(清凉)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们是各种酸凉饮品和凉菜的狂热粉丝。热衷于探索世界各地的酸凉搭配，如墨西哥的冰镇酸辣海鲜、东南亚的青柠冰饮。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "COAC": {
+      "name": "传统酸梅汤卫队",
+      "selfDescription": "酸梅汤必须用乌梅、山楂、甘草熬，冰镇喝。其他都是邪教。",
+      "tasteSignature": [
+        "C(清凉)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对传统酸梅汤有近乎苛刻的标准，认为那是酸凉饮品的巅峰。对市面上的勾兑酸梅汤或创新酸凉饮品不屑一顾。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "COSE": {
+      "name": "果酸冰饮探险家",
+      "selfDescription": "柠檬、百香果、青柠……加冰加水，就是最好的饮料。",
+      "tasteSignature": [
+        "C(清凉)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们迷恋水果天然的酸味与冰块的结合。不喜欢复杂的糖浆和添加剂，追求最纯粹的果酸冰饮。喜欢尝试各种小众柑橘类水果做冰饮。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "COSC": {
+      "name": "简单柠檬水党",
+      "selfDescription": "柠檬水，加冰，不要糖。我每天喝。",
+      "tasteSignature": [
+        "C(清凉)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对酸凉饮品的需求极度简单且固定。可能数十年如一日地喝同一款无糖柠檬冰水，不愿尝试其他任何酸味饮料。",
+      "dimensions": {
+        "stimulus": "C",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "MUAE": {
+      "name": "温火慢炖者",
+      "selfDescription": "辣是噪音，鲜才是信号。请给我一碗好汤，谢谢。",
+      "tasteSignature": [
+        "M(温和)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "完全不吃辣，但对鲜味的追求达到了极致。热爱老火靓汤、日式出汁、法式清汤。他们探索世界的方式是通过不同文化中的“鲜味载体”——从帕尔马火腿到鱼露，从昆布到番茄膏。他们推荐的餐厅通常“汤比菜好”。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "C",
-        "neophilic": "N",
-        "umami": "U"
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "E"
       }
     },
-    "MCNP": {
-      "name": "清爽极客",
-      "tagline": "喜欢口感趣味但讨厌味道负担",
-      "desc": "他们喜欢口感上的趣味，但讨厌味道上的负担。他们可能会迷恋\"海盐焦糖脆片\"或\"柚子味气泡炸鸡皮\"。他们推荐的餐厅通常\"有趣且不油腻\"。避雷区：红烧、卤煮等重色重味的菜。",
+    "MUAC": {
+      "name": "本帮菜死忠",
+      "selfDescription": "浓油赤酱、咸甜鲜香，本帮菜是温和派的巅峰。",
+      "tasteSignature": [
+        "M(温和)",
+        "U(鲜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对以鲜甜酱油味为核心的本帮菜、苏帮菜有极深感情。不吃辣，追求鲜与甜的复合，但对其他菜系的探索兴趣有限，认为家乡的红烧和清炒足矣。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "C",
-        "neophilic": "N",
-        "umami": "P"
+        "taste": "U",
+        "philosophy": "A",
+        "novelty": "C"
       }
     },
-    "MCTU": {
-      "name": "经典脆党",
-      "tagline": "粤菜烧腊的忠实拥趸",
-      "desc": "粤菜烧腊的忠实拥趸。烧鹅皮、乳猪皮、炸子鸡皮是他们的灵魂伴侣。他们重视食材本味的鲜与烹饪技法的脆。他们推荐的粤菜/淮扬菜馆子可信度满分。避雷区：炖得太烂的肉、没有口感对比的菜。",
+    "MUSE": {
+      "name": "清淡雅士",
+      "selfDescription": "食材本鲜，略施盐便足矣。淮扬菜是我的审美。",
+      "tasteSignature": [
+        "M(温和)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们追求最高级的本味之鲜，如清蒸刀鱼、鸡汤汆海蚌、白灼海鲜。认为调味是辅助，食材本身才是主角。探索不同地域如何用减法体现鲜味。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "C",
-        "neophilic": "T",
-        "umami": "U"
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "E"
       }
     },
-    "MCTP": {
-      "name": "纯粹口感派",
-      "tagline": "极度挑食的\"小孩口味\"成人版",
-      "desc": "极度挑食的\"小孩口味\"成人版。只爱吃薯条、炸猪排、脆皮面包。对复杂的调味（哪怕是黑胡椒）都可能排斥。他们的推荐仅限于\"炸物榜\"。避雷区：除了油炸和烘烤脆壳的一切。",
+    "MUSC": {
+      "name": "白灼原教旨",
+      "selfDescription": "白灼菜心、清蒸鲈鱼，鲜味不需要调料来证明。",
+      "tasteSignature": [
+        "M(温和)",
+        "U(鲜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们是“白灼”和“清蒸”的坚定守护者。认为只有这两种方式能检验食材的新鲜度。对用高汤、酱汁提鲜的做法持保留态度，坚守自己的本味信条。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "C",
-        "neophilic": "T",
-        "umami": "P"
+        "taste": "U",
+        "philosophy": "S",
+        "novelty": "C"
       }
     },
-    "MWNU": {
-      "name": "醇厚鉴赏家",
-      "tagline": "用\"软\"和\"浓\"来衡量幸福",
-      "desc": "他们用\"软\"和\"浓\"来衡量幸福。热爱提拉米苏、勃艮第红酒炖牛肉、溏心蛋、葱烧海参。他们是甜品店和西餐厅的优质推荐信源。避雷区：筋道的面条、法棍、麻辣重口。",
+    "MSAE": {
+      "name": "咸香探索者",
+      "selfDescription": "不吃辣，但咸香味不能少。腌笃鲜、梅菜扣肉才是硬菜。",
+      "tasteSignature": [
+        "M(温和)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们不爱辣，但热爱咸鲜风味浓郁的菜肴。腌制品、风干肉类、酱菜是他们的爱。乐于探索全球各地不辣的重咸鲜料理，如意大利火腿、西班牙腊肠。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "W",
-        "neophilic": "N",
-        "umami": "U"
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "E"
       }
     },
-    "MWNP": {
-      "name": "轻盈梦想家",
-      "tagline": "追求\"空气感\"和\"温柔的甜/酸\"",
-      "desc": "喜欢尝试各种口味的布丁、慕斯、云朵蛋糕。追求的是\"空气感\"和\"温柔的甜/酸\"。他们对食物的视觉美感要求往往高于味道浓度。避雷区：油腻、扎实、管饱的主食。",
+    "MSAC": {
+      "name": "老底子咸党",
+      "selfDescription": "外婆做的咸肉、自家晒的萝卜干，这咸味才正。",
+      "tasteSignature": [
+        "M(温和)",
+        "S(咸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对传统家常咸鲜味有深厚感情。可能是“霉干菜扣肉”“咸鱼茄子煲”的忠实粉丝，但对新式咸味料理（如芝士、黄油等西式咸味）接受度低。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "W",
-        "neophilic": "N",
-        "umami": "P"
+        "taste": "S",
+        "philosophy": "A",
+        "novelty": "C"
       }
     },
-    "MWTU": {
-      "name": "怀旧治愈家",
-      "tagline": "\"外婆的味道\"人格",
-      "desc": "这是最典型的\"外婆的味道\"人格。番茄炒蛋拌饭、红烧肉汁拌饭、烂糊面、鸡蛋羹。他们通过软烂的食物获取安全感。他们推荐的\"家常菜馆\"往往环境一般但味道窝心。避雷区：生冷、有嚼劲、创新的融合菜。",
+    "MSSE": {
+      "name": "纯粹盐味旅人",
+      "selfDescription": "海盐、岩盐、湖盐……不同盐的风味值得探索。",
+      "tasteSignature": [
+        "M(温和)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们是盐的品鉴家。喜欢用不同的盐搭配最简单的食材（如白水煮蛋、清蒸蔬菜），以体会盐本身的风味差异。对复合调味料无感。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "W",
-        "neophilic": "T",
-        "umami": "U"
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "E"
       }
     },
-    "MWTP": {
-      "name": "极简隐士",
-      "tagline": "饮食世界的\"性冷淡风\"",
-      "desc": "饮食世界的\"性冷淡风\"。可能最喜欢白粥配腐乳（只吃腐乳的咸味不吃豆子）、白吐司、土豆泥（只放盐）。他们不是挑剔，只是味觉阈值极低且对多数风味物质敏感。避雷区：几乎所有的社交型餐饮。",
+    "MSSC": {
+      "name": "纯粹咸党",
+      "selfDescription": "盐是百味之首，其他都是配角。别给我整那些花里胡哨的。",
+      "tasteSignature": [
+        "M(温和)",
+        "S(咸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "饮食极其朴素，追求直接的咸味满足。最爱白米饭配酱油、盐煎肉、清炒时蔬。对复杂的香料、鲜味堆叠无感甚至反感，偏好食材本味加一点盐就足够。",
       "dimensions": {
         "stimulus": "M",
-        "crunch": "W",
-        "neophilic": "T",
-        "umami": "P"
+        "taste": "S",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "MWAE": {
+      "name": "发酵甜品诗人",
+      "selfDescription": "甜要有层次，软要有灵魂。工业糖精别来碰瓷。",
+      "tasteSignature": [
+        "M(温和)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "热爱酒酿、蜂蜜发酵茶、天然酵母面包、陈年奶酪。追求的不是单纯的甜，而是经过时间转化后带有微酸、微醺、微苦的复合甜感。是甜品店和面包房的高阶信源。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "MWAC": {
+      "name": "传统糕点守卫",
+      "selfDescription": "定胜糕、条头糕、桂花糕，传统糕点的甜才叫高级。",
+      "tasteSignature": [
+        "M(温和)",
+        "W(甜味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对中式传统糕点有极深的感情，欣赏米香、豆香与糖桂花、猪油融合的复合甜感。对西式甜品或创新甜品兴趣不大，认为传统才是经典。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "W",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "MWSE": {
+      "name": "自然甜心",
+      "selfDescription": "水果的甜、蜂蜜的甜、根茎蔬菜的甜，这才是高级甜。",
+      "tasteSignature": [
+        "M(温和)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们偏爱未经复杂加工的天然甜味来源。喜欢烤红薯、蒸南瓜、水果挞等突出食材本甜的料理。探索全球各地用自然甜味制作的美食。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "MWSC": {
+      "name": "糖霜保守派",
+      "selfDescription": "我只吃我认识的东西，最好它是甜的，而且环境要干净。",
+      "tasteSignature": [
+        "M(温和)",
+        "W(甜味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "饮食世界里的“安全区居民”。偏爱熟悉的甜味、软糯口感、精致干净的出品，喜欢食材本身的清甜而非复合调味。新菜系、怪味食材会让他们直接劝退。推荐范围虽窄，但在蛋糕、面包、布丁等甜点领域的可信度极高。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "W",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "MBAE": {
+      "name": "黑金品鉴家",
+      "selfDescription": "苦是成人的味道，甜留给小孩吧。给我来杯手冲，深烘。",
+      "tasteSignature": [
+        "M(温和)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "完全不吃辣，但嗜苦如命。能从单一产地咖啡豆中喝出花果香，能分辨不同可可含量的黑巧。喜欢焦香、烘焙、陈年的复合风味。推荐一家精酿啤酒吧或手冲咖啡馆比推荐米其林三星更能赢得他们的心。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "MBAC": {
+      "name": "传统烘焙苦行派",
+      "selfDescription": "我就喝这一家烘的豆子，深烘，别的喝不惯。",
+      "tasteSignature": [
+        "M(温和)",
+        "B(苦/醇)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对苦味来源有固定的偏好，比如认准某家老字号咖啡店的深烘豆，或只喝某个品牌的普洱茶。不愿尝试新的苦味体验，但对自己认定的那款极度专一。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "B",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "MBSE": {
+      "name": "极简苦味旅人",
+      "selfDescription": "苦瓜刺身、纯黑巧、无糖冷萃……苦得纯粹，才尝得出风土。",
+      "tasteSignature": [
+        "M(温和)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜欢不加任何掩盖的纯粹苦味，以分辨不同产地、品种的苦味食材差异。乐于尝试全球各地的苦味食材和饮品，但都要求“原味”。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "MBSC": {
+      "name": "极简苦行僧",
+      "selfDescription": "苦瓜就清炒，咖啡只喝黑。别加糖，别加奶，别废话。",
+      "tasteSignature": [
+        "M(温和)",
+        "B(苦/醇)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "追求最纯粹的苦味体验。欣赏苦瓜、苦菊、黑咖啡的原味，拒绝用任何甜味或鲜味去“平衡”。饮食极其克制，对陌生苦味食材谨慎尝试。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "B",
+        "philosophy": "S",
+        "novelty": "C"
+      }
+    },
+    "MOAE": {
+      "name": "酸香探秘者",
+      "selfDescription": "不吃辣，但醋溜、酸汤、果酸发酵是我的爱。",
+      "tasteSignature": [
+        "M(温和)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们热爱各种不辣但酸味浓郁的复合料理，如糖醋排骨、老醋蛰头、意式油醋沙拉。喜欢探索世界各地将酸味与鲜、甜结合的菜肴。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "E"
+      }
+    },
+    "MOAC": {
+      "name": "糖醋原教旨",
+      "selfDescription": "糖醋比例必须完美，多一分甜腻，少一分寡酸。",
+      "tasteSignature": [
+        "M(温和)",
+        "O(酸味)",
+        "A(加法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对“糖醋”味型有执念，认为那是中式烹饪的瑰宝。对外来的酸甜口（如西式茄汁、日式甜醋）持谨慎态度，坚守本土糖醋传统。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "O",
+        "philosophy": "A",
+        "novelty": "C"
+      }
+    },
+    "MOSE": {
+      "name": "果酸雅士",
+      "selfDescription": "柠檬汁挤在海鲜上，油醋汁拌沙拉，果酸的清新无人能及。",
+      "tasteSignature": [
+        "M(温和)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "E(探索者)"
+      ],
+      "analysis": "他们喜爱用天然果酸来提升食材本味，而非用醋去腌制或炖煮。喜欢探索各种柑橘、浆果在料理中的清新应用。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "E"
+      }
+    },
+    "MOSC": {
+      "name": "简单酸味派",
+      "selfDescription": "吃面放醋，吃饺子蘸醋，够了。",
+      "tasteSignature": [
+        "M(温和)",
+        "O(酸味)",
+        "S(减法烹饪)",
+        "C(保守者)"
+      ],
+      "analysis": "他们对酸的需求很简单直接：就是醋。可能一辈子只吃米醋或陈醋，对果酸、发酵酸兴趣寥寥，但每餐都离不开那几滴醋。",
+      "dimensions": {
+        "stimulus": "M",
+        "taste": "O",
+        "philosophy": "S",
+        "novelty": "C"
       }
     }
   }

@@ -154,8 +154,8 @@ export function renderStackedBars(dimensionResults) {
 
     // Stacked bar
     html += `<div class="bar-track" style="display:flex;height:24px;border-radius:4px;overflow:hidden;margin:6px 0;">`;
-    const codes = Object.keys(dr.percentages);
-    codes.forEach(code => {
+    const sortedCodes = Object.entries(dr.percentages).sort((a, b) => b[1] - a[1]).map(e => e[0]);
+    sortedCodes.forEach(code => {
       const pct = Math.round(dr.percentages[code]);
       const color = CODE_COLORS[code] || '#ccc';
       html += `<div style="width:${pct}%;background:${color};min-width:0;" title="${escapeHtml(code)}: ${pct}%"></div>`;
@@ -164,7 +164,7 @@ export function renderStackedBars(dimensionResults) {
 
     // Legend rows
     html += `<div class="bar-legend" style="display:flex;flex-wrap:wrap;gap:8px;font-size:12px;">`;
-    codes.forEach(code => {
+    sortedCodes.forEach(code => {
       const pct = Math.round(dr.percentages[code]);
       const color = CODE_COLORS[code] || '#ccc';
       const label = getCodeLabel(code, dim);

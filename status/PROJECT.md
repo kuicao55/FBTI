@@ -8,13 +8,13 @@
 **Repository:** https://github.com/kuicao55/FBTI
 **Harness Version:** 3.3.0
 **Generated:** 2026-04-11
-**Last Updated:** 2026-04-11
+**Last Updated:** 2026-04-12
 
 ## Tech Stack
 
 **Languages:** Vanilla JavaScript (ES Modules), HTML5, CSS3
 **Frameworks:** None — zero dependency, no build step
-**Test Framework:** Manual browser testing (no automated test suite)
+**Test Framework:** Node.js built-in test runner (`node --test`) — 100 tests across scoring and render modules
 **Package Manager:** None (static files, CDN-only dependencies)
 **Deployment:** GitHub Pages (static hosting)
 
@@ -23,12 +23,14 @@
 | Module | Purpose | Source Location |
 |--------|---------|-----------------|
 | loader | Data loading with 5-min TTL cache and URL validation | `modules/loader.js` |
-| scoring | 4-dimension scoring engine (S/M, C/W, N/T, U/P) | `modules/scoring.js` |
-| render | Quiz question and result UI rendering | `modules/render.js` |
+| scoring | 4-dimension stratified sampling + percentage scoring engine (TasteType 3.1) | `modules/scoring.js` |
+| render | Quiz question and result UI rendering (self-desc, taste-signature, radar chart, stacked bars) | `modules/render.js` |
 | entry | App initialization, event binding, share image generation | `index.html` (inline `<script>`) |
-| types data | 16 personality type definitions (name, tagline, dimensions) | `data/types.json` |
-| questions data | 16 situational questions with dimension mapping | `data/questions.json` |
-| SVG avatars | 16 personality type avatar illustrations | `assets/*.svg` |
+| types data | 80 personality type definitions (name, selfDescription, tasteSignature, analysis, dimensions) | `data/types.json` |
+| questions data | 100 situational questions across 4 dimensions (stimulus/taste/philosophy/novelty) | `data/questions.json` |
+| SVG avatars | Placeholder (16 type avatar SVGs pending) | `assets/*.svg` |
+| scoring tests | 40 TDD tests for scoring module | `tests/test_scoring.js` |
+| render tests | 60 TDD tests for render module | `tests/test_render.js` |
 
 ## Key Architectural Decisions
 
@@ -36,9 +38,11 @@
 - **5-layer modular architecture**: Data (JSON) → Loader → Scoring → Render → Entry — each layer independently editable
 - **CSS custom properties design system**: All colors, spacing, typography, and motion tokens defined as `:root` variables for consistency
 - **Anthropic-inspired design language**: Warm cream (#ECE9E0) + orange accent (#D97757), Lora/Poppins/Noto Serif SC fonts
-- **URL-based sharing**: `?type=SCNU` query param allows direct linking to results without backend
+- **URL-based sharing**: `?type=HUAE` query param allows direct linking to results without backend
 - **Canvas API share image**: 900×1200 PNG generated client-side with SVG avatar, type code, QR code
 - **TTL-cached data loading**: loader.js caches fetch results for 5 minutes to avoid redundant requests
+- **TasteType 3.1 stratified sampling**: 24 questions per quiz (6 stimulus / 8 taste / 4 philosophy / 6 novelty) with min-per-tendency guarantees
+- **TasteType 3.1 percentage scoring**: Each dimension scores independently; dominant = highest %, secondary = 2nd if ≥70% of dominant
 
 ## Project Structure
 
@@ -46,16 +50,21 @@
 FBTI/
 ├── index.html              # Main SPA (HTML + CSS + inline JS entry)
 ├── gen_readme.py           # README generator script
+├── validate_questions.py   # TDD validation script for questions.json
+├── validate_types.py       # TDD validation script for types.json
 ├── modules/
 │   ├── loader.js           # Data loading + caching
-│   ├── scoring.js          # Scoring engine
-│   └── render.js           # UI rendering
+│   ├── scoring.js          # Stratified sampling + percentage scoring
+│   └── render.js           # Question + result UI rendering
 ├── data/
-│   ├── types.json          # 16 personality types
-│   └── questions.json      # 16 quiz questions
+│   ├── types.json          # 80 personality types (TasteType 3.1)
+│   └── questions.json      # 100 questions across 4 dimensions
+├── tests/
+│   ├── test_scoring.js     # 40 tests for scoring module
+│   └── test_render.js      # 60 tests for render module
 ├── assets/
 │   ├── FBTI_logo.svg       # Brand logo
-│   └── *.svg               # 16 type avatars (SCNU, SCNP, ...)
+│   └── *.svg               # Type avatars (pending replacement)
 ├── docs/
 │   ├── FBTI_Basic.md       # Personality model documentation
 │   ├── FBTI_Questions.md   # Full question bank documentation
@@ -76,11 +85,14 @@ FBTI/
 |-----------|-------|-------|----------|
 | milestone-1 | Build FBTI single-file quiz app | 10 | 2026-04-11 |
 | milestone-2 | Modularize FBTI into independent modules | 6 | 2026-04-11 |
+| milestone-3 | Update data layer (questions + types) | 2 | 2026-04-12 |
+| milestone-4 | Update logic layer (scoring + render + entry) | 4 | 2026-04-12 |
 
 ## Key Design Specs
 
 - `docs/harness/specs/2026-04-11-fbti-web-design.md` — Original quiz app design (3-screen flow, design tokens, data flow)
 - `docs/harness/specs/2026-04-11-fbti-modular-design.md` — Modular refactor design (5-layer architecture, module boundaries)
+- `docs/harness/specs/2026-04-12-tastetype-3.1-design.md` — TasteType 3.1 upgrade design (80 types, 100 questions, stratified sampling, percentage scoring, new result page)
 
 ## Harness Reference
 

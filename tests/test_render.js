@@ -719,3 +719,96 @@ describe('renderResult with missing DOM elements', () => {
     assert.equal(el, null, 'should return null for unregistered IDs');
   });
 });
+
+// ---------- loadRestaurants and loadRestaurantSettings ----------
+
+describe('loadRestaurants', () => {
+  beforeEach(async () => {
+    const { clearCache } = await import('../modules/loader.js');
+    clearCache();
+  });
+
+  it('loadRestaurants returns {} when file fetch fails (graceful fallback)', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      if (url.includes('restaurants.json')) {
+        throw new Error('fetch error');
+      }
+      return originalFetch(url);
+    };
+
+    try {
+      const { loadRestaurants } = await import('../modules/loader.js');
+      const result = await loadRestaurants();
+      assert.strictEqual(Object.keys(result).length, 0);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+describe('loadRestaurants happy path', () => {
+  beforeEach(async () => {
+    const { clearCache } = await import('../modules/loader.js');
+    clearCache();
+  });
+
+  it('loadRestaurants returns data from restaurants.json', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      if (url.includes('restaurants.json')) {
+        return { ok: true, json: async () => ({ HUAE: [{ name: '测试', by: '测试', date: '2026-04-14' }] }) };
+      }
+      return originalFetch(url);
+    };
+    try {
+      const { loadRestaurants } = await import('../modules/loader.js');
+      const result = await loadRestaurants();
+      assert.strictEqual(result.HUAE[0].name, '测试');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});
+
+describe('loadRestaurantSettings', () => {
+  beforeEach(async () => {
+    const { clearCache } = await import('../modules/loader.js');
+    clearCache();
+  });
+
+  it('loadRestaurantSettings returns data from restaurant-settings.json', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      if (url.includes('restaurant-settings.json')) {
+        return { ok: true, json: async () => ({ maxPerType: 3 }) };
+      }
+      return originalFetch(url);
+    };
+    try {
+      const { loadRestaurantSettings } = await import('../modules/loader.js');
+      const result = await loadRestaurantSettings();
+      assert.strictEqual(result.maxPerType, 3);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('loadRestaurantSettings returns defaults on failure', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      if (url.includes('restaurant-settings.json')) {
+        throw new Error('network error');
+      }
+      return originalFetch(url);
+    };
+    try {
+      const { loadRestaurantSettings } = await import('../modules/loader.js');
+      const result = await loadRestaurantSettings();
+      assert.strictEqual(result.maxPerType, 5);
+      assert.strictEqual(Object.keys(result).length, 1);
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+});

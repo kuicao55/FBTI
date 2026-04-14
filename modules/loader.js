@@ -7,6 +7,15 @@ const cache = {};
 const CACHE_TTL_MS = 5 * 60 * 1000; // 5 minutes
 
 /**
+ * Clear the loadJSON cache. Exported for testing.
+ */
+export function clearCache() {
+  for (const key of Object.keys(cache)) {
+    delete cache[key];
+  }
+}
+
+/**
  * Normalize URL for use as cache key: strip query params and resolve relative paths.
  */
 function normalizeUrl(url) {
@@ -54,4 +63,22 @@ export async function loadTypes() {
 
 export async function loadQuestions() {
   return loadJSON('./data/questions.json');
+}
+
+export async function loadRestaurants() {
+  try {
+    return await loadJSON('./data/restaurants.json');
+  } catch (e) {
+    console.warn('[FBTI] loadRestaurants failed, returning {}:', e instanceof Error ? e.message : String(e));
+    return {};
+  }
+}
+
+export async function loadRestaurantSettings() {
+  try {
+    return await loadJSON('./data/restaurant-settings.json');
+  } catch (e) {
+    console.warn('[FBTI] loadRestaurantSettings failed, returning defaults:', e instanceof Error ? e.message : String(e));
+    return Object.assign({}, { maxPerType: 5 });
+  }
 }

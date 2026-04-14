@@ -10,10 +10,10 @@
 
 // Dimension configuration: total questions, codes, minimum per code
 const DIMENSION_CONFIG = {
-  stimulus:   { total: 6,  codes: ['H', 'N', 'C', 'M'],  minPerTendency: { H: 1, N: 1, C: 1, M: 1 } },
+  stimulus:   { total: 8,  codes: ['H', 'N', 'C', 'M'],  minPerTendency: { H: 2, N: 2, C: 2, M: 2 } },
   taste:      { total: 8,  codes: ['U', 'S', 'W', 'B', 'O'], minPerTendency: { U: 1, S: 1, W: 1, B: 1, O: 1 } },
-  philosophy: { total: 4,  codes: ['A', 'S'],             minPerTendency: { A: 1, S: 1 } },
-  novelty:    { total: 6,  codes: ['E', 'C'],             minPerTendency: { E: 2, C: 2 } }
+  philosophy: { total: 4,  codes: ['A', 'S'],             minPerTendency: { A: 2, S: 2 } },
+  novelty:    { total: 4,  codes: ['E', 'C'],             minPerTendency: { E: 2, C: 2 } }
 };
 
 /**
@@ -21,6 +21,20 @@ const DIMENSION_CONFIG = {
  */
 function questionScoresCode(question, code) {
   return question.options.some(opt => opt.scores && opt.scores[code] > 0);
+}
+
+/**
+ * Parse dimension string into base dimension and primary tag.
+ * E.g., "stimulus-H" -> { dim: "stimulus", primaryTag: "H" }
+ * Falls back to treating the whole string as dimension with no primary tag.
+ */
+function parseDimension(dimStr) {
+  const match = dimStr.match(/^([a-z]+)-([A-Z])$/);
+  if (match) {
+    return { dim: match[1], primaryTag: match[2] };
+  }
+  // Legacy format or unknown: treat whole as dimension, no primary tag
+  return { dim: dimStr, primaryTag: null };
 }
 
 /**
@@ -38,7 +52,7 @@ function shuffle(arr) {
  * selectQuestions(questionsData) — Stratified random sampling
  *
  * Extracts 24 questions from the full pool:
- *   stimulus: 6, taste: 8, philosophy: 4, novelty: 6
+ *   stimulus: 8, taste: 8, philosophy: 4, novelty: 4
  * Ensures minimum representation per tendency code within each dimension.
  *
  * @param {Object} questionsData — { dimensions: [...], questions: [...] }
@@ -49,18 +63,24 @@ export function selectQuestions(questionsData) {
   const result = [];
 
   for (const [dimName, config] of Object.entries(DIMENSION_CONFIG)) {
-    // Group questions belonging to this dimension
-    const pool = allQuestions.filter(q => q.dimension === dimName);
+    // Group questions belonging to this dimension (by parsing compound dimension string)
+    const pool = allQuestions.filter(q => {
+      const { dim } = parseDimension(q.dimension);
+      return dim === dimName;
+    });
 
     // Track selected question ids to avoid duplicates
     const selectedIds = new Set();
     const selected = [];
 
-    // Phase 1: For each code, pick minPerTendency questions that score that code
+    // Phase 1: For each code, pick minPerTendency questions whose primaryTag matches that code
     for (const code of config.codes) {
       const minCount = config.minPerTendency[code] || 0;
       const candidates = shuffle(
-        pool.filter(q => !selectedIds.has(q.id) && questionScoresCode(q, code))
+        pool.filter(q => {
+          const { primaryTag } = parseDimension(q.dimension);
+          return !selectedIds.has(q.id) && primaryTag === code;
+        })
       );
       let picked = 0;
       for (let i = 0; i < Math.min(minCount, candidates.length); i++) {
@@ -120,7 +140,8 @@ export function calculateScores(answers, questions) {
     const option = question.options.find(opt => opt.label === answer);
     if (!option) continue;
 
-    const dimScores = scores[question.dimension];
+    const { dim } = parseDimension(question.dimension);
+    const dimScores = scores[dim];
     if (!dimScores) continue;
 
     for (const [code, value] of Object.entries(option.scores)) {
@@ -250,4 +271,76 @@ export function calculateType(answers, questions, types) {
     scores,
     dimensionResults
   };
+}
+
+// ---- Compact URL encoding for dimensionResults ----
+// Format: s{D}{D}{pct...}|t{D}{D}{pct...}|p{D}{D}{pct...}|n{D}{D}{pct...}
+// Dimension prefix: s=stimulus, t=taste, p=philosophy, n=novelty
+// Two dominant+secondary codes, then all percentages concatenated as 2-digit integers
+// Example: sHN62251270tSW3025201510pAS5545nEC7030 (~46 chars vs ~100+ base64 chars)
+
+const DIMENSION_URL_CODES = {
+  stimulus: 's',
+  taste: 't',
+  philosophy: 'p',
+  novelty: 'n'
+};
+
+const DIMENSION_CODES_URL = {
+  s: 'stimulus',
+  t: 'taste',
+  p: 'philosophy',
+  n: 'novelty'
+};
+
+// Percentages are always in this code order per dimension
+const PERCENTAGE_CODE_ORDER = {
+  stimulus:   ['H', 'N', 'C', 'M'],
+  taste:      ['U', 'S', 'W', 'B', 'O'],
+  philosophy: ['A', 'S'],
+  novelty:    ['E', 'C']
+};
+
+export function encodeDimensionResults(dimensionResults) {
+  if (!dimensionResults) return '';
+  const parts = [];
+  for (const [dim, dr] of Object.entries(dimensionResults)) {
+    const prefix = DIMENSION_URL_CODES[dim];
+    if (!prefix) continue;
+    const dom = dr.dominant || '';
+    const sec = dr.secondary || '';
+    const pctStr = (PERCENTAGE_CODE_ORDER[dim] || [])
+      .map(code => {
+        const pct = dr.percentages ? Math.round(dr.percentages[code] || 0) : 0;
+        return String(pct).padStart(2, '0');
+      })
+      .join('');
+    parts.push(prefix + dom + sec + pctStr);
+  }
+  return parts.join('');
+}
+
+export function decodeDimensionResults(encoded) {
+  if (!encoded) return null;
+  const result = {};
+  const dimPattern = /([stpn])([A-Z])([A-Z]?)(\d+)/g;
+  let match;
+  while ((match = dimPattern.exec(encoded)) !== null) {
+    const [, urlDim, dom, sec, pctStr] = match;
+    const dim = DIMENSION_CODES_URL[urlDim];
+    if (!dim) continue;
+    const codeOrder = PERCENTAGE_CODE_ORDER[dim];
+    const percentages = {};
+    for (let i = 0; i < codeOrder.length; i++) {
+      const code = codeOrder[i];
+      const val = parseInt(pctStr.substr(i * 2, 2), 10) || 0;
+      percentages[code] = val;
+    }
+    result[dim] = {
+      dominant: dom,
+      secondary: sec || null,
+      percentages
+    };
+  }
+  return Object.keys(result).length > 0 ? result : null;
 }

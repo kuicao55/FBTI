@@ -4,1061 +4,1101 @@
     {
       "id": 1,
       "text": "朋友点了一盘红油满满的菜，你的第一反应是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "直接夹一筷子，先尝尝辣得正不正", "scores": { "H": 1 } },
-        { "label": "B", "text": "先观察一下有没有花椒，有花椒更兴奋", "scores": { "N": 1 } },
-        { "label": "C", "text": "先喝一口冰水或冰饮料降降温", "scores": { "C": 1 } },
-        { "label": "D", "text": "内心默默祈祷不要太辣", "scores": { "M": 1 } }
+        { "label": "A", "text": "直接夹一筷子，先尝尝辣得正不正，越辣越兴奋", "scores": { "H": 3 } },
+        { "label": "B", "text": "先观察一下有没有花椒，有花椒更兴奋", "scores": { "N": 3 } },
+        { "label": "C", "text": "先喝一口冰水或冰饮料降降温，再小心尝试", "scores": { "C": 2, "M": 1 } },
+        { "label": "D", "text": "内心默默祈祷不要太辣，或者只挑不沾油的吃", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 2,
       "text": "吃火锅时，你调蘸料的花椒油/藤椒油用量是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-N",
       "options": [
-        { "label": "A", "text": "从来都不碰，只吃香油蒜泥", "scores": { "M": 1 } },
-        { "label": "B", "text": "加一点点提个味就行", "scores": { "M": 0.5, "N": 0.5 } },
-        { "label": "C", "text": "必须加满，嘴唇不跳舞等于没吃", "scores": { "N": 1 } },
-        { "label": "D", "text": "我更在意有没有薄荷或折耳根", "scores": { "C": 1 } }
+        { "label": "A", "text": "从来都不碰，只吃香油蒜泥或麻酱", "scores": { "N": 0, "M": 3 } },
+        { "label": "B", "text": "加一点点提个味就行，有香气但不追求麻", "scores": { "N": 1, "M": 2 } },
+        { "label": "C", "text": "必须加满，嘴唇不跳舞等于没吃这顿火锅", "scores": { "N": 3 } },
+        { "label": "D", "text": "我更在意有没有薄荷、折耳根或醋", "scores": { "C": 3, "O": 2 } }
       ]
     },
     {
       "id": 3,
       "text": "夏天走在街上，看到“薄荷冰粉”和“麻辣凉面”，你更想买哪个？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "薄荷冰粉，清凉解暑", "scores": { "C": 1 } },
-        { "label": "B", "text": "麻辣凉面，辣得冒汗才爽", "scores": { "H": 1 } },
-        { "label": "C", "text": "如果凉面有花椒味就选凉面", "scores": { "N": 1 } },
-        { "label": "D", "text": "都不太想吃，找找有没有普通甜点", "scores": { "M": 1 } }
+        { "label": "A", "text": "薄荷冰粉，清凉解暑，看到就走不动道", "scores": { "C": 3 } },
+        { "label": "B", "text": "麻辣凉面，辣得冒汗才爽，冰粉太温和了", "scores": { "C": 0, "H": 3 } },
+        { "label": "C", "text": "如果凉面有花椒味就选凉面，否则选冰粉", "scores": { "N": 3, "C": 1 } },
+        { "label": "D", "text": "都不太想吃，找找有没有普通甜点或饭团", "scores": { "M": 3, "C": 0 } }
       ]
     },
     {
       "id": 4,
-      "text": "你如何评价一道“藤椒鱼”的好坏？",
-      "dimension": "stimulus",
+      "text": "你对“四川花椒”的看法？",
+      "dimension": "stimulus-N",
       "options": [
-        { "label": "A", "text": "鱼肉嫩不嫩、鲜不鲜最重要", "scores": {} },
-        { "label": "B", "text": "藤椒的麻味够不够劲，能不能让舌头颤抖", "scores": { "N": 1 } },
-        { "label": "C", "text": "辣味和麻味平衡得好不好", "scores": { "H": 0.5, "N": 0.5 } },
-        { "label": "D", "text": "我基本不吃藤椒鱼，太刺激了", "scores": { "M": 1 } }
+        { "label": "A", "text": "麻味太神奇了，我是重度麻味爱好者，无麻不欢", "scores": { "N": 3 } },
+        { "label": "B", "text": "可以接受，但不能放太多，偶尔提香即可", "scores": { "N": 1, "M": 2 } },
+        { "label": "C", "text": "只喜欢它的香气，不喜欢麻嘴的感觉，会挑出来", "scores": { "N": 0, "H": 2 } },
+        { "label": "D", "text": "我分不清花椒和藤椒的区别，感觉都差不多", "scores": { "N": 2, "E": 1 } }
       ]
     },
     {
       "id": 5,
-      "text": "吃完一顿重口味大餐后，你更想喝什么？",
-      "dimension": "stimulus",
+      "text": "吃完一顿重口味大餐后，你更想喝什么来收尾？",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "冰镇可乐或酸梅汤，要冰的", "scores": { "C": 1 } },
-        { "label": "B", "text": "温热茶水，解腻暖胃", "scores": { "M": 1 } },
-        { "label": "C", "text": "来一碗冰粉或凉虾，继续冰火两重天", "scores": { "C": 1 } },
-        { "label": "D", "text": "我会喝牛奶缓解辣感", "scores": { "M": 1 } }
+        { "label": "A", "text": "冰镇可乐或酸梅汤，必须带冰碴子的", "scores": { "C": 3 } },
+        { "label": "B", "text": "温热茶水或清汤，解腻暖胃才舒服", "scores": { "C": 0, "M": 3 } },
+        { "label": "C", "text": "来一碗冰粉或凉虾，继续冰火两重天的快乐", "scores": { "C": 2, "H": 2 } },
+        { "label": "D", "text": "我会喝牛奶或酸奶缓解辣感，温度无所谓", "scores": { "M": 2, "C": 1 } }
       ]
     },
     {
       "id": 6,
       "text": "你更愿意吃以下哪种零食？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "麻辣牛肉干", "scores": { "H": 1 } },
-        { "label": "B", "text": "怪味胡豆（麻+辣+甜）", "scores": { "N": 0.5, "H": 0.5 } },
-        { "label": "C", "text": "强劲薄荷巧克力", "scores": { "C": 1 } },
-        { "label": "D", "text": "原味薯片或饼干", "scores": { "M": 1 } }
+        { "label": "A", "text": "麻辣牛肉干，越嚼越辣越有味", "scores": { "H": 3 } },
+        { "label": "B", "text": "怪味胡豆（麻+辣+甜+咸的复合怪味）", "scores": { "N": 2, "H": 2, "W": 1 } },
+        { "label": "C", "text": "强劲薄荷巧克力，冰爽提神", "scores": { "C": 3, "W": 1 } },
+        { "label": "D", "text": "原味薯片或苏打饼干，简单不刺激", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 7,
       "text": "对于“芥末”这种调料，你的态度是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "吃寿司必须蘸很多，冲鼻的感觉很爽", "scores": { "C": 1 } },
-        { "label": "B", "text": "适量可以，但不能太多", "scores": { "M": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "完全拒绝，太呛了", "scores": { "M": 1 } },
-        { "label": "D", "text": "我更喜欢山葵的清新感", "scores": { "C": 1 } }
+        { "label": "A", "text": "吃寿司必须蘸很多，冲鼻流泪的感觉非常爽快", "scores": { "C": 3 } },
+        { "label": "B", "text": "适量蘸取，只为了提味，不能太冲", "scores": { "C": 1, "M": 2 } },
+        { "label": "C", "text": "完全拒绝，太呛了，我甚至不喜欢它的味道", "scores": { "C": 0, "M": 3 } },
+        { "label": "D", "text": "我更喜欢新鲜山葵的清新植物感，不那么冲", "scores": { "C": 2, "B": 1 } }
       ]
     },
     {
       "id": 8,
       "text": "朋友约你去吃“重庆老火锅”，你首先想到的是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "牛油味重不重，辣得香不香", "scores": { "H": 1 } },
-        { "label": "B", "text": "有没有九宫格，毛肚黄喉新不新鲜", "scores": { "H": 0.5 } },
-        { "label": "C", "text": "希望店里有冰汤圆或者冰啤酒", "scores": { "C": 1 } },
-        { "label": "D", "text": "我可能会点鸳鸯锅，中间清汤保命", "scores": { "M": 1 } }
+        { "label": "A", "text": "牛油味重不重，辣得香不香，是不是老油", "scores": { "H": 3 } },
+        { "label": "B", "text": "有没有九宫格，毛肚黄喉鸭肠新不新鲜", "scores": { "H": 2, "U": 2 } },
+        { "label": "C", "text": "希望店里有冰汤圆或者冰啤酒来解辣降温", "scores": { "C": 3, "H": 1 } },
+        { "label": "D", "text": "我可能会点鸳鸯锅，中间清汤保命，或者只要微辣", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 9,
       "text": "你吃面条时，对“油泼辣子”的态度？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "必须来一勺，不然面没灵魂", "scores": { "H": 1 } },
-        { "label": "B", "text": "如果辣子里有花椒粉会更完美", "scores": { "N": 1 } },
-        { "label": "C", "text": "我更愿意加醋和蒜", "scores": {} },
-        { "label": "D", "text": "我一般只放酱油和葱花", "scores": { "M": 1 } }
+        { "label": "A", "text": "必须来一大勺，不然面没灵魂，油泼辣子越多越香", "scores": { "H": 3 } },
+        { "label": "B", "text": "如果辣子里有花椒粉和芝麻会更完美", "scores": { "N": 3, "H": 2 } },
+        { "label": "C", "text": "我更愿意加醋和蒜，辣子可有可无", "scores": { "H": 0, "O": 3 } },
+        { "label": "D", "text": "我一般只放酱油和葱花，清淡一点", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 10,
       "text": "一碗“胡辣汤”端上来，你期待它的特点是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "胡椒的辛辣感要足，喝完额头冒汗", "scores": { "H": 0.5, "C": 0.5 } },
-        { "label": "B", "text": "汤的浓稠度和配料丰富度", "scores": {} },
-        { "label": "C", "text": "我不太喝胡辣汤，太刺激", "scores": { "M": 1 } },
-        { "label": "D", "text": "我喜欢里面加点醋和辣椒油", "scores": { "H": 0.5 } }
+        { "label": "A", "text": "胡椒的辛辣感要足，喝完额头冒汗，通透", "scores": { "H": 3, "C": 2 } },
+        { "label": "B", "text": "汤的浓稠度和配料丰富度，比如面筋、木耳", "scores": { "U": 2, "S": 1 } },
+        { "label": "C", "text": "我不太喝胡辣汤，太刺激肠胃了", "scores": { "H": 0, "M": 3 } },
+        { "label": "D", "text": "我喜欢在里面多加点醋和香油调和一下", "scores": { "H": 1, "O": 2 } }
       ]
     },
     {
       "id": 11,
       "text": "你如何描述“吃完麻辣食物后第二天”的感觉？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "嘴巴还在回味，肠胃略有抗议但值了", "scores": { "H": 1 } },
-        { "label": "B", "text": "如果麻味持续到第二天我会很满足", "scores": { "N": 1 } },
-        { "label": "C", "text": "我一般不会让这种情况发生，会控制量", "scores": { "M": 1 } },
-        { "label": "D", "text": "我会大量喝水吃清淡的来补救", "scores": { "M": 1 } }
+        { "label": "A", "text": "嘴巴还在回味，肠胃略有抗议但觉得值了，下次还吃", "scores": { "H": 3 } },
+        { "label": "B", "text": "如果麻味和香味持续到第二天我会很满足", "scores": { "N": 3, "H": 1 } },
+        { "label": "C", "text": "我一般不会让这种情况发生，会控制食量", "scores": { "H": 1, "M": 2 } },
+        { "label": "D", "text": "会很难受，所以我会大量喝水吃清淡的来补救，甚至后悔", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 12,
       "text": "看到“柠檬无骨凤爪”这道菜，你的关注点是？",
-      "dimension": "stimulus",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "酸辣味够不够劲", "scores": { "H": 0.5 } },
-        { "label": "B", "text": "有没有放百香果或薄荷", "scores": { "C": 1 } },
-        { "label": "C", "text": "凤爪是不是软糯脱骨", "scores": {} },
-        { "label": "D", "text": "我可能更想吃泡椒凤爪", "scores": { "H": 1 } }
+        { "label": "A", "text": "酸辣味够不够劲，柠檬清香重不重", "scores": { "H": 1, "O": 2, "C": 1 } },
+        { "label": "B", "text": "有没有放百香果或薄荷，冰镇过没有", "scores": { "C": 3, "O": 2 } },
+        { "label": "C", "text": "凤爪是不是软糯脱骨，调料只是辅助", "scores": { "U": 2, "C": 1 } },
+        { "label": "D", "text": "我可能更想吃泡椒凤爪，那才是真正的刺激", "scores": { "H": 3, "C": 0 } }
       ]
     },
     {
       "id": 13,
-      "text": "你对“四川花椒”的看法？",
-      "dimension": "stimulus",
+      "text": "你吃麻辣香锅时，通常会叮嘱什么？",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "麻味太神奇了，我是麻味爱好者", "scores": { "N": 1 } },
-        { "label": "B", "text": "可以接受，但不能放太多", "scores": { "M": 1 } },
-        { "label": "C", "text": "只喜欢它的香气，不喜欢麻嘴的感觉", "scores": { "H": 1 } },
-        { "label": "D", "text": "我分不清花椒和藤椒的区别", "scores": { "M": 1 } }
+        { "label": "A", "text": "多放辣椒，越辣越好，特辣", "scores": { "H": 3 } },
+        { "label": "B", "text": "多放花椒，麻一点，微辣重麻", "scores": { "N": 3, "H": 1 } },
+        { "label": "C", "text": "少油少盐，不要太辣，微微辣就行", "scores": { "H": 0, "M": 3 } },
+        { "label": "D", "text": "加一份午餐肉和藕片，味道正常即可", "scores": { "H": 1, "U": 2 } }
       ]
     },
     {
       "id": 14,
-      "text": "如果一道菜被描述为“入口先是清凉，然后辣味慢慢涌上来”，你感兴趣吗？",
-      "dimension": "stimulus",
+      "text": "朋友送你一包“死神辣椒薯片”，你的反应是？",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "非常感兴趣，这种反差很妙", "scores": { "C": 0.5, "H": 0.5 } },
-        { "label": "B", "text": "有点兴趣，但怕太刺激", "scores": { "M": 1 } },
-        { "label": "C", "text": "我更关心它是什么食材", "scores": {} },
-        { "label": "D", "text": "清凉感的东西我不太感冒", "scores": { "H": 1 } }
+        { "label": "A", "text": "迫不及待打开尝一片，挑战极限", "scores": { "H": 3, "E": 2 } },
+        { "label": "B", "text": "先问问麻不麻，有花椒味更期待", "scores": { "N": 3, "H": 2 } },
+        { "label": "C", "text": "怕辣，但出于礼貌尝一点点", "scores": { "H": 1, "M": 2 } },
+        { "label": "D", "text": "婉拒，我吃不了，送别人吧", "scores": { "H": 0, "M": 3 } }
       ]
     },
     {
       "id": 15,
-      "text": "冬天和夏天，你对辣的渴望程度有变化吗？",
-      "dimension": "stimulus",
+      "text": "你对“藤椒鱼”的评价标准中，麻味的重要性占比多少？",
+      "dimension": "stimulus-N",
       "options": [
-        { "label": "A", "text": "一年四季都爱吃辣，不分季节", "scores": { "H": 1 } },
-        { "label": "B", "text": "夏天更想吃清爽的，冬天吃辣暖身", "scores": { "C": 1 } },
-        { "label": "C", "text": "夏天吃辣配冰饮更爽", "scores": { "H": 0.5, "C": 0.5 } },
-        { "label": "D", "text": "我基本不吃辣，所以没差", "scores": { "M": 1 } }
+        { "label": "A", "text": "麻味决定一切，不麻的藤椒鱼就是耍流氓", "scores": { "N": 3 } },
+        { "label": "B", "text": "麻味和鱼肉鲜嫩各占一半", "scores": { "N": 2, "U": 2 } },
+        { "label": "C", "text": "麻味只是点缀，我更看重鱼本身的味道", "scores": { "N": 1, "U": 3 } },
+        { "label": "D", "text": "我不吃藤椒鱼，太麻了受不了", "scores": { "N": 0, "M": 3 } }
       ]
     },
     {
       "id": 16,
-      "text": "你吃麻辣香锅时，通常会叮嘱什么？",
-      "dimension": "stimulus",
+      "text": "你家里最常备的清凉系调味品是？",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "多放辣椒，越辣越好", "scores": { "H": 1 } },
-        { "label": "B", "text": "多放花椒，麻一点", "scores": { "N": 1 } },
-        { "label": "C", "text": "少油少盐，不要太辣", "scores": { "M": 1 } },
-        { "label": "D", "text": "加一份午餐肉和藕片", "scores": {} }
+        { "label": "A", "text": "薄荷酱或薄荷糖浆，夏天必备", "scores": { "C": 3 } },
+        { "label": "B", "text": "芥末酱或山葵酱，吃生鲜用", "scores": { "C": 2, "B": 2 } },
+        { "label": "C", "text": "没有专门的清凉调味品，只有基础调料", "scores": { "C": 0, "M": 3 } },
+        { "label": "D", "text": "冰片糖或凉茶包，用来煮糖水", "scores": { "C": 1, "W": 2 } }
       ]
     },
     {
       "id": 17,
-      "text": "你对“薄荷牙膏”的感觉是？",
-      "dimension": "stimulus",
+      "text": "冬天吃火锅时，你会特意点一份冰品（如冰粉、冰淇淋）吗？",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "喜欢，清凉感让人精神", "scores": { "C": 1 } },
-        { "label": "B", "text": "无所谓，就是刷牙的工具", "scores": { "M": 1 } },
-        { "label": "C", "text": "太刺激了，喜欢温和的牙膏", "scores": { "M": 1 } },
-        { "label": "D", "text": "我更在意有没有美白功能", "scores": {} }
+        { "label": "A", "text": "会，冰火两重天一年四季都爽", "scores": { "C": 3, "H": 2 } },
+        { "label": "B", "text": "夏天会，冬天基本不会，太冷了", "scores": { "C": 1, "M": 2 } },
+        { "label": "C", "text": "完全不会，冬天就要吃热乎的", "scores": { "C": 0, "M": 3 } },
+        { "label": "D", "text": "看火锅辣不辣，太辣了可能会点", "scores": { "C": 2, "H": 1 } }
       ]
     },
     {
       "id": 18,
-      "text": "以下哪种调味料你家里一定常备？",
-      "dimension": "stimulus",
+      "text": "你对“花椒冰淇淋”这类创新甜品怎么看？",
+      "dimension": "stimulus-N",
       "options": [
-        { "label": "A", "text": "辣椒油或辣椒酱", "scores": { "H": 1 } },
-        { "label": "B", "text": "花椒油或藤椒油", "scores": { "N": 1 } },
-        { "label": "C", "text": "薄荷酱或芥末酱", "scores": { "C": 1 } },
-        { "label": "D", "text": "都没有，只有基础的油盐酱醋", "scores": { "M": 1 } }
+        { "label": "A", "text": "非常想试，花椒和奶香的结合很妙", "scores": { "N": 3, "E": 3 } },
+        { "label": "B", "text": "可以接受，但觉得有点怪", "scores": { "N": 2, "E": 1 } },
+        { "label": "C", "text": "甜品就该是甜的，不能接受麻的", "scores": { "N": 0, "W": 3 } },
+        { "label": "D", "text": "我连普通冰淇淋都不爱吃", "scores": { "N": 0, "C": 1 } }
       ]
     },
     {
       "id": 19,
-      "text": "去东南亚旅游，你对当地菜的印象是？",
-      "dimension": "stimulus",
+      "text": "吃饭时，桌上有一道菜对你来说“太辣了”，你会？",
+      "dimension": "stimulus-M",
       "options": [
-        { "label": "A", "text": "酸辣开胃，非常过瘾", "scores": { "H": 1 } },
-        { "label": "B", "text": "香料味太重，不太习惯", "scores": { "M": 1 } },
-        { "label": "C", "text": "喜欢他们的青柠和香茅风味", "scores": { "C": 1 } },
-        { "label": "D", "text": "没去过，但很想尝试", "scores": {} }
+        { "label": "A", "text": "完全不吃那道菜，或者涮一下水再吃", "scores": { "M": 3, "H": 0 } },
+        { "label": "B", "text": "少吃一点，同时狂喝冰水或牛奶", "scores": { "M": 2, "C": 2 } },
+        { "label": "C", "text": "硬着头皮吃，辣并快乐着", "scores": { "M": 0, "H": 3 } },
+        { "label": "D", "text": "拌着米饭吃，能中和一些辣味", "scores": { "M": 1, "H": 1 } }
       ]
     },
     {
       "id": 20,
-      "text": "朋友送你一包“死神辣椒薯片”，你的反应是？",
-      "dimension": "stimulus",
+      "text": "你对菜品中“不小心吃到花椒粒”的反应是？",
+      "dimension": "stimulus-N",
       "options": [
-        { "label": "A", "text": "迫不及待打开尝一片", "scores": { "H": 1 } },
-        { "label": "B", "text": "先问问麻不麻，有花椒味更期待", "scores": { "N": 1 } },
-        { "label": "C", "text": "怕辣，但出于礼貌尝一点", "scores": { "M": 1 } },
-        { "label": "D", "text": "婉拒，我吃不了", "scores": { "M": 1 } }
+        { "label": "A", "text": "很享受，我就喜欢那种突然炸开的麻感", "scores": { "N": 3 } },
+        { "label": "B", "text": "可以接受，但不喜欢咬到壳的沙沙感", "scores": { "N": 2, "M": 1 } },
+        { "label": "C", "text": "立刻吐出来，很影响就餐体验", "scores": { "N": 0, "M": 3 } },
+        { "label": "D", "text": "我会挑出来放在一边，只吃菜", "scores": { "N": 1, "M": 2 } }
       ]
     },
     {
       "id": 21,
-      "text": "你对“凉拌菜放芥末油”的看法？",
-      "dimension": "stimulus",
+      "text": "去一家以“清淡养生”著称的餐厅，你的第一反应是？",
+      "dimension": "stimulus-M",
       "options": [
-        { "label": "A", "text": "非常提神，必须放", "scores": { "C": 1 } },
-        { "label": "B", "text": "可以接受，但不能太多", "scores": { "M": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "完全拒绝", "scores": { "M": 1 } },
-        { "label": "D", "text": "我更爱放辣椒油", "scores": { "H": 1 } }
+        { "label": "A", "text": "太好了，终于可以吃到食物原味了", "scores": { "M": 3, "S": 2 } },
+        { "label": "B", "text": "有点担心味道太淡，希望能有点蘸料", "scores": { "M": 1, "A": 2 } },
+        { "label": "C", "text": "不太情愿，但为了健康偶尔吃吃", "scores": { "M": 2, "H": 1 } },
+        { "label": "D", "text": "坚决不去，没辣椒怎么吃饭", "scores": { "M": 0, "H": 3 } }
       ]
     },
     {
       "id": 22,
-      "text": "吃烧烤时，你对“烤辣椒”的态度？",
-      "dimension": "stimulus",
+      "text": "你对“凉茶”（如王老吉、癍痧）的态度是？",
+      "dimension": "stimulus-C",
       "options": [
-        { "label": "A", "text": "必须点，而且要最辣的品种", "scores": { "H": 1 } },
-        { "label": "B", "text": "如果有烤花椒辣椒串更好", "scores": { "N": 1 } },
-        { "label": "C", "text": "太辣了，我一般只吃微辣", "scores": { "M": 1 } },
-        { "label": "D", "text": "我不吃烤辣椒", "scores": { "M": 1 } }
+        { "label": "A", "text": "喜欢喝，尤其是冰镇的，苦中带甘", "scores": { "C": 3, "B": 2 } },
+        { "label": "B", "text": "只有上火时才喝，平时不碰", "scores": { "C": 1, "M": 2 } },
+        { "label": "C", "text": "太苦了，喝不下去，宁愿喝白水", "scores": { "C": 0, "M": 3 } },
+        { "label": "D", "text": "我更爱喝甜的饮料，比如冰红茶", "scores": { "C": 1, "W": 3 } }
       ]
     },
     {
       "id": 23,
-      "text": "你吃凉皮/凉面时，对“冰镇”的态度？",
-      "dimension": "stimulus",
+      "text": "如果一道菜被描述为“温润滋补、毫无刺激”，你会？",
+      "dimension": "stimulus-M",
       "options": [
-        { "label": "A", "text": "必须冰镇过才爽口", "scores": { "C": 1 } },
-        { "label": "B", "text": "常温就好，太冰伤胃", "scores": { "M": 1 } },
-        { "label": "C", "text": "看天气，夏天冰镇冬天常温", "scores": { "C": 0.5, "M": 0.5 } },
-        { "label": "D", "text": "无所谓", "scores": {} }
+        { "label": "A", "text": "很感兴趣，这就是我日常喜欢的类型", "scores": { "M": 3, "U": 2 } },
+        { "label": "B", "text": "可以接受，但希望它至少咸鲜有味", "scores": { "M": 2, "S": 2 } },
+        { "label": "C", "text": "觉得有点无聊，除非食材特别名贵", "scores": { "M": 1, "H": 2 } },
+        { "label": "D", "text": "完全没兴趣，我要吃重口味的", "scores": { "M": 0, "H": 3 } }
       ]
     },
     {
       "id": 24,
-      "text": "如果有一款“辣椒味冰淇淋”，你会？",
-      "dimension": "stimulus",
+      "text": "你吃泡面时，对“辣包”的处理方式是？",
+      "dimension": "stimulus-H",
       "options": [
-        { "label": "A", "text": "非常好奇，必须尝", "scores": { "H": 0.5, "C": 0.5 } },
-        { "label": "B", "text": "听起来有点怪，但可以试试", "scores": {} },
-        { "label": "C", "text": "太暗黑了，不吃", "scores": { "C": 1 } },
-        { "label": "D", "text": "完全没兴趣", "scores": { "M": 1 } }
+        { "label": "A", "text": "全放，而且往往觉得不够辣", "scores": { "H": 3 } },
+        { "label": "B", "text": "放一半或三分之二，有点辣味就行", "scores": { "H": 1, "M": 2 } },
+        { "label": "C", "text": "基本不放，只吃酱包或粉包的原味", "scores": { "H": 0, "M": 3 } },
+        { "label": "D", "text": "我还会自己额外加辣椒酱或火锅底料", "scores": { "H": 3, "A": 2 } }
       ]
     },
     {
       "id": 25,
-      "text": "你觉得一碗“阳春面”最大的问题可能是？",
-      "dimension": "taste",
+      "text": "一碗“阳春面”你觉得最大的问题可能是？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "不够鲜，汤底太薄", "scores": { "U": 1 } },
-        { "label": "B", "text": "不够咸，味道太淡", "scores": { "S": 1 } },
-        { "label": "C", "text": "缺点回甜，或者缺点猪油香", "scores": { "W": 1 } },
-        { "label": "D", "text": "没有浇头吃起来单调", "scores": {} }
+        { "label": "A", "text": "不够鲜，汤底太薄，没有层次感", "scores": { "U": 3 } },
+        { "label": "B", "text": "不够咸，味道太淡，吃起来没劲", "scores": { "S": 3, "U": 0 } },
+        { "label": "C", "text": "缺点回甜，或者缺点猪油香和葱香", "scores": { "W": 2, "U": 1 } },
+        { "label": "D", "text": "没有浇头吃起来单调，需要点配菜", "scores": { "A": 2, "U": 1 } }
       ]
     },
     {
       "id": 26,
-      "text": "吃红烧肉时，你最在意的点是？",
-      "dimension": "taste",
+      "text": "吃日料时，你对“酱油”的使用习惯是？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "肉有没有炖到入口即化，酱汁浓不浓", "scores": { "U": 1 } },
-        { "label": "B", "text": "咸甜是否平衡，不能太甜", "scores": { "S": 0.5, "W": 0.5 } },
-        { "label": "C", "text": "肥肉部分会不会腻", "scores": {} },
-        { "label": "D", "text": "有没有放冰糖炒糖色", "scores": { "W": 1 } }
+        { "label": "A", "text": "蘸很多，喜欢浓郁的咸鲜味包裹食材", "scores": { "S": 3, "U": 2 } },
+        { "label": "B", "text": "轻轻蘸一点，怕盖过食材本味", "scores": { "U": 3, "S": 1 } },
+        { "label": "C", "text": "会往酱油里加大量现磨山葵，喜欢刺激", "scores": { "B": 2, "U": 2, "C": 1 } },
+        { "label": "D", "text": "我不太吃刺身，吃寿司也偏爱火炙或熟食", "scores": { "U": 0, "M": 3 } }
       ]
     },
     {
       "id": 27,
-      "text": "你对“糖醋排骨”的态度是？",
-      "dimension": "taste",
+      "text": "喝汤时，你更喜欢？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "喜欢，但希望醋味更突出一点", "scores": { "O": 1 } },
-        { "label": "B", "text": "喜欢，酸甜平衡最好", "scores": { "W": 0.5, "O": 0.5 } },
-        { "label": "C", "text": "不太喜欢，太甜了", "scores": { "B": 0.5, "S": 0.5 } },
-        { "label": "D", "text": "我更爱吃椒盐排骨", "scores": { "S": 1 } }
+        { "label": "A", "text": "老火慢炖的浓白汤，鲜得黏嘴，胶质丰富", "scores": { "U": 3, "A": 2 } },
+        { "label": "B", "text": "清澈见底的清汤，能看到食材原貌", "scores": { "U": 3, "S": 2 } },
+        { "label": "C", "text": "酸辣汤或冬阴功汤，开胃刺激", "scores": { "O": 3, "H": 2 } },
+        { "label": "D", "text": "我不怎么喝汤，更喜欢直接吃菜", "scores": { "U": 0 } }
       ]
     },
     {
       "id": 28,
-      "text": "如果让你选择一种口味的薯片，你会选？",
-      "dimension": "taste",
+      "text": "你对“腐乳”这种食物的看法？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "原味", "scores": { "S": 1 } },
-        { "label": "B", "text": "番茄味", "scores": { "O": 1 } },
-        { "label": "C", "text": "海苔味", "scores": { "U": 1 } },
-        { "label": "D", "text": "黄瓜味或青柠味", "scores": { "O": 0.5 } }
+        { "label": "A", "text": "咸鲜下饭神器，配粥配馒头绝配", "scores": { "S": 2, "U": 3 } },
+        { "label": "B", "text": "有点发酵味，偶尔吃可以，不能多吃", "scores": { "U": 1, "M": 2 } },
+        { "label": "C", "text": "完全接受不了那个味道，太臭了", "scores": { "U": 0, "M": 3 } },
+        { "label": "D", "text": "我喜欢用它炒空心菜，风味独特", "scores": { "U": 2, "A": 3 } }
       ]
     },
     {
       "id": 29,
-      "text": "你喝咖啡的习惯是？",
-      "dimension": "taste",
+      "text": "以下哪种蘸料你更喜欢？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "只喝黑咖啡或美式，不加糖奶", "scores": { "B": 1 } },
-        { "label": "B", "text": "拿铁或卡布奇诺，要加奶", "scores": { "U": 0.5, "W": 0.5 } },
-        { "label": "C", "text": "加糖加奶，不然太苦", "scores": { "W": 1 } },
-        { "label": "D", "text": "我不喝咖啡", "scores": {} }
+        { "label": "A", "text": "芝麻酱+腐乳+韭菜花（咸鲜浓香）", "scores": { "U": 3, "S": 2 } },
+        { "label": "B", "text": "酱油+醋+小米辣（酸辣开胃）", "scores": { "O": 3, "H": 2 } },
+        { "label": "C", "text": "香油+蒜泥+蚝油（咸甜润滑）", "scores": { "U": 2, "W": 2, "S": 2 } },
+        { "label": "D", "text": "干辣椒面+花椒面+盐（干香刺激）", "scores": { "H": 3, "N": 3, "S": 1 } }
       ]
     },
     {
       "id": 30,
-      "text": "吃日料时，你对“酱油”的使用习惯是？",
-      "dimension": "taste",
+      "text": "你对“味精/鸡精”的态度是？",
+      "dimension": "taste-U",
       "options": [
-        { "label": "A", "text": "蘸很多，喜欢咸鲜味", "scores": { "S": 0.5, "U": 0.5 } },
-        { "label": "B", "text": "轻轻蘸一点，怕盖过食材本味", "scores": { "U": 1 } },
-        { "label": "C", "text": "会往酱油里加现磨山葵", "scores": { "B": 0.5, "U": 0.5 } },
-        { "label": "D", "text": "我不太吃刺身", "scores": {} }
+        { "label": "A", "text": "做饭必放，提鲜神器，没有鲜味不够", "scores": { "U": 3, "A": 2 } },
+        { "label": "B", "text": "能不放就不放，喜欢自然食材的鲜味", "scores": { "U": 3, "S": 2 } },
+        { "label": "C", "text": "吃不出来区别，放不放无所谓", "scores": { "U": 1 } },
+        { "label": "D", "text": "我对外面餐馆的味精比较敏感，吃了口干", "scores": { "U": 2, "S": 2, "M": 2 } }
       ]
     },
     {
       "id": 31,
-      "text": "你认为“番茄炒蛋”是甜的好吃还是咸的好吃？",
-      "dimension": "taste",
+      "text": "如果让你选择一种口味的薯片，你会选？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "必须是甜的，下饭", "scores": { "W": 1 } },
-        { "label": "B", "text": "必须是咸的，甜的像异端", "scores": { "S": 1 } },
-        { "label": "C", "text": "酸甜口最好，番茄要炒出汁", "scores": { "O": 1 } },
-        { "label": "D", "text": "无所谓，蛋嫩就行", "scores": {} }
+        { "label": "A", "text": "原味（只有盐）", "scores": { "S": 3 } },
+        { "label": "B", "text": "番茄味（酸甜口）", "scores": { "O": 3, "W": 2 } },
+        { "label": "C", "text": "海苔味（咸鲜口）", "scores": { "U": 3, "S": 2 } },
+        { "label": "D", "text": "黄瓜味或青柠味（清爽酸咸）", "scores": { "C": 2, "O": 2, "S": 1 } }
       ]
     },
     {
       "id": 32,
-      "text": "你对“黑巧克力”的接受度是？",
-      "dimension": "taste",
+      "text": "你对“咸蛋黄”口味零食的态度？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "超爱，70%以上才够味", "scores": { "B": 1 } },
-        { "label": "B", "text": "可以接受，但不能太苦", "scores": { "W": 1 } },
-        { "label": "C", "text": "只吃牛奶巧克力", "scores": { "W": 1 } },
-        { "label": "D", "text": "我不太吃巧克力", "scores": {} }
+        { "label": "A", "text": "超爱，咸蛋黄的沙沙感和咸香无法抗拒，有就买", "scores": { "S": 3, "U": 2 } },
+        { "label": "B", "text": "有点腻，偶尔吃还行，不能多吃", "scores": { "S": 1, "W": 2 } },
+        { "label": "C", "text": "不太喜欢，更喜欢甜味零食", "scores": { "S": 0, "W": 3 } },
+        { "label": "D", "text": "没试过，听起来很怪", "scores": { "S": 1, "E": 1 } }
       ]
     },
     {
       "id": 33,
-      "text": "喝汤时，你更喜欢？",
-      "dimension": "taste",
+      "text": "吃烤肉时，你更喜欢蘸？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "老火慢炖的浓汤，鲜得黏嘴", "scores": { "U": 1 } },
-        { "label": "B", "text": "清汤，能看到食材原貌", "scores": { "U": 1 } },
-        { "label": "C", "text": "酸辣汤或冬阴功汤", "scores": { "O": 1 } },
-        { "label": "D", "text": "我不怎么喝汤", "scores": {} }
+        { "label": "A", "text": "简单的盐和胡椒，吃原味肉香", "scores": { "S": 3 } },
+        { "label": "B", "text": "韩式包饭酱或大酱（咸甜复合）", "scores": { "U": 3, "W": 2, "S": 1 } },
+        { "label": "C", "text": "日式烤肉酱汁带点甜味的那种", "scores": { "W": 3, "S": 1 } },
+        { "label": "D", "text": "干料，孜然辣椒面花椒面", "scores": { "H": 3, "N": 2, "S": 1 } }
       ]
     },
     {
       "id": 34,
-      "text": "你如何评价“腐乳”这种食物？",
-      "dimension": "taste",
+      "text": "你对“咸豆浆”的态度？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "咸鲜下饭神器", "scores": { "S": 0.5, "U": 0.5 } },
-        { "label": "B", "text": "有点发酵味，偶尔吃可以", "scores": { "U": 0.5 } },
-        { "label": "C", "text": "完全接受不了那个味道", "scores": {} },
-        { "label": "D", "text": "我喜欢用它炒空心菜", "scores": { "U": 1 } }
+        { "label": "A", "text": "超爱，加虾皮、紫菜、辣油、榨菜，咸鲜可口", "scores": { "S": 3, "U": 2 } },
+        { "label": "B", "text": "只喝甜豆浆，咸的无法接受", "scores": { "S": 0, "W": 3 } },
+        { "label": "C", "text": "都可以，看当天心情", "scores": { "S": 1, "W": 1 } },
+        { "label": "D", "text": "我不喝豆浆", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 35,
-      "text": "你对“咸蛋黄”口味零食的态度？",
-      "dimension": "taste",
+      "text": "喝粥时，你更喜欢配什么？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "超爱，咸蛋黄的沙沙感和咸香无法抗拒", "scores": { "S": 0.5, "U": 0.5 } },
-        { "label": "B", "text": "有点腻，偶尔吃还行", "scores": { "W": 1 } },
-        { "label": "C", "text": "不太喜欢，更喜欢甜味零食", "scores": { "W": 1 } },
-        { "label": "D", "text": "没试过", "scores": {} }
+        { "label": "A", "text": "咸鸭蛋、榨菜、腐乳（纯咸鲜）", "scores": { "S": 3, "U": 2 } },
+        { "label": "B", "text": "肉松、小鱼干（咸甜鲜）", "scores": { "U": 3, "S": 2, "W": 1 } },
+        { "label": "C", "text": "糖、蜂蜜、甜小菜", "scores": { "W": 3, "S": 0 } },
+        { "label": "D", "text": "什么都不配，喝白粥", "scores": { "S": 0, "M": 3 } }
       ]
     },
     {
       "id": 36,
-      "text": "一碗“酸辣粉”你觉得灵魂是？",
-      "dimension": "taste",
+      "text": "你吃牛排时，更喜欢搭配什么酱汁？",
+      "dimension": "taste-S",
       "options": [
-        { "label": "A", "text": "醋的酸味够不够劲", "scores": { "O": 1 } },
-        { "label": "B", "text": "辣椒油的香和辣", "scores": {} },
-        { "label": "C", "text": "粉条的口感", "scores": {} },
-        { "label": "D", "text": "花生碎和榨菜末的丰富度", "scores": { "U": 0.5, "S": 0.5 } }
+        { "label": "A", "text": "海盐和黑胡椒即可，原味最佳", "scores": { "S": 3 } },
+        { "label": "B", "text": "黑椒汁或蘑菇汁，味道更浓郁", "scores": { "A": 2, "S": 1 } },
+        { "label": "C", "text": "红酒汁或奶油汁，口感顺滑", "scores": { "U": 2, "S": 1 } },
+        { "label": "D", "text": "我不吃牛排", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 37,
-      "text": "你吃水果时，更喜欢？",
-      "dimension": "taste",
+      "text": "你认为“番茄炒蛋”是甜的好吃还是咸的好吃？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "酸甜口的，如柚子、百香果", "scores": { "O": 1 } },
-        { "label": "B", "text": "纯甜的，如芒果、荔枝", "scores": { "W": 1 } },
-        { "label": "C", "text": "清甜爽脆的，如梨、苹果", "scores": { "W": 0.5 } },
-        { "label": "D", "text": "带点苦味的，如西柚", "scores": { "B": 1 } }
+        { "label": "A", "text": "必须是甜的，放糖才下饭", "scores": { "W": 3, "S": 0 } },
+        { "label": "B", "text": "必须是咸的，放糖是异端", "scores": { "S": 3, "W": 0 } },
+        { "label": "C", "text": "酸甜口最好，番茄要炒出汁水来", "scores": { "O": 3, "W": 1 } },
+        { "label": "D", "text": "无所谓咸甜，蛋嫩就行，我都吃", "scores": { "W": 1, "S": 1 } }
       ]
     },
     {
       "id": 38,
-      "text": "你对“味精/鸡精”的态度是？",
-      "dimension": "taste",
+      "text": "你吃水果时，更喜欢？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "做饭必放，提鲜", "scores": { "U": 1 } },
-        { "label": "B", "text": "能不放就不放，喜欢自然鲜", "scores": { "U": 1 } },
-        { "label": "C", "text": "吃不出来区别", "scores": {} },
-        { "label": "D", "text": "我对外面餐馆的味精比较敏感", "scores": {} }
+        { "label": "A", "text": "酸甜口的，如柚子、百香果、菠萝", "scores": { "O": 3, "W": 1 } },
+        { "label": "B", "text": "纯甜的，如芒果、荔枝、释迦", "scores": { "W": 3, "O": 0 } },
+        { "label": "C", "text": "清甜爽脆的，如梨、苹果、莲雾", "scores": { "W": 2, "C": 1 } },
+        { "label": "D", "text": "带点苦味的，如西柚、葡萄柚", "scores": { "B": 3, "W": 0 } }
       ]
     },
     {
       "id": 39,
-      "text": "以下哪种蘸料你更喜欢？",
-      "dimension": "taste",
+      "text": "你对“果脯/蜜饯”的态度？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "芝麻酱+腐乳+韭菜花", "scores": { "U": 0.5, "S": 0.5 } },
-        { "label": "B", "text": "酱油+醋+小米辣", "scores": { "O": 0.5 } },
-        { "label": "C", "text": "香油+蒜泥+蚝油", "scores": { "U": 1 } },
-        { "label": "D", "text": "干辣椒面+花椒面", "scores": {} }
+        { "label": "A", "text": "太甜了，不喜欢，更爱咸口零食", "scores": { "W": 0, "S": 3 } },
+        { "label": "B", "text": "喜欢酸甜口的，如话梅、酸角糕", "scores": { "O": 3, "W": 1 } },
+        { "label": "C", "text": "喜欢纯甜的，如柿饼、冬瓜糖", "scores": { "W": 3, "O": 0 } },
+        { "label": "D", "text": "我不吃零食", "scores": { "W": 0 } }
       ]
     },
     {
       "id": 40,
-      "text": "你觉得“提拉米苏”最吸引你的地方是？",
-      "dimension": "taste",
+      "text": "你喝咖啡的习惯是？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "咖啡和可可粉的微苦", "scores": { "B": 1 } },
-        { "label": "B", "text": "马斯卡彭奶酪的细腻和甜", "scores": { "W": 1 } },
-        { "label": "C", "text": "整体口感的层次", "scores": {} },
-        { "label": "D", "text": "我不太喜欢提拉米苏", "scores": {} }
+        { "label": "A", "text": "只喝黑咖啡或美式，不加糖奶，享受苦香", "scores": { "B": 3, "W": 0 } },
+        { "label": "B", "text": "拿铁或卡布奇诺，需要奶香和咖啡融合", "scores": { "U": 2, "W": 2, "B": 1 } },
+        { "label": "C", "text": "加糖加奶，不然太苦，喝不惯", "scores": { "W": 3, "B": 0 } },
+        { "label": "D", "text": "我不喝咖啡，更爱喝茶或饮料", "scores": { "B": 0, "W": 1 } }
       ]
     },
     {
       "id": 41,
-      "text": "你对“腌笃鲜”这类汤菜的看法？",
-      "dimension": "taste",
+      "text": "你对甜品的最高评价是？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "鲜掉眉毛，咸肉和笋的鲜味融合绝了", "scores": { "U": 0.5, "S": 0.5 } },
-        { "label": "B", "text": "有点油腻，偶尔吃", "scores": { "S": 1 } },
-        { "label": "C", "text": "没吃过，但听起来不错", "scores": {} },
-        { "label": "D", "text": "我更喜欢清爽的汤", "scores": { "U": 1 } }
+        { "label": "A", "text": "“哇，好甜，太好吃了！”", "scores": { "W": 3 } },
+        { "label": "B", "text": "“甜而不腻，恰到好处”", "scores": { "W": 2, "B": 1 } },
+        { "label": "C", "text": "“不太甜，适合我”", "scores": { "W": 0, "B": 2 } },
+        { "label": "D", "text": "我很少吃甜品", "scores": { "W": 0 } }
       ]
     },
     {
       "id": 42,
-      "text": "吃烤肉时，你更喜欢蘸？",
-      "dimension": "taste",
+      "text": "你吃面包时，更喜欢？",
+      "dimension": "taste-W",
       "options": [
-        { "label": "A", "text": "简单的盐和胡椒", "scores": { "S": 1 } },
-        { "label": "B", "text": "韩式包饭酱或大酱", "scores": { "U": 0.5, "W": 0.5 } },
-        { "label": "C", "text": "烤肉酱带点甜味的那种", "scores": { "W": 1 } },
-        { "label": "D", "text": "干料，孜然辣椒面", "scores": {} }
+        { "label": "A", "text": "法棍或欧包，有嚼劲且麦香浓，微酸微苦", "scores": { "B": 3, "W": 0 } },
+        { "label": "B", "text": "软面包或甜面包，奶香十足", "scores": { "W": 3, "B": 0 } },
+        { "label": "C", "text": "咸面包或蒜香面包，咸口更香", "scores": { "S": 3, "W": 0 } },
+        { "label": "D", "text": "无所谓，有什么吃什么", "scores": { "W": 1, "B": 1 } }
       ]
     },
     {
       "id": 43,
-      "text": "你对“苦瓜”的态度是？",
-      "dimension": "taste",
+      "text": "你对“黑巧克力”的接受度是？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "超爱，苦味回甘很高级", "scores": { "B": 1 } },
-        { "label": "B", "text": "可以吃，但希望用豆豉或鸡蛋盖一下苦味", "scores": { "U": 0.5, "B": 0.5 } },
-        { "label": "C", "text": "完全不吃，太苦了", "scores": { "W": 1 } },
-        { "label": "D", "text": "没吃过", "scores": {} }
+        { "label": "A", "text": "超爱，70%以上才够味，85%更好", "scores": { "B": 3 } },
+        { "label": "B", "text": "可以接受，但不能太苦，50%左右正好", "scores": { "B": 1, "W": 2 } },
+        { "label": "C", "text": "只吃牛奶巧克力或白巧克力", "scores": { "B": 0, "W": 3 } },
+        { "label": "D", "text": "我不太吃巧克力", "scores": { "B": 0, "W": 1 } }
       ]
     },
     {
       "id": 44,
-      "text": "以下哪种饮品最让你感到愉悦？",
-      "dimension": "taste",
+      "text": "你觉得“提拉米苏”最吸引你的地方是？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "鲜榨果汁，酸甜口", "scores": { "O": 1 } },
-        { "label": "B", "text": "奶盖茶，咸甜交织", "scores": { "W": 0.5, "S": 0.5 } },
-        { "label": "C", "text": "纯茶，无糖", "scores": { "B": 1 } },
-        { "label": "D", "text": "可乐或汽水", "scores": { "W": 1 } }
+        { "label": "A", "text": "咖啡和可可粉的微苦，中和了甜腻", "scores": { "B": 3, "W": 1 } },
+        { "label": "B", "text": "马斯卡彭奶酪的细腻和甜香", "scores": { "W": 3, "B": 0 } },
+        { "label": "C", "text": "整体口感的层次，湿润与绵密结合", "scores": { "U": 2, "W": 2 } },
+        { "label": "D", "text": "我不太喜欢提拉米苏，太腻", "scores": { "B": 0, "W": 1 } }
       ]
     },
     {
       "id": 45,
-      "text": "你对“咸豆浆”的态度？",
-      "dimension": "taste",
+      "text": "你对“苦瓜”的态度是？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "超爱，加虾皮紫菜辣油", "scores": { "S": 0.5, "U": 0.5 } },
-        { "label": "B", "text": "只喝甜豆浆", "scores": { "W": 1 } },
-        { "label": "C", "text": "都可以，看心情", "scores": {} },
-        { "label": "D", "text": "我不喝豆浆", "scores": {} }
+        { "label": "A", "text": "超爱，苦味回甘很高级，清炒就很好吃", "scores": { "B": 3 } },
+        { "label": "B", "text": "可以吃，但希望用豆豉、鸡蛋或肉盖一下苦味", "scores": { "B": 1, "U": 3, "S": 2 } },
+        { "label": "C", "text": "完全不吃，太苦了，吃不下去", "scores": { "B": 0, "W": 3 } },
+        { "label": "D", "text": "没吃过，也不想尝试", "scores": { "B": 0, "C": 3 } }
       ]
     },
     {
       "id": 46,
-      "text": "吃牛排时，你更注重？",
-      "dimension": "taste",
+      "text": "喝酸奶时，你喜欢？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "肉本身的肉香和汁水", "scores": { "U": 1 } },
-        { "label": "B", "text": "调味酱汁是否出色", "scores": {} },
-        { "label": "C", "text": "熟度是否完美", "scores": {} },
-        { "label": "D", "text": "配菜是否丰富", "scores": {} }
+        { "label": "A", "text": "原味无糖，越酸越醇越好", "scores": { "B": 3, "O": 2 } },
+        { "label": "B", "text": "加糖或果酱的，甜一点好喝", "scores": { "W": 3, "B": 0 } },
+        { "label": "C", "text": "希腊式厚酸奶，口感浓郁", "scores": { "U": 3, "B": 1 } },
+        { "label": "D", "text": "我不喝酸奶", "scores": { "B": 0 } }
       ]
     },
     {
       "id": 47,
-      "text": "你对“醋溜白菜”的看法？",
-      "dimension": "taste",
+      "text": "你对“啤酒”的苦味怎么看？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "酸味要足，开胃下饭", "scores": { "O": 1 } },
-        { "label": "B", "text": "酸味适中，不能盖过白菜的甜", "scores": { "S": 0.5, "O": 0.5 } },
-        { "label": "C", "text": "不太喜欢醋味", "scores": {} },
-        { "label": "D", "text": "我更喜欢辣炒白菜", "scores": {} }
+        { "label": "A", "text": "就是喜欢啤酒花的微苦和香气，IPA是我的爱", "scores": { "B": 3 } },
+        { "label": "B", "text": "可以接受，但更爱喝清爽型或果啤", "scores": { "B": 1, "W": 2 } },
+        { "label": "C", "text": "不喜欢苦味，只喝甜的饮料", "scores": { "B": 0, "W": 3 } },
+        { "label": "D", "text": "我不喝酒", "scores": { "B": 0 } }
       ]
     },
     {
       "id": 48,
-      "text": "喝酸奶时，你喜欢？",
-      "dimension": "taste",
+      "text": "你对“凉茶”（如癍痧、二十四味）的态度？",
+      "dimension": "taste-B",
       "options": [
-        { "label": "A", "text": "原味无糖", "scores": { "B": 0.5, "U": 0.5 } },
-        { "label": "B", "text": "加糖或果酱的", "scores": { "W": 1 } },
-        { "label": "C", "text": "希腊式厚酸奶", "scores": { "U": 1 } },
-        { "label": "D", "text": "我不喝酸奶", "scores": {} }
+        { "label": "A", "text": "冰镇后一口闷，苦尽甘来很舒服", "scores": { "B": 3, "C": 2 } },
+        { "label": "B", "text": "只有上火时喝，平时不喝", "scores": { "B": 1, "M": 2 } },
+        { "label": "C", "text": "太苦了，完全喝不下去", "scores": { "B": 0, "M": 3 } },
+        { "label": "D", "text": "没喝过", "scores": { "B": 0 } }
       ]
     },
     {
       "id": 49,
-      "text": "你对“糖蒜”的态度？",
-      "dimension": "taste",
+      "text": "你对“糖醋排骨”的态度是？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "吃火锅必点，酸甜解腻", "scores": { "O": 0.5, "W": 0.5 } },
-        { "label": "B", "text": "可以吃，但不会主动点", "scores": {} },
-        { "label": "C", "text": "完全不吃蒜", "scores": {} },
-        { "label": "D", "text": "我更爱吃生蒜的辛辣", "scores": {} }
+        { "label": "A", "text": "喜欢，但希望醋味更突出一点，酸香扑鼻", "scores": { "O": 3, "W": 1 } },
+        { "label": "B", "text": "喜欢，酸甜平衡最好，黄金比例", "scores": { "W": 2, "O": 2 } },
+        { "label": "C", "text": "不太喜欢，太甜了，腻", "scores": { "O": 0, "S": 3, "B": 1 } },
+        { "label": "D", "text": "我更爱吃椒盐排骨或者红烧排骨", "scores": { "O": 0, "S": 3, "U": 2 } }
       ]
     },
     {
       "id": 50,
-      "text": "你如何评价一道“清蒸鱼”？",
-      "dimension": "taste",
+      "text": "一碗“酸辣粉”你觉得灵魂是？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "鱼肉鲜甜，豉油提味恰到好处", "scores": { "U": 1 } },
-        { "label": "B", "text": "豉油太咸，盖过鱼味", "scores": { "S": 1 } },
-        { "label": "C", "text": "我更看重鱼的品种和新鲜度", "scores": {} },
-        { "label": "D", "text": "我喜欢红烧或烤鱼", "scores": {} }
+        { "label": "A", "text": "醋的酸味够不够劲，是否醇厚", "scores": { "O": 3, "H": 1 } },
+        { "label": "B", "text": "辣椒油的香和辣，以及花椒的麻", "scores": { "H": 3, "N": 2, "O": 1 } },
+        { "label": "C", "text": "粉条的口感，是否Q弹软糯", "scores": { "O": 1, "U": 2 } },
+        { "label": "D", "text": "花生碎、榨菜末和香菜的丰富度", "scores": { "U": 3, "S": 2, "O": 1 } }
       ]
     },
     {
       "id": 51,
-      "text": "你吃面包时，更喜欢？",
-      "dimension": "taste",
+      "text": "以下哪种饮品最让你感到愉悦？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "法棍或欧包，有嚼劲且麦香浓", "scores": { "B": 1 } },
-        { "label": "B", "text": "软面包或甜面包", "scores": { "W": 1 } },
-        { "label": "C", "text": "咸面包或蒜香面包", "scores": { "S": 1 } },
-        { "label": "D", "text": "无所谓", "scores": {} }
+        { "label": "A", "text": "鲜榨果汁，酸甜口，如柠檬汁", "scores": { "O": 3, "C": 1 } },
+        { "label": "B", "text": "奶盖茶，咸甜交织，口感丰富", "scores": { "W": 2, "S": 3 } },
+        { "label": "C", "text": "纯茶，无糖，感受茶的本味", "scores": { "B": 3 } },
+        { "label": "D", "text": "可乐或汽水，刺激爽快", "scores": { "W": 3, "C": 1 } }
       ]
     },
     {
       "id": 52,
-      "text": "对于“皮蛋豆腐”这道凉菜，你的看法？",
-      "dimension": "taste",
+      "text": "你对“醋溜白菜”的看法？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "皮蛋的鲜与豆腐的醇是绝配", "scores": { "U": 1 } },
-        { "label": "B", "text": "酱油和香油调得好才好吃", "scores": { "S": 0.5, "U": 0.5 } },
-        { "label": "C", "text": "皮蛋味道太怪，不吃", "scores": {} },
-        { "label": "D", "text": "我更爱吃小葱拌豆腐", "scores": { "S": 1 } }
+        { "label": "A", "text": "酸味要足，开胃下饭，越酸越香", "scores": { "O": 3 } },
+        { "label": "B", "text": "酸味适中，不能盖过白菜的甜和脆", "scores": { "O": 1, "W": 2, "S": 2 } },
+        { "label": "C", "text": "不太喜欢醋味，更爱清炒白菜", "scores": { "O": 0, "M": 3 } },
+        { "label": "D", "text": "我更喜欢辣炒白菜或酸辣白菜", "scores": { "O": 2, "H": 3 } }
       ]
     },
     {
       "id": 53,
-      "text": "喝粥时，你更喜欢配什么？",
-      "dimension": "taste",
+      "text": "你对“糖蒜”的态度？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "咸鸭蛋、榨菜、腐乳", "scores": { "S": 1 } },
-        { "label": "B", "text": "肉松、小鱼干", "scores": { "U": 1 } },
-        { "label": "C", "text": "糖、蜂蜜、甜小菜", "scores": { "W": 1 } },
-        { "label": "D", "text": "什么都不配，喝白粥", "scores": {} }
+        { "label": "A", "text": "吃火锅必点，酸甜解腻，能吃一碟", "scores": { "O": 3, "W": 2 } },
+        { "label": "B", "text": "可以吃，但不会主动点", "scores": { "O": 1, "M": 2 } },
+        { "label": "C", "text": "完全不吃蒜，任何形态都不行", "scores": { "O": 0, "M": 3 } },
+        { "label": "D", "text": "我更爱吃生蒜的辛辣刺激", "scores": { "O": 0, "H": 3, "B": 2 } }
       ]
     },
     {
       "id": 54,
-      "text": "你对“果脯/蜜饯”的态度？",
-      "dimension": "taste",
+      "text": "吃饺子时，你的蘸料里醋的比例是？",
+      "dimension": "taste-O",
       "options": [
-        { "label": "A", "text": "太甜了，不喜欢", "scores": { "B": 0.5, "S": 0.5 } },
-        { "label": "B", "text": "喜欢酸甜口的，如话梅、酸角", "scores": { "O": 1 } },
-        { "label": "C", "text": "喜欢甜的，如柿饼、冬瓜糖", "scores": { "W": 1 } },
-        { "label": "D", "text": "我不吃零食", "scores": {} }
+        { "label": "A", "text": "纯醋，或者醋占主导，其他少许", "scores": { "O": 3 } },
+        { "label": "B", "text": "醋和酱油一半一半", "scores": { "O": 2, "S": 2 } },
+        { "label": "C", "text": "几乎不放醋，只放酱油和辣椒", "scores": { "O": 0, "S": 3, "H": 2 } },
+        { "label": "D", "text": "我不蘸料，直接吃", "scores": { "O": 0, "M": 3 } }
       ]
     },
     {
       "id": 55,
       "text": "你更欣赏哪种烹饪理念？",
-      "dimension": "philosophy",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "用十几种香料卤一锅肉，层次越复杂越好", "scores": { "A": 1 } },
-        { "label": "B", "text": "清蒸一条鱼，只放葱姜盐，吃鱼的本味", "scores": { "S": 1 } }
+        { "label": "A", "text": "用十几种香料卤一锅肉，层次越复杂越好", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "清蒸一条鱼，只放葱姜盐，吃鱼的本味", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "我欣赏香料搭配，但也要保留部分食材原味", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "看具体食材，有的适合加法有的适合减法", "scores": { "A": 1, "S": 1 } }
       ]
     },
     {
       "id": 56,
       "text": "对于“白切鸡”，你觉得灵魂是？",
-      "dimension": "philosophy",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "蘸料要调得好，姜葱油或沙姜酱油是关键", "scores": { "A": 1 } },
-        { "label": "B", "text": "鸡肉本身的鲜嫩和鸡味，原味吃就很好", "scores": { "S": 1 } }
+        { "label": "A", "text": "蘸料要调得好，姜葱油或沙姜酱油是关键", "scores": { "A": 3, "S": 1 } },
+        { "label": "B", "text": "鸡肉本身的鲜嫩和鸡味，原味吃就很好", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "鸡肉和蘸料缺一不可，各占一半", "scores": { "A": 2, "S": 2 } },
+        { "label": "D", "text": "我不喜欢吃白切鸡，太寡淡", "scores": { "A": 1, "S": 0 } }
       ]
     },
     {
       "id": 57,
       "text": "你如何看待“水煮鱼”最后泼油的那一步？",
-      "dimension": "philosophy",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "灵魂步骤，辣椒和花椒的香气全被逼出来了", "scores": { "A": 1 } },
-        { "label": "B", "text": "有点油腻，更喜欢鱼本身的清甜", "scores": { "S": 1 } }
+        { "label": "A", "text": "灵魂步骤，辣椒和花椒的香气全被逼出来了", "scores": { "A": 3, "H": 3 } },
+        { "label": "B", "text": "有点油腻，更喜欢鱼本身的清甜，能省则省", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "可以泼油，但油温要控制好，不能太糊", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "我不吃水煮鱼，太油太辣", "scores": { "A": 0, "S": 0, "M": 3 } }
       ]
     },
     {
       "id": 58,
-      "text": "一家餐厅的招牌是“只用盐调味就能吃到肉的鲜甜”，你感兴趣吗？",
-      "dimension": "philosophy",
+      "text": "你更喜欢吃哪种做法的茄子？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "很感兴趣，这是对食材的自信", "scores": { "S": 1 } },
-        { "label": "B", "text": "有点担心味道寡淡，还是喜欢有调味的", "scores": { "A": 1 } }
+        { "label": "A", "text": "鱼香茄子或蒜蓉烤茄子，调料要足，油大才香", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "清蒸茄子，蘸一点生抽即可，吃本味", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "红烧茄子，既要酱香又要保留茄子口感", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "我不喜欢吃茄子", "scores": { "A": 0, "S": 0 } }
       ]
     },
     {
       "id": 59,
-      "text": "你更喜欢吃哪种做法的茄子？",
-      "dimension": "philosophy",
+      "text": "对于“火锅”，你觉得锅底重要还是食材重要？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "鱼香茄子或蒜蓉烤茄子，调料要足", "scores": { "A": 1 } },
-        { "label": "B", "text": "清蒸茄子，蘸一点生抽即可", "scores": { "S": 1 } }
+        { "label": "A", "text": "锅底是灵魂，牛油、清油、番茄决定一切", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "食材新鲜最重要，锅底清淡才能吃出食材好坏", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "都重要，好锅底配好食材才是完美", "scores": { "A": 2, "S": 2 } },
+        { "label": "D", "text": "我不爱吃火锅", "scores": { "A": 0, "S": 0 } }
       ]
     },
     {
       "id": 60,
-      "text": "对于“火锅”，你觉得锅底重要还是食材重要？",
-      "dimension": "philosophy",
+      "text": "你如何评价“十三香小龙虾”？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "锅底是灵魂，牛油、清油、番茄、菌汤决定一切", "scores": { "A": 1 } },
-        { "label": "B", "text": "食材新鲜最重要，锅底清淡一点才能吃出食材好坏", "scores": { "S": 1 } }
+        { "label": "A", "text": "香料越复杂越上头，停不下来", "scores": { "A": 3 } },
+        { "label": "B", "text": "更喜欢简单的蒜蓉或清蒸，能吃出虾肉的鲜甜", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "十三香太抢味，偶尔吃可以，更爱麻辣味", "scores": { "A": 2, "H": 2 } },
+        { "label": "D", "text": "我不吃小龙虾", "scores": { "A": 0, "S": 0 } }
       ]
     },
     {
       "id": 61,
-      "text": "你如何评价“十三香小龙虾”？",
-      "dimension": "philosophy",
+      "text": "你更倾向于以下哪种描述？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "香料越复杂越上头，停不下来", "scores": { "A": 1 } },
-        { "label": "B", "text": "更喜欢简单的蒜蓉或清蒸，能吃出虾肉的鲜甜", "scores": { "S": 1 } }
+        { "label": "A", "text": "“这道菜放了三七二十一味中药香料”", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "“这道菜只用了海盐和现磨黑胡椒”", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "“这道菜香料和盐用得恰到好处”", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "无所谓，好吃就行", "scores": { "A": 1, "S": 1 } }
       ]
     },
     {
       "id": 62,
-      "text": "做菜时，你对“焯水”后过冰水这一步的看法？",
-      "dimension": "philosophy",
+      "text": "你如何看待“咖喱”这种料理？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "为了让口感更脆，值得", "scores": {} },
-        { "label": "B", "text": "能保留食材原色和原味，必须做", "scores": { "S": 1 } }
+        { "label": "A", "text": "香料越复杂越有深度，印度咖喱是神", "scores": { "A": 3 } },
+        { "label": "B", "text": "更喜欢日式咖喱，相对温和简单", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "喜欢泰式咖喱，椰奶和香料结合", "scores": { "A": 2, "C": 1 } },
+        { "label": "D", "text": "我不吃咖喱", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 63,
-      "text": "你更倾向于以下哪种描述？",
-      "dimension": "philosophy",
+      "text": "你更喜欢吃哪种做法的豆腐？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "“这道菜放了三七二十一味中药香料”", "scores": { "A": 1 } },
-        { "label": "B", "text": "“这道菜只用了海盐和现磨黑胡椒”", "scores": { "S": 1 } }
+        { "label": "A", "text": "麻婆豆腐，麻辣鲜香烫，调料丰富", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "小葱拌豆腐，一清二白，吃豆香", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "家常豆腐，先煎后烧，有酱香也有豆香", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "我不吃豆腐", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 64,
-      "text": "你觉得一块好的牛排应该怎么吃？",
-      "dimension": "philosophy",
+      "text": "你认为“红烧”这种烹饪技法的核心是？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "蘸海盐和胡椒就足够，能吃出肉香", "scores": { "S": 1 } },
-        { "label": "B", "text": "配黑椒汁、蘑菇汁或红酒汁更丰富", "scores": { "A": 1 } }
+        { "label": "A", "text": "炒糖色和香料的配合，形成复合酱香味", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "让肉酥烂入味的同时保留肉的原香", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "火候的把握，让汁水收浓挂在肉上", "scores": { "A": 2, "S": 2 } },
+        { "label": "D", "text": "我不吃红烧菜", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 65,
-      "text": "你对“松茸”这种食材的态度？",
-      "dimension": "philosophy",
+      "text": "如果让你学做一道菜，你会选？",
+      "dimension": "philosophy-A",
       "options": [
-        { "label": "A", "text": "黄油煎一下，撒点盐就很绝", "scores": { "S": 1 } },
-        { "label": "B", "text": "用来炖鸡汤，让汤更鲜", "scores": { "A": 1 } }
+        { "label": "A", "text": "工序复杂、香料众多的咖喱蟹", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "食材简单、考验火候的清蒸石斑", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "既考验调味又考验火候的红烧肉", "scores": { "A": 2, "S": 2 } },
+        { "label": "D", "text": "我不想学做菜", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 66,
-      "text": "吃寿司时，你对“酱油和芥末”的使用？",
-      "dimension": "philosophy",
+      "text": "一家餐厅的招牌是“只用盐调味就能吃到肉的鲜甜”，你感兴趣吗？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "尽量少蘸或不蘸，吃鱼生的原味", "scores": { "S": 1 } },
-        { "label": "B", "text": "根据鱼的种类调整蘸料，有些鱼需要酱油提味", "scores": { "A": 1 } }
+        { "label": "A", "text": "非常感兴趣，这是对食材的自信，必去", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "有点担心味道寡淡，还是喜欢有调味的", "scores": { "A": 3, "S": 0 } },
+        { "label": "C", "text": "可以去试试，如果肉不好吃就拉黑", "scores": { "S": 2, "A": 1 } },
+        { "label": "D", "text": "要看是什么肉，牛肉可以，猪肉不行", "scores": { "S": 1, "A": 1 } }
       ]
     },
     {
       "id": 67,
-      "text": "你如何看待“咖喱”这种料理？",
-      "dimension": "philosophy",
+      "text": "做菜时，你对“焯水”后过冰水这一步的看法？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "香料越复杂越有深度，印度咖喱是神", "scores": { "A": 1 } },
-        { "label": "B", "text": "更喜欢日式咖喱，相对温和简单", "scores": { "S": 1 } }
+        { "label": "A", "text": "为了让口感更脆、色泽更亮，值得多洗一个锅", "scores": { "S": 2, "A": 2 } },
+        { "label": "B", "text": "能保留食材原色和原味，必须做", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "太麻烦了，直接焯水捞出就行", "scores": { "S": 1, "A": 1 } },
+        { "label": "D", "text": "我很少做需要焯水的菜", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 68,
-      "text": "你觉得“潮汕牛肉火锅”最吸引你的是？",
-      "dimension": "philosophy",
+      "text": "你觉得一块好的牛排应该怎么吃？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "汤底清，能吃到不同部位牛肉的本味", "scores": { "S": 1 } },
-        { "label": "B", "text": "沙茶酱蘸料才是点睛之笔", "scores": { "A": 1 } }
+        { "label": "A", "text": "蘸海盐和胡椒就足够，能吃出肉香", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "配黑椒汁、蘑菇汁或红酒汁更丰富", "scores": { "A": 3, "S": 0 } },
+        { "label": "C", "text": "先吃原味，再蘸酱汁，都体验一下", "scores": { "S": 2, "A": 2 } },
+        { "label": "D", "text": "我不吃牛排", "scores": { "S": 0, "A": 0 } }
       ]
     },
     {
       "id": 69,
-      "text": "你更喜欢吃哪种做法的豆腐？",
-      "dimension": "philosophy",
+      "text": "你对“松茸”这种食材的态度？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "麻婆豆腐，麻辣鲜香烫", "scores": { "A": 1 } },
-        { "label": "B", "text": "小葱拌豆腐，一清二白", "scores": { "S": 1 } }
+        { "label": "A", "text": "黄油煎一下，撒点盐就很绝", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "用来炖鸡汤，让汤更鲜", "scores": { "A": 3, "S": 1 } },
+        { "label": "C", "text": "生吃刺身，感受原始香气", "scores": { "S": 3, "E": 2 } },
+        { "label": "D", "text": "太贵了，不吃", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 70,
-      "text": "对于“油醋汁沙拉”，你的看法是？",
-      "dimension": "philosophy",
+      "text": "吃寿司时，你对“酱油和芥末”的使用？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "油醋比例调得好才能让草变好吃", "scores": { "A": 1 } },
-        { "label": "B", "text": "沙拉就该吃菜本身的味道，酱汁是辅助", "scores": { "S": 1 } }
+        { "label": "A", "text": "尽量少蘸或不蘸，吃鱼生的原味", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "根据鱼的种类调整蘸料，有些鱼需要酱油提味", "scores": { "A": 3, "S": 1 } },
+        { "label": "C", "text": "习惯性蘸很多，不然没味道", "scores": { "A": 2, "S": 0 } },
+        { "label": "D", "text": "我不吃寿司", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 71,
-      "text": "你认为“红烧”这种烹饪技法的核心是？",
-      "dimension": "philosophy",
+      "text": "你觉得“潮汕牛肉火锅”最吸引你的是？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "炒糖色和香料的配合，形成复合酱香味", "scores": { "A": 1 } },
-        { "label": "B", "text": "让肉酥烂入味的同时保留肉的原香", "scores": { "S": 1 } }
+        { "label": "A", "text": "汤底清，能吃到不同部位牛肉的本味", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "沙茶酱蘸料才是点睛之笔", "scores": { "A": 3, "S": 0 } },
+        { "label": "C", "text": "牛肉新鲜现切，部位分得细", "scores": { "S": 2, "U": 3 } },
+        { "label": "D", "text": "我不爱吃潮汕火锅", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 72,
-      "text": "你更欣赏哪位厨师？",
-      "dimension": "philosophy",
+      "text": "对于“油醋汁沙拉”，你的看法是？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "擅长将几十种香料运用自如的卤味大师", "scores": { "A": 1 } },
-        { "label": "B", "text": "能将一条鱼的火候和本味发挥到极致的大师", "scores": { "S": 1 } }
+        { "label": "A", "text": "油醋比例调得好才能让草变好吃", "scores": { "A": 3 } },
+        { "label": "B", "text": "沙拉就该吃菜本身的味道，酱汁是辅助", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "我喜欢加更多配料，比如奶酪、坚果", "scores": { "A": 2, "U": 2 } },
+        { "label": "D", "text": "我不吃沙拉", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 73,
       "text": "你如何定义“一道菜太咸了”？",
-      "dimension": "philosophy",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "盖住了其他香料和食材的复合风味", "scores": { "A": 1 } },
-        { "label": "B", "text": "盖住了食材本身应有的清甜或鲜美", "scores": { "S": 1 } }
+        { "label": "A", "text": "盖住了其他香料和食材的复合风味", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "盖住了食材本身应有的清甜或鲜美", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "单纯就是盐放多了，齁嗓子", "scores": { "S": 2, "A": 1 } },
+        { "label": "D", "text": "我吃不出来咸淡", "scores": { "S": 0 } }
       ]
     },
     {
       "id": 74,
-      "text": "如果让你学做一道菜，你会选？",
-      "dimension": "philosophy",
+      "text": "你更欣赏哪位厨师？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "工序复杂、香料众多的咖喱蟹", "scores": { "A": 1 } },
-        { "label": "B", "text": "食材简单、考验火候的清蒸石斑", "scores": { "S": 1 } }
+        { "label": "A", "text": "擅长将几十种香料运用自如的卤味大师", "scores": { "A": 3, "S": 0 } },
+        { "label": "B", "text": "能将一条鱼的火候和本味发挥到极致的大师", "scores": { "S": 3, "A": 0 } },
+        { "label": "C", "text": "能将普通食材通过调味做出惊艳效果的创意厨师", "scores": { "A": 2, "S": 1 } },
+        { "label": "D", "text": "我不关注厨师", "scores": { "A": 0 } }
       ]
     },
     {
       "id": 75,
-      "text": "去一家没吃过的异国餐厅，菜单上有“香菜菠萝披萨”和“玛格丽特披萨”，你会？",
-      "dimension": "novelty",
+      "text": "你吃饭时，更喜欢自己单独品尝还是蘸着酱料吃？",
+      "dimension": "philosophy-S",
       "options": [
-        { "label": "A", "text": "绝对点香菜菠萝的，没吃过才有趣", "scores": { "E": 1 } },
-        { "label": "B", "text": "保险起见点玛格丽特，不踩雷最重要", "scores": { "C": 1 } },
-        { "label": "C", "text": "先问服务员哪个是招牌再决定", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "D", "text": "我都不点，找菜单上最熟悉的肉菜", "scores": { "C": 1 } }
+        { "label": "A", "text": "能不蘸酱就不蘸，原味最香", "scores": { "S": 3, "A": 0 } },
+        { "label": "B", "text": "必须蘸酱，不然太寡淡", "scores": { "A": 3, "S": 0 } },
+        { "label": "C", "text": "看具体吃什么，炸物必蘸酱，蒸菜不蘸", "scores": { "A": 2, "S": 2 } },
+        { "label": "D", "text": "无所谓", "scores": { "A": 1, "S": 1 } }
       ]
     },
     {
       "id": 76,
-      "text": "朋友向你安利一家“用巧克力蘸辣椒面吃”的店，你的第一反应是？",
-      "dimension": "novelty",
+      "text": "去一家没吃过的异国餐厅，菜单上有“香菜菠萝披萨”和“玛格丽特披萨”，你会？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "听起来很暗黑，但我必须去验证一下", "scores": { "E": 1 } },
-        { "label": "B", "text": "谢谢，这搭配超出了我的认知，不去", "scores": { "C": 1 } },
-        { "label": "C", "text": "如果是黑巧克力我可能考虑", "scores": { "E": 0.5 } },
-        { "label": "D", "text": "我要先看看大众点评上的图片", "scores": { "E": 0.5, "C": 0.5 } }
+        { "label": "A", "text": "绝对点香菜菠萝的，没吃过才有趣，必须猎奇", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "保险起见点玛格丽特，不踩雷最重要", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "先问服务员哪个是招牌再决定", "scores": { "E": 1, "C": 2 } },
+        { "label": "D", "text": "我都不点，找菜单上最熟悉的肉菜或意面", "scores": { "C": 3, "E": 0 } }
       ]
     },
     {
       "id": 77,
-      "text": "在自助餐厅，你的取餐策略通常是？",
-      "dimension": "novelty",
+      "text": "朋友向你安利一家“用巧克力蘸辣椒面吃”的店，你的第一反应是？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "每样没见过的都拿一点点尝尝", "scores": { "E": 1 } },
-        { "label": "B", "text": "直奔我最爱吃的那几样，拿满一盘", "scores": { "C": 1 } },
-        { "label": "C", "text": "第一轮拿熟悉的，第二轮再探索新菜", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "D", "text": "看排队人数，人多的一定好吃", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "听起来很暗黑，但我必须去验证一下", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "谢谢，这搭配超出了我的认知，不去", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "如果是黑巧克力我可能考虑，牛奶巧克力就算了", "scores": { "E": 2, "C": 1 } },
+        { "label": "D", "text": "我要先看看大众点评上的图片和评价", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 78,
-      "text": "你对“折耳根（鱼腥草）”的态度是？",
-      "dimension": "novelty",
+      "text": "在自助餐厅，你的取餐策略通常是？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "超爱吃，那股特殊气味上头", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以接受，但不喜欢也不讨厌", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "完全不行，闻到就想逃", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过，但很好奇", "scores": { "E": 1 } }
+        { "label": "A", "text": "每样没见过的都拿一点点尝尝，雨露均沾", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "直奔我最爱吃的那几样，拿满一盘再说", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "第一轮拿熟悉的，第二轮再探索新菜", "scores": { "E": 1, "C": 2 } },
+        { "label": "D", "text": "看排队人数，人多的一定好吃", "scores": { "E": 2, "C": 1 } }
       ]
     },
     {
       "id": 79,
-      "text": "去外地旅游，你会尝试当地“特色虫子宴”吗？",
-      "dimension": "novelty",
+      "text": "你对“折耳根（鱼腥草）”的态度是？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "会，来都来了，必须挑战一下", "scores": { "E": 1 } },
-        { "label": "B", "text": "看是什么虫子，常见的蚕蛹可以，别的算了", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "坚决不吃，心理上过不去", "scores": { "C": 1 } },
-        { "label": "D", "text": "没遇到过，不知道", "scores": {} }
+        { "label": "A", "text": "超爱吃，那股特殊气味上头，凉拌必点", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以接受，但不喜欢也不讨厌，能吃", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "完全不行，闻到就想逃，无法接受", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，但很好奇什么味道", "scores": { "E": 3, "C": 0 } }
       ]
     },
     {
       "id": 80,
-      "text": "你对“香菜”的态度是？",
-      "dimension": "novelty",
+      "text": "去外地旅游，你会尝试当地“特色虫子宴”吗？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "火锅蘸料必加，越多越好", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以放，但不能太多", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "完全不吃，基因里讨厌", "scores": { "C": 1 } },
-        { "label": "D", "text": "我无所谓", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "会，来都来了，必须挑战一下，蚕蛹竹虫都行", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "看是什么虫子，常见的蚕蛹可以，别的不行", "scores": { "E": 2, "C": 2 } },
+        { "label": "C", "text": "坚决不吃，心理上过不去，看着害怕", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没遇到过，遇到了看同行的人吃不吃", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 81,
       "text": "你尝试新餐厅的频率是？",
-      "dimension": "novelty",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "每周至少一次，喜欢探店", "scores": { "E": 1 } },
-        { "label": "B", "text": "一个月一两次，有好店才去", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "很少，基本只去常吃的那几家", "scores": { "C": 1 } },
-        { "label": "D", "text": "看朋友约不约", "scores": {} }
+        { "label": "A", "text": "每周至少一次，喜欢探店，哪里有新店开哪里有我", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "一个月一两次，有好店才去，被安利才去", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "很少，基本只去常吃的那几家，不想冒险", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "看朋友约不约，没人约就不去", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 82,
       "text": "如果一道菜的名字你完全看不懂（如“暗黑破坏神炒饭”），你会？",
-      "dimension": "novelty",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "出于好奇点来试试", "scores": { "E": 1 } },
-        { "label": "B", "text": "问服务员里面有什么再决定", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "跳过，点个认识的", "scores": { "C": 1 } },
-        { "label": "D", "text": "看图片决定", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "出于好奇点来试试，看看到底是什么", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "问服务员里面有什么再决定", "scores": { "E": 1, "C": 2 } },
+        { "label": "C", "text": "跳过，点个认识的，名字太怪的不敢点", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "看图片决定，图片好看就点", "scores": { "E": 2, "C": 1 } }
       ]
     },
     {
       "id": 83,
-      "text": "你对“木姜子”这种香料的态度？",
-      "dimension": "novelty",
+      "text": "你对“螺蛳粉”的态度是？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "非常喜欢，贵州酸汤鱼必备", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但那股柠檬草味有点冲", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "吃不惯，不喜欢", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "超爱，越臭越香，加辣加臭加鸭脚", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但不太理解为什么有人上瘾", "scores": { "E": 2, "C": 2 } },
+        { "label": "C", "text": "完全不能接受酸笋的味道，太臭了", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过但想试试，被网上馋到了", "scores": { "E": 3, "C": 0 } }
       ]
     },
     {
       "id": 84,
-      "text": "你对“螺蛳粉”的态度是？",
-      "dimension": "novelty",
+      "text": "朋友说“有一家店的菜都特别怪但很好吃”，你会？",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "超爱，越臭越香", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但不太理解为什么有人上瘾", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "完全不能接受酸笋的味道", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过但想试试", "scores": { "E": 1 } }
+        { "label": "A", "text": "立刻求带路，怪好吃的店最吸引我", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "先问问具体怎么个怪法，食材是什么", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "算了，我口味比较传统，怕踩雷", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "看大众点评评价决定，高分就去", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 85,
-      "text": "在餐厅点菜时，你更倾向于？",
-      "dimension": "novelty",
+      "text": "去一个新城市，你会优先吃什么？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "优先点没吃过的菜", "scores": { "E": 1 } },
-        { "label": "B", "text": "优先点招牌菜或推荐菜", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "优先点自己上次吃过觉得好的", "scores": { "C": 1 } },
-        { "label": "D", "text": "让同伴点", "scores": {} }
+        { "label": "A", "text": "当地最怪最地道的特色小吃，越罕见越好", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "当地最有名的连锁餐厅，品质稳定", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "我在家乡也常吃的熟悉菜系，安全第一", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "看大众点评必吃榜，跟着榜单吃", "scores": { "E": 2, "C": 1 } }
       ]
     },
     {
       "id": 86,
-      "text": "你对“蓝纹奶酪”的态度？",
-      "dimension": "novelty",
+      "text": "在餐厅点菜时，你更倾向于？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "非常爱，霉菌带来的风味很迷人", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以尝一点，但不能多", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "太臭了，不碰", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "优先点没吃过的菜，寻找惊喜", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "优先点招牌菜或推荐菜，大概率好吃", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "优先点自己上次吃过觉得好的", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "让同伴点，我负责吃", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 87,
-      "text": "朋友说“有一家店的菜都特别怪但很好吃”，你会？",
-      "dimension": "novelty",
+      "text": "你对“蓝纹奶酪”的态度？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "立刻求带路", "scores": { "E": 1 } },
-        { "label": "B", "text": "先问问具体怎么个怪法", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "算了，我口味比较传统", "scores": { "C": 1 } },
-        { "label": "D", "text": "看评价决定", "scores": { "E": 0.5, "C": 0.5 } }
+        { "label": "A", "text": "非常爱，霉菌带来的风味很迷人，配酒一绝", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以尝一点，但不能多，味道太冲", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "太臭了，不碰，无法接受", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，有机会想试试", "scores": { "E": 3, "C": 0 } }
       ]
     },
     {
       "id": 88,
       "text": "你对“榴莲”的态度是？",
-      "dimension": "novelty",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "超级爱，越吃越香", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但不会主动买", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "完全不能接受那个味道", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "超级爱，越吃越香，猫山王黑刺都爱", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但不会主动买，太贵了", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "完全不能接受那个味道，太臭了", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，有点好奇", "scores": { "E": 3, "C": 0 } }
       ]
     },
     {
       "id": 89,
-      "text": "你第一次吃“生腌海鲜”时的感受？",
-      "dimension": "novelty",
+      "text": "如果菜单上有“猪脑花”，你会？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "惊艳，打开了新世界大门", "scores": { "E": 1 } },
-        { "label": "B", "text": "有点担心寄生虫，但还是尝了", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "不敢吃，生的怕拉肚子", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过，想尝试", "scores": { "E": 1 } }
+        { "label": "A", "text": "这是我的必点菜，火锅烤脑花都爱", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但不会主动点，除非别人点了", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "心理上接受不了，坚决不吃", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，想试试但又有点怕", "scores": { "E": 2, "C": 1 } }
       ]
     },
     {
       "id": 90,
-      "text": "你对“芥末”的接受度？",
-      "dimension": "novelty",
+      "text": "你对“皮蛋”的态度？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "吃寿司必放，冲鼻的感觉爽", "scores": { "E": 1 } },
-        { "label": "B", "text": "适量，不能太冲", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "完全不吃，太呛了", "scores": { "C": 1 } },
-        { "label": "D", "text": "无所谓", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "非常喜欢，尤其是擂辣椒皮蛋，风味独特", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但不喜欢那股碱味，偶尔吃", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "完全不吃，觉得恶心", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，看起来黑黑的有点怕", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 91,
-      "text": "如果菜单上有“猪脑花”，你会？",
-      "dimension": "novelty",
+      "text": "朋友从国外带回“甘草糖”（咸甜怪味），你会？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "这是我的必点菜", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但不会主动点", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "心理上接受不了", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过，想试试", "scores": { "E": 1 } }
+        { "label": "A", "text": "兴奋地接过来品尝，体验不同文化", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "礼貌性尝一小口，不好吃就放下", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "婉拒，怕浪费感情，听说很难吃", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "看别人吃了什么反应再说", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 92,
-      "text": "你对“皮蛋”的态度？",
-      "dimension": "novelty",
+      "text": "在陌生的异国餐厅，你会如何点菜？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "非常喜欢，尤其是擂辣椒皮蛋", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但不喜欢那股碱味", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "完全不吃", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "专挑名字看不懂的点，开盲盒", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "让服务员推荐本地人爱吃的", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "找图片看起来熟悉的，或者点套餐", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "用翻译软件查清楚再点", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 93,
-      "text": "去一个新城市，你会优先吃什么？",
-      "dimension": "novelty",
+      "text": "你如何看待“鲱鱼罐头”这类网红挑战食品？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "当地最怪最地道的特色小吃", "scores": { "E": 1 } },
-        { "label": "B", "text": "当地最有名的连锁餐厅", "scores": { "C": 1 } },
-        { "label": "C", "text": "我在家乡也常吃的熟悉菜系", "scores": { "C": 1 } },
-        { "label": "D", "text": "看大众点评必吃榜", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "越臭越好奇，想和朋友一起挑战", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "看别人吃就满足了，自己不会碰", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "如果给钱可以考虑，不然免谈", "scores": { "E": 2, "C": 1 } },
+        { "label": "D", "text": "完全没兴趣，觉得是噱头，不健康", "scores": { "C": 3, "E": 0 } }
       ]
     },
     {
       "id": 94,
       "text": "你对“鸡屁股”的态度？",
-      "dimension": "novelty",
+      "dimension": "novelty-E",
       "options": [
-        { "label": "A", "text": "烤鸡屁股是美味", "scores": { "E": 1 } },
-        { "label": "B", "text": "可以吃，但有点膈应", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "绝对不吃", "scores": { "C": 1 } },
-        { "label": "D", "text": "没吃过", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "烤鸡屁股是美味，油脂丰富很香", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但有点膈应，别人吃我也吃", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "绝对不吃，心理上接受不了", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，不知道能不能接受", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 95,
       "text": "你对“牛瘪火锅”的态度？",
-      "dimension": "novelty",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "去贵州必须挑战，听着就地道", "scores": { "E": 1 } },
-        { "label": "B", "text": "心理上接受不了，不碰", "scores": { "C": 1 } },
-        { "label": "C", "text": "好奇但不敢吃", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "D", "text": "没听说过", "scores": {} }
+        { "label": "A", "text": "去贵州必须挑战，听着就地道，想试试", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "心理上接受不了，不碰，太猎奇了", "scores": { "C": 3, "E": 0 } },
+        { "label": "C", "text": "好奇但不敢吃，过不了心里那道坎", "scores": { "E": 1, "C": 2 } },
+        { "label": "D", "text": "没听说过，百度了一下有点震惊", "scores": { "E": 2, "C": 1 } }
       ]
     },
     {
       "id": 96,
-      "text": "如果在菜单上看到“活珠子”（未孵化鸭蛋），你会？",
-      "dimension": "novelty",
+      "text": "你对“活珠子”（未孵化鸭蛋）的态度？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "点！地方特色必须尝", "scores": { "E": 1 } },
-        { "label": "B", "text": "犹豫很久，可能尝一口", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "坚决不点", "scores": { "C": 1 } },
-        { "label": "D", "text": "没听过，了解一下再说", "scores": { "E": 0.5 } }
+        { "label": "A", "text": "地方特色必须尝，听说很鲜", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "犹豫很久，可能尝一口试试", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "坚决不点，看着就吓人", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没听过，了解一下再说，大概率不点", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 97,
-      "text": "朋友从国外带回“甘草糖”（咸甜怪味），你会？",
-      "dimension": "novelty",
+      "text": "你对“香菜”的态度是？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "兴奋地接过来品尝", "scores": { "E": 1 } },
-        { "label": "B", "text": "礼貌性尝一小口", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "婉拒，怕浪费感情", "scores": { "C": 1 } },
-        { "label": "D", "text": "看别人吃了什么反应再说", "scores": { "C": 0.5 } }
+        { "label": "A", "text": "火锅蘸料必加，越多越好，香菜万岁", "scores": { "E": 3 } },
+        { "label": "B", "text": "可以放，但不能太多，点缀一下", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "完全不吃，基因里讨厌，有香菜就不吃", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "我无所谓，有就吃没有就不吃", "scores": { "E": 1, "C": 1 } }
       ]
     },
     {
       "id": 98,
       "text": "你对“昆虫蛋白棒”这类新潮食品的态度？",
-      "dimension": "novelty",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "很感兴趣，想试试", "scores": { "E": 1 } },
-        { "label": "B", "text": "如果味道不怪可以接受", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "C", "text": "虫子做的，坚决不吃", "scores": { "C": 1 } },
-        { "label": "D", "text": "没听说过", "scores": {} }
+        { "label": "A", "text": "很感兴趣，想试试，未来食物", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "如果味道不怪、看不出虫子形态可以接受", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "虫子做的，坚决不吃", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没听说过，观望一下", "scores": { "E": 1, "C": 2 } }
       ]
     },
     {
       "id": 99,
-      "text": "在陌生的异国餐厅，你会如何点菜？",
-      "dimension": "novelty",
+      "text": "你第一次吃“生腌海鲜”时的感受？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "专挑名字看不懂的点", "scores": { "E": 1 } },
-        { "label": "B", "text": "让服务员推荐本地人爱吃的", "scores": { "E": 0.5 } },
-        { "label": "C", "text": "找图片看起来熟悉的", "scores": { "C": 1 } },
-        { "label": "D", "text": "点一个最保险的套餐", "scores": { "C": 1 } }
+        { "label": "A", "text": "惊艳，打开了新世界大门，鲜甜软糯", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "有点担心寄生虫，但还是尝了，味道不错", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "不敢吃，生的怕拉肚子，心理上抗拒", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，想尝试但没机会", "scores": { "E": 3, "C": 0 } }
       ]
     },
     {
       "id": 100,
-      "text": "你如何看待“鲱鱼罐头”这类网红挑战食品？",
-      "dimension": "novelty",
+      "text": "你对于“木姜子”这种香料的态度？",
+      "dimension": "novelty-C",
       "options": [
-        { "label": "A", "text": "越臭越好奇，想和朋友一起挑战", "scores": { "E": 1 } },
-        { "label": "B", "text": "看别人吃就满足了，自己不会碰", "scores": { "C": 1 } },
-        { "label": "C", "text": "如果给钱可以考虑", "scores": { "E": 0.5, "C": 0.5 } },
-        { "label": "D", "text": "完全没兴趣，觉得是噱头", "scores": { "C": 1 } }
+        { "label": "A", "text": "非常喜欢，贵州酸汤鱼必备，那味道很清新", "scores": { "E": 3, "C": 0 } },
+        { "label": "B", "text": "可以吃，但那股柠檬草味有点冲，偶尔吃", "scores": { "E": 2, "C": 1 } },
+        { "label": "C", "text": "吃不惯，不喜欢那个味道", "scores": { "C": 3, "E": 0 } },
+        { "label": "D", "text": "没吃过，听起来像中药", "scores": { "E": 1, "C": 0 } }
       ]
     }
   ]

@@ -3,6 +3,8 @@
  * Render engine for TasteType 3.1
  */
 
+import { encodeDimensionResults } from './scoring.js';
+
 // ---- Dimension configuration ----
 
 const DIMENSION_ORDER = ['stimulus', 'taste', 'philosophy', 'novelty'];
@@ -14,7 +16,7 @@ const DIMENSION_LABELS = {
   novelty: '第四维度 · 新奇探索指数',
 };
 
-const CODE_COLORS = {
+export const CODE_COLORS = {
   H: '#E07B54', N: '#C4A4D4', C: '#8BBF8B', M: '#9EB8D0',
   U: '#E07B54', S: '#C4A4D4', W: '#8BBF8B', B: '#9EB8D0',
   O: '#F0C87A', A: '#E07B54', E: '#E07B54',
@@ -29,7 +31,7 @@ const CODE_LABELS = {
 
 // Philosophy-specific S label
 const CODE_LABELS_PHILOSOPHY = {
-  A: '加法烹饪', S: '咸味哲学',
+  A: '加法烹饪', S: '减法烹饪',
 };
 
 // Novelty-specific C label
@@ -37,7 +39,7 @@ const CODE_LABELS_NOVELTY = {
   E: '探索者', C: '经典派',
 };
 
-function getCodeLabel(code, dimension) {
+export function getCodeLabel(code, dimension) {
   if (dimension === 'philosophy' && CODE_LABELS_PHILOSOPHY[code]) {
     return CODE_LABELS_PHILOSOPHY[code];
   }
@@ -72,62 +74,82 @@ export function buildSubCode(dimensionResults) {
 
 // ---- renderRadarChart ----
 
+// All 13 letter codes in display order (clockwise from top), each with its dimension
+const RADAR_CODES = [
+  { code: 'H', dim: 'stimulus' },
+  { code: 'N', dim: 'stimulus' },
+  { code: 'C', dim: 'stimulus' },
+  { code: 'M', dim: 'stimulus' },
+  { code: 'U', dim: 'taste' },
+  { code: 'S', dim: 'taste' },
+  { code: 'W', dim: 'taste' },
+  { code: 'B', dim: 'taste' },
+  { code: 'O', dim: 'taste' },
+  { code: 'A', dim: 'philosophy' },
+  { code: 'S', dim: 'philosophy' },   // 减法烹饪
+  { code: 'E', dim: 'novelty' },
+  { code: 'C', dim: 'novelty' },       // 经典派
+];
+const RADAR_N = RADAR_CODES.length; // 13
+
 export function renderRadarChart(dimensionResults) {
-  const size = 300;
+  const size = 380;
   const cx = size / 2;
   const cy = size / 2;
   const maxRadius = 120;
-  const dims = DIMENSION_ORDER;
-  const n = dims.length;
+  const labelR = maxRadius + 28;
 
-  // Axis angles: top, right, bottom, left (0, 90, 180, 270 degrees)
-  // Starting from top (north), going clockwise
-  const angles = dims.map((_, i) => (i * 2 * Math.PI / n) - Math.PI / 2);
+  // Evenly space 13 axes clockwise, starting from top (-PI/2)
+  const angles = RADAR_CODES.map((_, i) => (i * 2 * Math.PI / RADAR_N) - Math.PI / 2);
 
   // Grid rings at 25%, 50%, 75%, 100%
   let gridRings = '';
   for (let pct = 25; pct <= 100; pct += 25) {
     const r = maxRadius * pct / 100;
-    const points = angles.map(a => `${cx + r * Math.cos(a)},${cy + r * Math.sin(a)}`).join(' ');
-    gridRings += `<polygon points="${points}" fill="none" stroke="#e0e0e0" stroke-width="0.5"/>`;
+    const points = angles.map(a => `${(cx + r * Math.cos(a)).toFixed(2)},${(cy + r * Math.sin(a)).toFixed(2)}`).join(' ');
+    gridRings += `<polygon points="${points}" fill="none" stroke="rgba(255,255,255,0.12)" stroke-width="0.5"/>`;
   }
 
   // Axis lines
   let axisLines = '';
   let axisLabels = '';
-  const radarLabels = ['刺激', '味觉', '哲学', '新奇'];
-  angles.forEach((a, i) => {
+  RADAR_CODES.forEach(({ code, dim }, i) => {
+    const a = angles[i];
     const ex = cx + maxRadius * Math.cos(a);
     const ey = cy + maxRadius * Math.sin(a);
-    axisLines += `<line x1="${cx}" y1="${cy}" x2="${ex}" y2="${ey}" stroke="#ccc" stroke-width="0.5"/>`;
-    // Label position slightly beyond the axis endpoint
-    const labelR = maxRadius + 20;
+    axisLines += `<line x1="${cx.toFixed(2)}" y1="${cy.toFixed(2)}" x2="${ex.toFixed(2)}" y2="${ey.toFixed(2)}" stroke="rgba(255,255,255,0.1)" stroke-width="0.5"/>`;
+
+    // Label with code + meaning, e.g. H(灼烧)
+    const label = getCodeLabel(code, dim);
+    const displayText = `${code}(${label})`;
     const lx = cx + labelR * Math.cos(a);
     const ly = cy + labelR * Math.sin(a);
-    axisLabels += `<text x="${lx}" y="${ly}" text-anchor="middle" dominant-baseline="middle" font-size="12" fill="#666">${radarLabels[i]}</text>`;
+    // Anchor text based on angle quadrant
+    const anchor = Math.cos(a) > 0.1 ? 'start' : Math.cos(a) < -0.1 ? 'end' : 'middle';
+    const dx = anchor === 'start' ? 4 : anchor === 'end' ? -4 : 0;
+    const color = CODE_COLORS[code] || 'rgba(255,255,255,0.55)';
+    axisLabels += `<text x="${(lx + dx).toFixed(2)}" y="${ly.toFixed(2)}" text-anchor="${anchor}" dominant-baseline="middle" font-size="9" fill="${color}">${escapeHtml(displayText)}</text>`;
   });
 
-  // Data polygon: plot dominant percentage on each axis
-  const dataPoints = dims.map((dim, i) => {
+  // Data polygon: plot each code's percentage (normalized within dimension)
+  const dataPoints = RADAR_CODES.map(({ code, dim }, i) => {
     const dr = dimensionResults[dim];
-    const rawPct = dr ? (dr.percentages[dr.dominant] || 0) : 0;
-    const pct = Math.max(0, Math.min(100, rawPct));
-    const r = maxRadius * pct / 100;
-    return `${cx + r * Math.cos(angles[i])},${cy + r * Math.sin(angles[i])}`;
-  }).join(' ');
+    const pct = dr ? (dr.percentages[code] || 0) : 0;
+    const r = maxRadius * Math.max(0, Math.min(100, pct)) / 100;
+    return `${(cx + r * Math.cos(angles[i])).toFixed(2)},${(cy + r * Math.sin(angles[i])).toFixed(2)}`;
+  });
 
-  const dataPolygon = `<polygon points="${dataPoints}" fill="rgba(224,123,84,0.25)" stroke="#E07B54" stroke-width="2"/>`;
+  const dataPolygon = `<polygon points="${dataPoints.join(' ')}" fill="rgba(224,123,84,0.25)" stroke="#E07B54" stroke-width="1.5"/>`;
 
   // Data point dots
   let dataDots = '';
-  dims.forEach((dim, i) => {
+  RADAR_CODES.forEach(({ code, dim }, i) => {
     const dr = dimensionResults[dim];
-    const rawPct = dr ? (dr.percentages[dr.dominant] || 0) : 0;
-    const pct = Math.max(0, Math.min(100, rawPct));
-    const r = maxRadius * pct / 100;
+    const pct = dr ? (dr.percentages[code] || 0) : 0;
+    const r = maxRadius * Math.max(0, Math.min(100, pct)) / 100;
     const dx = cx + r * Math.cos(angles[i]);
     const dy = cy + r * Math.sin(angles[i]);
-    dataDots += `<circle cx="${dx}" cy="${dy}" r="3" fill="#E07B54"/>`;
+    dataDots += `<circle cx="${dx.toFixed(2)}" cy="${dy.toFixed(2)}" r="2.5" fill="#E07B54"/>`;
   });
 
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">` +
@@ -170,7 +192,7 @@ export function renderStackedBars(dimensionResults) {
       const label = getCodeLabel(code, dim);
       html += `<span style="display:inline-flex;align-items:center;gap:3px;">` +
         `<span style="display:inline-block;width:10px;height:10px;border-radius:2px;background:${color};"></span>` +
-        `${escapeHtml(label)} ${pct}%</span>`;
+        `${escapeHtml(code)}(${escapeHtml(label)}) ${pct}%</span>`;
     });
     html += `</div>`;
 
@@ -278,6 +300,24 @@ export function renderResult(typeCode, typeData, dimensionResults) {
     tasteSigEl.innerHTML = '';
   }
 
+  // Secondary tags: lowercase letters from sub-code (e.g., h, s, c)
+  const secondaryEl = document.getElementById('result-taste-signature-secondary');
+  if (secondaryEl && dimensionResults) {
+    secondaryEl.innerHTML = '';
+    DIMENSION_ORDER.forEach(dim => {
+      const dr = dimensionResults[dim];
+      if (!dr || !dr.secondary) return;
+      const secCode = dr.secondary.toLowerCase();
+      const secLabel = getCodeLabel(dr.secondary, dim);
+      const span = document.createElement('span');
+      span.className = 'taste-tag-secondary';
+      span.textContent = `${secCode} · ${secLabel}`;
+      secondaryEl.appendChild(span);
+    });
+  } else if (secondaryEl) {
+    secondaryEl.innerHTML = '';
+  }
+
   if (analysisEl && typeData.analysis) {
     analysisEl.textContent = typeData.analysis;
   } else if (analysisEl) {
@@ -285,14 +325,56 @@ export function renderResult(typeCode, typeData, dimensionResults) {
   }
 
   if (avatarEl) {
+    avatarEl.innerHTML = '';
+    // Try svg, png, jpg — load first that exists, draw placeholder if all fail
+    const exts = ['svg', 'png', 'jpg'];
+    let loaded = false;
     const img = document.createElement('img');
-    img.src = loadTypeSVG(typeCode);
     img.alt = typeData.name;
     img.style.width = '100%';
     img.style.height = '100%';
     img.style.objectFit = 'cover';
-    avatarEl.innerHTML = '';
-    avatarEl.appendChild(img);
+    (async function() {
+      for (const ext of exts) {
+        const path = './assets/' + typeCode + '.' + ext;
+        try {
+          if (ext === 'svg') {
+            const r = await fetch(path);
+            if (!r.ok) continue;
+            const svgText = await r.text();
+            img.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgText)));
+          } else {
+            img.src = path;
+          }
+          await new Promise(function(res, rej) {
+            const t = setTimeout(function() { rej(new Error('timeout')); }, 2000);
+            img.onload = function() { clearTimeout(t); loaded = true; res(); };
+            img.onerror = function() { clearTimeout(t); rej(new Error('load error')); };
+          });
+          // success
+          avatarEl.appendChild(img);
+          return;
+        } catch(e) {}
+      }
+      // All failed: draw colored circle with type code letter as placeholder
+      const size = 80;
+      const cav = document.createElement('canvas');
+      cav.width = size;
+      cav.height = size;
+      cav.style.width = '100%';
+      cav.style.height = '100%';
+      const cx = cav.getContext('2d');
+      cx.fillStyle = '#D97757';
+      cx.beginPath();
+      cx.arc(size / 2, size / 2, size / 2, 0, Math.PI * 2);
+      cx.fill();
+      cx.fillStyle = 'white';
+      cx.font = 'bold 40px Poppins, Arial, sans-serif';
+      cx.textAlign = 'center';
+      cx.textBaseline = 'middle';
+      cx.fillText(typeCode[0] || '?', size / 2, size / 2);
+      avatarEl.appendChild(cav);
+    })();
   }
 
   if (detailsEl && dimensionResults) {
@@ -304,11 +386,98 @@ export function renderResult(typeCode, typeData, dimensionResults) {
   // Push URL state
   const url = new URL(window.location.href);
   url.searchParams.set('type', typeCode);
+  if (dimensionResults) {
+    url.searchParams.set('data', encodeDimensionResults(dimensionResults));
+  } else {
+    url.searchParams.delete('data');
+  }
   window.history.pushState({ type: typeCode }, '', url.toString());
 }
 
-// ---- loadTypeSVG (unchanged) ----
+// ---- loadTypeImage ----
+// Tries svg, png, jpg in order and returns the first one found
+export function loadTypeImage(typeCode) {
+  const exts = ['svg', 'png', 'jpg'];
+  for (const ext of exts) {
+    const path = `./assets/${typeCode}.${ext}`;
+    // Return path without checking existence — caller should load and handle 404
+    return path;
+  }
+}
 
+// Kept for backward compatibility
 export function loadTypeSVG(typeCode) {
-  return `./assets/${typeCode}.svg`;
+  return loadTypeImage(typeCode);
+}
+
+// ---- drawRadarToCanvas ----
+// Draws radar chart directly onto a canvas 2D context (used for share image generation)
+export function drawRadarToCanvas(ctx, dimensionResults, cx, cy, size) {
+  const maxRadius = size * 0.32;
+  const labelR = maxRadius + size * 0.075;
+  const RADAR_N = RADAR_CODES.length;
+
+  // Evenly space 13 axes clockwise, starting from top (-PI/2)
+  const angles = RADAR_CODES.map((_, i) => (i * 2 * Math.PI / RADAR_N) - Math.PI / 2);
+
+  // Grid rings at 25%, 50%, 75%, 100%
+  for (let pct = 25; pct <= 100; pct += 25) {
+    const r = maxRadius * pct / 100;
+    ctx.beginPath();
+    ctx.arc(cx, cy, r, 0, Math.PI * 2);
+    ctx.strokeStyle = 'rgba(20,20,19,0.20)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+  }
+
+  // Axis lines + labels
+  RADAR_CODES.forEach(({ code, dim }, i) => {
+    const a = angles[i];
+    const ex = cx + maxRadius * Math.cos(a);
+    const ey = cy + maxRadius * Math.sin(a);
+
+    ctx.beginPath();
+    ctx.moveTo(cx, cy);
+    ctx.lineTo(ex, ey);
+    ctx.strokeStyle = 'rgba(20,20,19,0.20)';
+    ctx.lineWidth = 0.8;
+    ctx.stroke();
+
+    const label = getCodeLabel(code, dim);
+    const displayText = code + '(' + label + ')';
+    const lx = cx + labelR * Math.cos(a);
+    const ly = cy + labelR * Math.sin(a);
+    const anchor = Math.cos(a) > 0.1 ? 'left' : Math.cos(a) < -0.1 ? 'right' : 'center';
+    ctx.font = 'bold ' + (size * 0.024) + 'px Poppins, Arial, sans-serif';
+    ctx.fillStyle = 'rgba(20,20,19,0.75)';
+    ctx.textAlign = anchor;
+    ctx.textBaseline = 'middle';
+    const dx = anchor === 'left' ? 3 : anchor === 'right' ? -3 : 0;
+    ctx.fillText(displayText, lx + dx, ly);
+  });
+
+  // Data polygon
+  const dataPoints = RADAR_CODES.map(({ code, dim }, i) => {
+    const dr = dimensionResults[dim];
+    const pct = dr ? (dr.percentages[code] || 0) : 0;
+    const r = maxRadius * Math.max(0, Math.min(100, pct)) / 100;
+    return [cx + r * Math.cos(angles[i]), cy + r * Math.sin(angles[i])];
+  });
+
+  ctx.beginPath();
+  dataPoints.forEach((p, i) => i === 0 ? ctx.moveTo(p[0], p[1]) : ctx.lineTo(p[0], p[1]));
+  ctx.closePath();
+  ctx.fillStyle = 'rgba(224,123,84,0.25)';
+  ctx.fill();
+  ctx.strokeStyle = '#D97757';
+  ctx.lineWidth = 1.5;
+  ctx.stroke();
+
+  // Data point dots
+  dataPoints.forEach((p) => {
+    ctx.beginPath();
+    ctx.arc(p[0], p[1], 2.5, 0, Math.PI * 2);
+    ctx.fillStyle = '#D97757';
+    ctx.fill();
+  });
 }

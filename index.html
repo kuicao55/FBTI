@@ -7,7 +7,7 @@
   <meta property="og:title" content="口味人格测试 · TasteType">
   <meta property="og:description" content="24道情景题，发现你的味觉人格。">
   <meta property="og:type" content="website">
-  <link rel="icon" href="assets/FBTI_logo.svg" type="image/svg+xml">
+  <link rel="icon" href="assets/FBTI_logo.png" type="image/png">
   <title>FBT Intelligence Quiz</title>
 
   <!-- Google Fonts preconnect -->
@@ -174,7 +174,7 @@
     }
     .progress-track {
       flex: 1;
-      width: 100%;
+      min-width: 0;
       height: 4px;
       background: var(--color-border);
       border-radius: var(--radius-full);
@@ -294,6 +294,15 @@
       font-size: 13px;
       border: 1px solid rgba(217,119,87,0.4);
     }
+
+    .taste-tag-secondary {
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.45);
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-family: var(--font-heading);
+      font-size: 12px;
+      border: 1px solid rgba(255,255,255,0.15);
     }
 
     .details-panel {
@@ -335,13 +344,81 @@
       gap: 8px;
       font-size: 12px;
     }
+
+    /* === MOBILE RESPONSIVE === */
+    @media (max-width: 640px) {
+      /* Radar chart: override hardcoded SVG dimensions */
+      .details-panel .radar-section svg {
+        width: 100% !important;
+        height: auto !important;
+        max-width: 380px;
+      }
+
+      /* Quiz screen: reduce padding to fit viewport */
+      .quiz-wrap {
+        padding: var(--space-4) 0 !important;
+        justify-content: flex-start !important;
+      }
+      .quiz-header {
+        margin-bottom: var(--space-6) !important;
+      }
+      .progress-wrap {
+        margin-bottom: var(--space-6) !important;
+      }
+      .quiz-question-text {
+        font-size: 16px !important;
+        margin-bottom: var(--space-4) !important;
+      }
+      .option-card {
+        padding: var(--space-4) !important;
+        margin-bottom: 8px !important;
+      }
+      .option-letter {
+        font-size: 14px !important;
+      }
+      .option-text {
+        font-size: 14px !important;
+      }
+
+      /* Result screen: compact layout to fit without scrolling when details hidden */
+      #screen-result .container {
+        padding-top: var(--space-6) !important;
+        padding-bottom: var(--space-6) !important;
+      }
+      #result-avatar {
+        width: 100px !important;
+        height: 100px !important;
+        margin-bottom: var(--space-4) !important;
+      }
+      #result-type-code {
+        font-size: 40px !important;
+        letter-spacing: 4px !important;
+      }
+      #result-type-code-sub {
+        font-size: 16px !important;
+        margin-bottom: var(--space-4) !important;
+      }
+      #result-name {
+        font-size: 20px !important;
+        margin-bottom: var(--space-4) !important;
+      }
+
+      /* Screens: scrollable on mobile when content overflows */
+      .screen {
+        overflow-y: auto !important;
+        max-height: 100vh;
+      }
+      .screen.active {
+        overflow-y: auto;
+      }
+    }
   </style>
 </head>
 <body>
   <section id="screen-welcome" class="screen active">
     <div style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:var(--space-16);padding-bottom:var(--space-16);">
       <div class="fade-in-up stagger-1">
-        <img src="assets/FBTI_logo.svg" alt="FBTI Logo" width="80" height="80">
+        <img src="assets/FBTI_logo.png" alt="FBTI Logo" width="80" height="80">
       </div>
       <h1 class="fade-in-up stagger-2" style="font-family: var(--font-display); font-size: 48px; font-weight: 700; color: var(--color-text-primary); margin-bottom: var(--space-4); line-height: 1.2;">口味人格测试</h1>
       <p class="fade-in-up stagger-3" style="font-family: var(--font-heading); font-size: 16px; color: var(--color-text-secondary); margin-bottom: var(--space-10); max-width: 360px; line-height: 1.6;">24道情景题 · 发现你的味觉人格</p>
@@ -369,7 +446,7 @@
   <section id="screen-result" class="screen">
   <div class="container" style="flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding-top:var(--space-16);padding-bottom:var(--space-16);">
     <!-- Avatar -->
-    <div id="result-avatar" class="fade-in-up stagger-1" style="width:200px;height:200px;border-radius:50%;overflow:hidden;margin:0 auto var(--space-8);box-shadow:0 0 0 6px rgba(255,255,255,0.15);"></div>
+    <div id="result-avatar" class="fade-in-up stagger-1" style="width:200px;height:200px;border-radius:50%;overflow:hidden;margin:0 auto var(--space-8);"></div>
     <!-- Type code (main) -->
     <div id="result-type-code" class="fade-in-up stagger-2" style="font-family:var(--font-heading);font-size:56px;font-weight:700;color:white;letter-spacing:8px;margin-bottom:4px;line-height:1;"></div>
     <!-- Type code (sub) -->
@@ -377,7 +454,9 @@
     <!-- Personality name -->
     <div id="result-name" class="fade-in-up stagger-3" style="font-family:var(--font-display);font-size:28px;font-weight:600;font-style:italic;color:white;margin-bottom:16px;"></div>
     <!-- Taste signature tags -->
-    <div id="result-taste-signature" class="fade-in-up stagger-3" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;"></div>
+    <div id="result-taste-signature" class="fade-in-up stagger-3" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:8px;"></div>
+    <!-- Secondary taste signature tags (lowercase) -->
+    <div id="result-taste-signature-secondary" class="fade-in-up stagger-3" style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:24px;"></div>
     <!-- Self description (with orange left border) -->
     <div id="result-self-description" class="fade-in-up stagger-4" style="border-left:3px solid #D97757;padding-left:16px;max-width:480px;text-align:left;font-style:italic;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.85);"></div>
     <!-- Analysis -->
@@ -388,7 +467,7 @@
     <div id="details-panel" class="fade-in-up" style="display:none;width:100%;max-width:640px;margin:0 auto 32px;text-align:left;" role="region" aria-label="详细分析"></div>
     <!-- Share buttons -->
     <div class="fade-in-up stagger-5" style="display:flex;gap:var(--space-4);width:100%;max-width:360px;margin-bottom:var(--space-4);">
-      <button id="btn-copy-link" class="btn-primary" style="flex:1;">复制链接</button>
+      <button id="btn-copy-link" class="btn-primary" style="flex:1;">分享链接</button>
       <button id="btn-share-image" class="btn-primary" style="flex:1;">保存图片</button>
     </div>
     <!-- Retake button -->
@@ -401,14 +480,14 @@
   <!-- Toast element -->
   <div id="toast" class="toast">链接已复制 ✓</div>
 
-  <!-- qrcode.js CDN -->
-  <script src="https://cdn.jsdelivr.net/npm/qrcode@1.5.3/build/qrcode.min.js"></script>
+  <!-- qrcodejs CDN (local QR generation, no tainted canvas issue) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <!-- Main script -->
   <script type="module">
     import { loadTypes, loadQuestions } from './modules/loader.js';
-    import { selectQuestions, calculateType } from './modules/scoring.js';
-    import { renderQuestion, renderResult, loadTypeSVG } from './modules/render.js';
+    import { selectQuestions, calculateType, encodeDimensionResults, decodeDimensionResults } from './modules/scoring.js';
+    import { renderQuestion, renderResult, loadTypeSVG, buildSubCode, drawRadarToCanvas, CODE_COLORS, getCodeLabel } from './modules/render.js';
 
     function showScreen(name) {
       document.querySelectorAll('.screen').forEach(function(s) {
@@ -438,9 +517,22 @@
 
         var urlParams = new URLSearchParams(window.location.search);
         var urlType = urlParams.get('type');
+        var urlData = urlParams.get('data');
+        var dimensionResults = null;
+        if (urlData) {
+          // Try compact format first
+          try { dimensionResults = decodeDimensionResults(urlData); } catch(e) { console.error('Compact decode error:', e); }
+          // Fall back to old base64+JSON format
+          if (!dimensionResults) {
+            try { dimensionResults = JSON.parse(decodeURIComponent(atob(urlData))); } catch(e) { console.error('Old format decode error:', e); }
+          }
+          console.log('[FBTI] URL data decode: input len=' + urlData.length + ', decoded=' + !!dimensionResults, dimensionResults);
+        }
         if (urlType && window.types[urlType]) {
           showScreen('result');
-          renderResult(urlType, window.types[urlType], null); // null for dimensionResults (URL-only view)
+          renderResult(urlType, window.types[urlType], dimensionResults);
+          // Wire up details panel toggle for URL-loaded results
+          bindDetailsToggle();
         } else {
           showScreen('welcome');
         }
@@ -490,7 +582,10 @@
       var result = calculateType(answers, window.selectedQuestions, window.types);
       showScreen('result');
       renderResult(result.typeCode, window.types[result.typeCode], result.dimensionResults);
-      // Wire up details panel toggle
+      bindDetailsToggle();
+    }
+
+    function bindDetailsToggle() {
       var detailsBtn = document.getElementById('btn-details');
       var detailsPanel = document.getElementById('details-panel');
       if (detailsBtn && detailsPanel) {
@@ -504,19 +599,44 @@
     }
 
     function copyLink() {
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(window.location.href).then(function() {
-          showToast('链接已复制 ✓');
+      var typeCode, dimensionResults;
+      if (answers.length === (window.selectedQuestions ? window.selectedQuestions.length : 24)) {
+        var result = calculateType(answers, window.selectedQuestions, window.types);
+        typeCode = result.typeCode;
+        dimensionResults = result.dimensionResults;
+      } else {
+        var urlParams2 = new URLSearchParams(window.location.search);
+        typeCode = urlParams2.get('type') || 'SCNU';
+        var dataParam = urlParams2.get('data');
+        if (dataParam) {
+          try {
+            dimensionResults = JSON.parse(decodeURIComponent(atob(dataParam)));
+          } catch(e) {}
+        }
+      }
+      var url = new URL(window.location.href);
+      url.searchParams.set('type', typeCode);
+      if (dimensionResults) {
+        url.searchParams.set('data', encodeDimensionResults(dimensionResults));
+      } else {
+        url.searchParams.delete('data');
+      }
+      var shareUrl = url.toString();
+      if (navigator.share) {
+        navigator.share({
+          title: '我的味型测试结果',
+          text: '快来看看我的味型分析！',
+          url: shareUrl
         }).catch(function() {
-          fallbackCopy();
+          fallbackCopy(shareUrl);
         });
       } else {
-        fallbackCopy();
+        fallbackCopy(shareUrl);
       }
     }
-    function fallbackCopy() {
+    function fallbackCopy(shareUrl) {
       var textArea = document.createElement('textarea');
-      textArea.value = window.location.href;
+      textArea.value = shareUrl || window.location.href;
       textArea.style.position = 'fixed';
       textArea.style.opacity = '0';
       document.body.appendChild(textArea);
@@ -537,149 +657,401 @@
       showScreen('welcome');
     }
 
+    function rrect(ctx, x, y, w, h, r) {
+      ctx.beginPath();
+      ctx.moveTo(x + r, y);
+      ctx.lineTo(x + w - r, y);
+      ctx.quadraticCurveTo(x + w, y, x + w, y + r);
+      ctx.lineTo(x + w, y + h - r);
+      ctx.quadraticCurveTo(x + w, y + h, x + w - r, y + h);
+      ctx.lineTo(x + r, y + h);
+      ctx.quadraticCurveTo(x, y + h, x, y + h - r);
+      ctx.lineTo(x, y + r);
+      ctx.quadraticCurveTo(x, y, x + r, y);
+      ctx.closePath();
+    }
+
     async function generateShareImage() {
-      var typeCode;
-      if (answers.length !== (window.selectedQuestions ? window.selectedQuestions.length : 24)) {
+      // 1. Gather data
+      var typeCode, dimensionResults;
+      if (answers.length === (window.selectedQuestions ? window.selectedQuestions.length : 24)) {
+        var result = calculateType(answers, window.selectedQuestions, window.types);
+        typeCode = result.typeCode;
+        dimensionResults = result.dimensionResults;
+      } else {
         var urlParams = new URLSearchParams(window.location.search);
         typeCode = urlParams.get('type') || 'SCNU';
-      } else {
-        typeCode = calculateType(answers, window.selectedQuestions, window.types).typeCode;
+        var dataParam = urlParams.get('data');
+        if (dataParam) {
+          // Try compact format first
+          try { dimensionResults = decodeDimensionResults(dataParam); } catch(e) {}
+          // Fall back to old base64+JSON format
+          if (!dimensionResults) {
+            try { dimensionResults = JSON.parse(decodeURIComponent(atob(dataParam))); } catch(e) {}
+          }
+        }
       }
       if (!window.types[typeCode]) typeCode = 'SCNU';
 
-      var data = window.types[typeCode];
-      var W = 900, H = 1200;
-      var canvas = document.createElement('canvas');
-      canvas.width = W; canvas.height = H;
-      var ctx = canvas.getContext('2d');
+      var typeData = window.types[typeCode];
+      var subCode = dimensionResults ? buildSubCode(dimensionResults) : '';
+      var primaryTags = typeData.tasteSignature || [];
+      var secondaryTags = [];
+      if (dimensionResults) {
+        ['stimulus', 'taste', 'philosophy', 'novelty'].forEach(function(dim) {
+          var dr = dimensionResults[dim];
+          if (dr && dr.secondary) {
+            secondaryTags.push(dr.secondary.toLowerCase() + ' \u00B7 ' + getCodeLabel(dr.secondary, dim));
+          }
+        });
+      }
 
-      // 1. Background
+      showToast('\u6B63\u5728\u751F\u6210\u56FE\u7247\u2026');
+
+      // 2. Canvas setup — 900×1200 (3:4 portrait), 2x resolution
+      var W = 900, H = 1200;
+      var DPR = 2;
+      var canvas = document.createElement('canvas');
+      canvas.width = W * DPR;
+      canvas.height = H * DPR;
+      canvas.style.width = W + 'px';
+      canvas.style.height = H + 'px';
+      var ctx = canvas.getContext('2d');
+      ctx.scale(DPR, DPR);
+
+      // 3. Background
       ctx.fillStyle = '#ECE9E0';
       ctx.fillRect(0, 0, W, H);
 
-      // 2. Radial gradient overlay
-      var grad = ctx.createRadialGradient(W * 0.2, H * 0.1, 0, W * 0.2, H * 0.1, W * 0.8);
-      grad.addColorStop(0, 'rgba(217,119,87,0.08)');
-      grad.addColorStop(1, 'transparent');
-      ctx.fillStyle = grad;
-      ctx.fillRect(0, 0, W, H);
-
-      // 3. FBTI Logo (top center)
-      var logoImg = new Image();
-      logoImg.src = 'assets/FBTI_logo.svg';
-      await Promise.race([
-        new Promise(function(r) { logoImg.onload = r; }),
-        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('logo timeout')); }, 5000); })
-      ]).catch(function() {}); // If logo fails, continue without it
-      var logoW = 100, logoH = 100;
-      ctx.drawImage(logoImg, (W - logoW) / 2, 60, logoW, logoH);
-
-      // 4. SVG Avatar (circular clip)
-      var svgUrl = loadTypeSVG(typeCode);
+      // 4. Avatar (200px, result page match) — tries svg, png, jpg
+      var avatarReady = false;
       var avatarImg = new Image();
-      var svgLoaded = false;
-      fetch(svgUrl).then(function(r) { return r.text(); }).then(function(svgText) {
-        avatarImg.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgText)));
-        avatarImg.onload && avatarImg.onload();
-        svgLoaded = true;
-      }).catch(function() {
-        // Silent failure acceptable — avatar area will be blank but image still generates
-      });
+      var avatarExts = ['svg', 'png', 'jpg'];
+      var avatarLoaded = false;
+      (async function tryAvatarLoad() {
+        for (var i = 0; i < avatarExts.length; i++) {
+          var ext = avatarExts[i];
+          var path = './assets/' + typeCode + '.' + ext;
+          console.log('[FBTI] Avatar attempt: ' + path);
+          try {
+            if (ext === 'svg') {
+              var r = await fetch(path);
+              if (!r.ok) { console.log('[FBTI] ' + ext + ' not found, continue'); continue; }
+              var svgText = await r.text();
+              avatarImg.src = 'data:image/svg+xml;base64,' + btoa(unescape(encodeURIComponent(svgText)));
+            } else {
+              // PNG/JPG: direct src, no fetch
+              avatarImg.src = path;
+              console.log('[FBTI] ' + ext + ' src set, complete=' + avatarImg.complete + ', width=' + avatarImg.width);
+            }
+            await new Promise(function(res, rej) {
+              var t = setTimeout(function() { console.log('[FBTI] ' + ext + ' timeout'); rej(new Error('timeout')); }, 2000);
+              avatarImg.onload = function() { clearTimeout(t); console.log('[FBTI] ' + ext + ' loaded! ready=' + avatarImg.readyState); avatarReady = true; avatarLoaded = true; res(); };
+              avatarImg.onerror = function() { clearTimeout(t); console.log('[FBTI] ' + ext + ' error, try next'); rej(new Error('load error')); };
+            });
+            console.log('[FBTI] Avatar success with ' + ext);
+            break;
+          } catch(e) { console.log('[FBTI] Avatar ' + ext + ' failed: ' + e.message); }
+        }
+      })();
       await Promise.race([
-        new Promise(function(r) { avatarImg.onload = r; }),
+        new Promise(function(r) {
+          var check = function() {
+            if (avatarLoaded || avatarReady) { r(); return; }
+            setTimeout(check, 50);
+          };
+          check();
+        }),
         new Promise(function(_, reject) { setTimeout(function() { reject(new Error('avatar timeout')); }, 5000); })
-      ]).catch(function() {}); // If avatar fails, continue without it
+      ]).catch(function() {});
       var avatarSize = 200;
-      var avatarX = (W - avatarSize) / 2;
-      var avatarY = 200;
+      var avatarY = 30;
       ctx.save();
       ctx.beginPath();
       ctx.arc(W / 2, avatarY + avatarSize / 2, avatarSize / 2, 0, Math.PI * 2);
-      ctx.closePath();
       ctx.clip();
-      ctx.drawImage(avatarImg, avatarX, avatarY, avatarSize, avatarSize);
+      if (avatarReady) {
+        ctx.drawImage(avatarImg, (W - avatarSize) / 2, avatarY, avatarSize, avatarSize);
+      } else {
+        ctx.fillStyle = '#D97757';
+        ctx.fill();
+      }
       ctx.restore();
-      // Ring
-      ctx.strokeStyle = 'rgba(20,20,19,0.15)';
-      ctx.lineWidth = 6;
-      ctx.beginPath();
-      ctx.arc(W / 2, avatarY + avatarSize / 2, avatarSize / 2 + 3, 0, Math.PI * 2);
-      ctx.stroke();
 
       // 5. Type code
-      var spacedCode = typeCode.split('').join(' ');
-      ctx.font = '700 64px Poppins, Arial, sans-serif';
+      var curY = avatarY + avatarSize + 56;
+      ctx.font = '700 56px Poppins, Arial, sans-serif';
       ctx.fillStyle = '#141413';
       ctx.textAlign = 'center';
-      ctx.fillText(spacedCode, W / 2, avatarY + avatarSize + 80);
+      ctx.fillText(typeCode.split('').join(' '), W / 2, curY);
 
-      // 6. Personality name
+      // 6. Sub-code
+      if (subCode) {
+        curY += 28;
+        ctx.font = '400 24px Poppins, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(20,20,19,0.4)';
+        ctx.fillText(subCode, W / 2, curY);
+      }
+
+      // 7. Name
+      curY += 36;
       ctx.font = 'italic 600 28px Lora, "Noto Serif SC", serif';
       ctx.fillStyle = '#141413';
-      ctx.textAlign = 'center';
-      ctx.fillText(data.name, W / 2, avatarY + avatarSize + 130);
+      ctx.fillText(typeData.name, W / 2, curY);
 
-      // 7. Tagline (word-wrap)
-      ctx.font = '400 16px Lora, "Noto Serif SC", serif';
-      ctx.fillStyle = '#6B6860';
-      ctx.textAlign = 'center';
-      var tagline = data.selfDescription || data.tagline || '';
-      var maxWidth = W - 80;
-      var lineHeight = 26;
-      var lines = wrapText(ctx, tagline, maxWidth);
-      var tagY = avatarY + avatarSize + 170;
-      lines.forEach(function(line, i) {
-        ctx.fillText(line, W / 2, tagY + i * lineHeight);
+      // 8. Primary tags (orange pills)
+      curY += 38;
+      var tagRadius = 16;
+      var tagPadX = 10, tagGapH = 8, tagGapV = 6;
+      var rowW = W - 80;
+      ctx.font = '500 13px Poppins, Arial, sans-serif';
+      var lineH = tagRadius * 2 + tagGapV;
+      var currentLineW = 0;
+      var tagsByLine = [[]];
+      primaryTags.forEach(function(tag) {
+        var tw = ctx.measureText(tag).width + tagPadX * 2;
+        if (currentLineW + tw > rowW && tagsByLine[tagsByLine.length - 1].length > 0) {
+          tagsByLine.push([]);
+          currentLineW = 0;
+        }
+        tagsByLine[tagsByLine.length - 1].push({ tag: tag, tw: tw });
+        currentLineW += tw + tagGapH;
       });
+      tagsByLine.filter(function(l) { return l.length > 0; }).forEach(function(line) {
+        var lineTotalW = line.reduce(function(s, t) { return s + t.tw; }, 0) + (line.length - 1) * tagGapH;
+        var tx = (W - lineTotalW) / 2;
+        line.forEach(function(item) {
+          rrect(ctx, tx, curY, item.tw, tagRadius * 2, tagRadius);
+          ctx.fillStyle = 'rgba(217,119,87,0.25)';
+          ctx.fill();
+          ctx.fillStyle = '#141413';
+          ctx.textAlign = 'center';
+          ctx.textBaseline = 'middle';
+          ctx.fillText(item.tag, tx + item.tw / 2, curY + tagRadius);
+          tx += item.tw + tagGapH;
+        });
+        curY += lineH;
+      });
+      ctx.textBaseline = 'alphabetic';
 
-      // 8. Decorative line
-      ctx.strokeStyle = '#D97757';
-      ctx.lineWidth = 2;
-      ctx.beginPath();
-      ctx.moveTo(W / 2 - 40, tagY + lines.length * lineHeight + 20);
-      ctx.lineTo(W / 2 + 40, tagY + lines.length * lineHeight + 20);
-      ctx.stroke();
-
-      // 9. QR Code
-      var qrUrl = 'https://fbti.app/result?type=' + typeCode;
-      var qrCanvas = document.createElement('canvas');
-      qrCanvas.width = 160; qrCanvas.height = 160;
-      if (typeof QRCode === 'undefined') {
-        showToast('图片生成失败，请重试');
-        return;
+      // 9. Secondary tags (small muted pills)
+      if (secondaryTags.length > 0) {
+        curY += 8;
+        var secRadius = 14;
+        var secPadX = 8, secGapH = 6, secGapV = 4;
+        ctx.font = '400 12px Poppins, Arial, sans-serif';
+        var secLineH = secRadius * 2 + secGapV;
+        var secByLine = [[]];
+        var secLineW = 0;
+        secondaryTags.forEach(function(tag) {
+          var tw = ctx.measureText(tag).width + secPadX * 2;
+          if (secLineW + tw > W - 80 && secByLine[secByLine.length - 1].length > 0) {
+            secByLine.push([]);
+            secLineW = 0;
+          }
+          secByLine[secByLine.length - 1].push({ tag: tag, tw: tw });
+          secLineW += tw + secGapH;
+        });
+        secByLine.filter(function(l) { return l.length > 0; }).forEach(function(line) {
+          var lineTotalW = line.reduce(function(s, t) { return s + t.tw; }, 0) + (line.length - 1) * secGapH;
+          var tx = (W - lineTotalW) / 2;
+          line.forEach(function(item) {
+            rrect(ctx, tx, curY, item.tw, secRadius * 2, secRadius);
+            ctx.fillStyle = 'rgba(20,20,19,0.08)';
+            ctx.fill();
+            ctx.fillStyle = 'rgba(20,20,19,0.45)';
+            ctx.textAlign = 'center';
+            ctx.textBaseline = 'middle';
+            ctx.fillText(item.tag, tx + item.tw / 2, curY + secRadius);
+            tx += item.tw + secGapH;
+          });
+          curY += secLineH;
+        });
+        ctx.textBaseline = 'alphabetic';
       }
-      var qrOk = false;
-      try {
-        await Promise.race([
-          new Promise(function(resolve, reject) {
-            QRCode.toCanvas(qrCanvas, qrUrl, { width: 160, margin: 1 }, function(err) {
-              if (!err) resolve(); else reject(err);
-            });
-          }),
-          new Promise(function(_, reject) { setTimeout(function() { reject(new Error('qr timeout')); }, 5000); })
-        ]);
-        qrOk = true;
-      } catch(e) {
-        showToast('图片生成失败，请重试');
-      }
-      if (!qrOk) return;
 
-      // Continue with drawing QR and download only if qrOk is true
-      var qrX = (W - 160) / 2;
-      var qrY = H - 160 - 60;
-      ctx.drawImage(qrCanvas, qrX, qrY, 160, 160);
-      // QR label
+      // 10. Self-description (italic, orange left border)
+      curY += 16;
+      if (typeData.selfDescription) {
+        var sqX = 40, sqW = W - 80;
+        ctx.font = 'italic 400 15px Lora, "Noto Serif SC", serif';
+        ctx.fillStyle = 'rgba(20,20,19,0.75)';
+        ctx.textAlign = 'left';
+        var sqLines = wrapText(ctx, '\u201C' + typeData.selfDescription + '\u201D', sqW - 20);
+        sqLines.forEach(function(line, i) {
+          ctx.fillText(line, sqX + 16, curY + 20 + i * 24);
+        });
+        ctx.strokeStyle = '#D97757';
+        ctx.lineWidth = 3;
+        ctx.beginPath();
+        ctx.moveTo(sqX + 3, curY);
+        ctx.lineTo(sqX + 3, curY + sqLines.length * 24 + 10);
+        ctx.stroke();
+        curY += sqLines.length * 24 + 28;
+      }
+
+      // 11. Analysis (italic, no border)
+      if (typeData.analysis) {
+        ctx.font = 'italic 400 14px Lora, "Noto Serif SC", serif';
+        ctx.fillStyle = 'rgba(20,20,19,0.65)';
+        ctx.textAlign = 'left';
+        var anaLines = wrapText(ctx, typeData.analysis, W - 80);
+        anaLines.slice(0, 5).forEach(function(line, i) {
+          ctx.fillText(line, 40, curY + 18 + i * 22);
+        });
+        curY += anaLines.slice(0, 5).length * 22 + 24;
+      }
+
+      // 12. Stacked bars (4 dimensions, flex layout — each row tracks its actual bottom)
+      curY += 12;
+      var barX = 40;
+      var barW = W - barX * 2;
+      var barH = 28;
+      var dimLabels = ['\u7B2C\u4E00\u7EF4\u5EA6 \u00B7 \u523A\u6FC0\u504F\u597D', '\u7B2C\u4E8C\u7EF4\u5EA6 \u00B7 \u6838\u5FC3\u5473\u89C9\u5F15\u529B', '\u7B2C\u4E09\u7EF4\u5EA6 \u00B7 \u98CE\u5473\u6784\u5EFA\u54F2\u5B66', '\u7B2C\u56DB\u7EF4\u5EA6 \u00B7 \u65B0\u5947\u63A2\u7D22\u6307\u6570'];
+      var dimKeys = ['stimulus', 'taste', 'philosophy', 'novelty'];
+      var barRadius = 6;
+      var rowBottom = curY; // tracks the actual bottom edge of each row
+
+      dimKeys.forEach(function(dimKey, idx) {
+        var dr = dimensionResults ? dimensionResults[dimKey] : null;
+
+        // Each row title starts below previous row's bottom, with a gap
+        var rowY = rowBottom + 14;
+        var barRowY = rowY + 12; // label above bar
+
+        // Dimension label
+        ctx.font = '600 11px Poppins, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(20,20,19,0.5)';
+        ctx.textAlign = 'left';
+        ctx.fillText(dimLabels[idx], barX, rowY);
+
+        // Bar: clip all segments to rounded rectangle, background shows through at rounded corners
+        ctx.save();
+        // Background (shows at corners where segments don't reach)
+        ctx.fillStyle = 'rgba(20,20,19,0.08)';
+        rrect(ctx, barX, barRowY, barW, barH, barRadius);
+        ctx.fill();
+        // Clip for segments
+        rrect(ctx, barX, barRowY, barW, barH, barRadius);
+        ctx.clip();
+        if (dr && dr.percentages) {
+          var sorted = Object.entries(dr.percentages).sort(function(a, b) { return b[1] - a[1]; });
+          var x = barX;
+          sorted.forEach(function(entry) {
+            var pct = Math.round(entry[1]);
+            if (pct <= 0) return;
+            var color = CODE_COLORS[entry[0]] || '#ccc';
+            var w = barW * pct / 100;
+            ctx.fillStyle = color;
+            ctx.fillRect(x, barRowY, w, barH);
+            x += w;
+          });
+        }
+        ctx.restore();
+
+        // Legend with wrapping — updates rowBottom to track actual height
+        var legY = barRowY + barH + 6;
+        var legX = barX;
+        var legLineH = 14;
+        ctx.font = '400 11px Poppins, Arial, sans-serif';
+        if (dr && dr.percentages) {
+          var sorted = Object.entries(dr.percentages).sort(function(a, b) { return b[1] - a[1]; });
+          sorted.forEach(function(entry) {
+            var pct = Math.round(entry[1]);
+            if (pct <= 0) return;
+            var color = CODE_COLORS[entry[0]] || '#ccc';
+            var label = entry[0] + '(' + getCodeLabel(entry[0], dimKey) + ') ' + pct + '%';
+            var lw = ctx.measureText(label).width + 18;
+            if (legX + lw > barX + barW) {
+              legX = barX;
+              legY += legLineH;
+            }
+            ctx.fillStyle = color;
+            ctx.beginPath();
+            ctx.arc(legX + 5, legY + 5, 4, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.fillStyle = 'rgba(20,20,19,0.7)';
+            ctx.textAlign = 'left';
+            ctx.fillText(label, legX + 14, legY + 8);
+            legX += lw;
+          });
+          rowBottom = legY + legLineH;
+        } else {
+          rowBottom = legY;
+        }
+        // Gap between rows
+        rowBottom += 8;
+      });
+      curY = rowBottom;
+
+      // 13. QR Code (read from assets/QR.png — placeholder until real file is added)
+      var qrSize = 100;
+      var qrX = (W - qrSize) / 2;
+      var qrY = H - 140;
+      var qrReady = false;
+      var qrImg = new Image();
+      qrImg.onload = function() { qrReady = true; };
+      qrImg.src = 'assets/QR.png?v=' + Date.now();
+      await Promise.race([
+        new Promise(function(r) { qrImg.onload = function() { qrReady = true; r(); }; }),
+        new Promise(function(_, reject) { setTimeout(function() { reject(new Error('qr timeout')); }, 5000); })
+      ]).catch(function() {});
+      if (qrReady) {
+        ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+      } else {
+        // Fallback placeholder: rounded rect with text
+        ctx.fillStyle = 'rgba(20,20,19,0.08)';
+        rrect(ctx, qrX, qrY, qrSize, qrSize, 8);
+        ctx.fill();
+        ctx.font = '400 11px Poppins, Arial, sans-serif';
+        ctx.fillStyle = 'rgba(20,20,19,0.3)';
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText('QR', W / 2, qrY + qrSize / 2);
+        ctx.textBaseline = 'alphabetic';
+      }
       ctx.font = '400 12px Poppins, Arial, sans-serif';
-      ctx.fillStyle = '#6B6860';
+      ctx.fillStyle = 'rgba(20,20,19,0.4)';
       ctx.textAlign = 'center';
-      ctx.fillText('fbti.app/result', W / 2, qrY + 170);
+      ctx.fillText('\u626B\u7801\u6D4B\u8BD5fbti', W / 2, qrY + qrSize + 18);
 
-      // 10. Download
-      var link = document.createElement('a');
-      link.download = 'fbti-' + typeCode.toLowerCase() + '.png';
-      link.href = canvas.toDataURL('image/png');
-      link.click();
-      showToast('图片已保存 ✓');
+      // 14. Download / Share
+      var filename = 'fbti-' + typeCode.toLowerCase() + '.png';
+      var shareTitle = '\u6211\u7684\u5473\u578B\u6D4B\u8BD5\u7ED3\u679C';
+      var shareText = '\u9EBB\u70E6\u770B\u770B\u6211\u7684\u5473\u578B\u5206\u6790\uFF01 ' + window.location.href;
+
+      canvas.toBlob(function(blob) {
+        if (blob) {
+          var file = new File([blob], filename, { type: 'image/png' });
+          if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+            // Mobile: opens share sheet (WeChat, Save Image, etc.)
+            navigator.share({
+              title: shareTitle,
+              text: shareText,
+              files: [file]
+            }).then(function() {
+              showToast('\u56FE\u7247\u5DF2\u5206\u4EAB \u2713');
+            }).catch(function(e) {
+              if (e.name !== 'AbortError') {
+                fallbackDownload(blob, filename);
+              }
+            });
+          } else {
+            // Desktop or mobile without file sharing support: direct download
+            fallbackDownload(blob, filename);
+          }
+        }
+      }, 'image/png');
+
+      function fallbackDownload(blob, name) {
+        var url = URL.createObjectURL(blob);
+        var link = document.createElement('a');
+        link.download = name;
+        link.href = url;
+        link.click();
+        setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
+        showToast('\u56FE\u7247\u5DF2\u4FDD\u5B58 \u2713');
+      }
     }
 
     function wrapText(ctx, text, maxWidth) {

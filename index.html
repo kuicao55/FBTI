@@ -426,6 +426,199 @@
         overflow-y: auto;
       }
     }
+
+/* === RESTAURANT SECTION === */
+.restaurant-section {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+.restaurant-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+}
+.restaurant-section-title {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.9);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.restaurant-count {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+.restaurant-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 14px;
+}
+.restaurant-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 10px;
+  padding: 10px 14px;
+}
+.restaurant-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  flex-shrink: 0;
+}
+.restaurant-name {
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 500;
+  color: white;
+  flex: 1;
+}
+.restaurant-meta {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+}
+.btn-add-restaurant {
+  width: 100%;
+  background: rgba(217,119,87,0.15);
+  color: var(--color-accent);
+  border: 1px dashed rgba(217,119,87,0.4);
+  border-radius: 10px;
+  padding: 10px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  transition: background var(--duration-fast), border-color var(--duration-fast);
+}
+.btn-add-restaurant:hover {
+  background: rgba(217,119,87,0.25);
+  border-color: rgba(217,119,87,0.6);
+}
+.at-limit-msg {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+  padding: 8px;
+}
+
+/* === RESTAURANT MODAL === */
+.restaurant-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 20px;
+}
+.restaurant-modal-overlay.hidden {
+  display: none;
+}
+.restaurant-modal {
+  background: var(--color-bg-inverted);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 20px;
+  padding: 28px;
+  width: 100%;
+  max-width: 380px;
+}
+.restaurant-modal-title {
+  font-family: var(--font-heading);
+  font-size: 17px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  text-align: center;
+  color: white;
+}
+.restaurant-modal-subtitle {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  margin-bottom: 20px;
+}
+.restaurant-form-group {
+  margin-bottom: 14px;
+}
+.restaurant-form-label {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: rgba(255,255,255,0.6);
+  display: block;
+  margin-bottom: 6px;
+}
+.restaurant-form-input {
+  width: 100%;
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 10px;
+  padding: 10px 14px;
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  outline: none;
+  transition: border-color var(--duration-fast);
+}
+.restaurant-form-input:focus {
+  border-color: var(--color-accent);
+}
+.restaurant-form-input::placeholder {
+  color: rgba(255,255,255,0.3);
+}
+.restaurant-form-hint {
+  font-family: var(--font-heading);
+  font-size: 11px;
+  color: rgba(255,255,255,0.35);
+  margin-top: 4px;
+}
+.btn-restaurant-submit {
+  width: 100%;
+  background: var(--color-accent);
+  color: white;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  padding: 12px;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: opacity var(--duration-fast);
+}
+.btn-restaurant-submit:hover {
+  opacity: 0.85;
+}
+.btn-restaurant-cancel {
+  width: 100%;
+  background: transparent;
+  color: rgba(255,255,255,0.5);
+  font-family: var(--font-heading);
+  font-size: 13px;
+  border: none;
+  padding: 8px;
+  cursor: pointer;
+  margin-top: 4px;
+}
   </style>
 </head>
 <body>
@@ -478,6 +671,8 @@
     <div id="result-self-description" class="fade-in-up stagger-4" style="border-left:3px solid #D97757;padding-left:16px;max-width:480px;text-align:left;font-style:italic;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.85);"></div>
     <!-- Analysis -->
     <div id="result-analysis" class="fade-in-up stagger-4" style="max-width:480px;text-align:left;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.75);"></div>
+    <!-- Restaurant recommendation section -->
+    <div id="restaurant-section-container"></div>
     <!-- Details toggle button -->
     <button id="btn-details" class="fade-in-up stagger-5" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:10px 20px;border-radius:20px;cursor:pointer;margin-bottom:16px;font-family:var(--font-heading);font-size:14px;" aria-expanded="false" aria-controls="details-panel">查看详细分析 ▼</button>
     <!-- Collapsed details panel -->
@@ -497,14 +692,36 @@
   <!-- Toast element -->
   <div id="toast" class="toast">链接已复制 ✓</div>
 
+  <!-- Restaurant submit modal -->
+  <div id="restaurant-modal-overlay" class="restaurant-modal-overlay hidden" onclick="closeRestaurantModalOnOverlay(event)">
+    <div class="restaurant-modal" onclick="event.stopPropagation()">
+      <div class="restaurant-modal-title">推荐餐厅</div>
+      <div class="restaurant-modal-subtitle" id="restaurant-modal-subtitle">为 HUAE 型人格推荐 · 口味相近的人会看到</div>
+
+      <div class="restaurant-form-group">
+        <label class="restaurant-form-label">地名·餐厅名称 *</label>
+        <input class="restaurant-form-input" type="text" placeholder="例如：上海·鼎泰丰" maxlength="30" id="restaurant-name-input">
+      </div>
+
+      <div class="restaurant-form-group">
+        <label class="restaurant-form-label">你的昵称（选填）</label>
+        <input class="restaurant-form-input" type="text" placeholder="例如：小王" maxlength="20" id="restaurant-nick-input">
+        <div class="restaurant-form-hint">不填则显示"匿名用户"</div>
+      </div>
+
+      <button class="btn-restaurant-submit" id="btn-restaurant-submit">提交推荐</button>
+      <button class="btn-restaurant-cancel" onclick="closeRestaurantModal()">取消</button>
+    </div>
+  </div>
+
   <!-- qrcodejs CDN (local QR generation, no tainted canvas issue) -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
   <!-- Main script -->
   <script type="module">
-    import { loadTypes, loadQuestions } from './modules/loader.js';
+    import { loadTypes, loadQuestions, loadRestaurants, loadRestaurantSettings } from './modules/loader.js';
     import { selectQuestions, calculateType, encodeDimensionResults, decodeDimensionResults } from './modules/scoring.js';
-    import { renderQuestion, renderResult, loadTypeSVG, buildSubCode, drawRadarToCanvas, CODE_COLORS, getCodeLabel } from './modules/render.js';
+    import { renderQuestion, renderResult, renderRestaurantSection, loadTypeSVG, buildSubCode, drawRadarToCanvas, CODE_COLORS, getCodeLabel } from './modules/render.js';
 
     function showScreen(name) {
       document.querySelectorAll('.screen').forEach(function(s) {
@@ -558,6 +775,32 @@
           renderResult(urlType, window.types[urlType], dimensionResults);
           // Wire up details panel toggle for URL-loaded results
           bindDetailsToggle();
+          // Load and render restaurant section
+          (async function() {
+            try {
+              var settings = await loadRestaurantSettings();
+              window.restaurantSettings = settings;
+              window.restaurantMaxPerType = settings.maxPerType || 5;
+              var restaurantsData = await loadRestaurants();
+              // Merge with localStorage overrides
+              try {
+                var local = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null');
+                if (local) {
+                  Object.keys(local).forEach(function(k) {
+                    if (Array.isArray(local[k]) && local[k].length > 0) {
+                      restaurantsData[k] = local[k];
+                    }
+                  });
+                }
+              } catch(e) {}
+              var container = document.getElementById('restaurant-section-container');
+              if (container && restaurantsData[urlType] && restaurantsData[urlType].length > 0) {
+                renderRestaurantSection(container, urlType, restaurantsData[urlType]);
+              }
+            } catch(e) {
+              console.warn('[FBTI] Restaurant section error:', e);
+            }
+          })();
         } else {
           showScreen('welcome');
         }
@@ -608,6 +851,32 @@
       showScreen('result');
       renderResult(result.typeCode, window.types[result.typeCode], result.dimensionResults);
       bindDetailsToggle();
+      // Load and render restaurant section
+      (async function() {
+        try {
+          var settings = await loadRestaurantSettings();
+          window.restaurantSettings = settings;
+          window.restaurantMaxPerType = settings.maxPerType || 5;
+          var restaurantsData = await loadRestaurants();
+          // Merge with localStorage overrides
+          try {
+            var local = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null');
+            if (local) {
+              Object.keys(local).forEach(function(k) {
+                if (Array.isArray(local[k]) && local[k].length > 0) {
+                  restaurantsData[k] = local[k];
+                }
+              });
+            }
+          } catch(e) {}
+          var container = document.getElementById('restaurant-section-container');
+          if (container && restaurantsData[result.typeCode] && restaurantsData[result.typeCode].length > 0) {
+            renderRestaurantSection(container, result.typeCode, restaurantsData[result.typeCode]);
+          }
+        } catch(e) {
+          console.warn('[FBTI] Restaurant section error:', e);
+        }
+      })();
     }
 
     function bindDetailsToggle() {
@@ -1089,6 +1358,102 @@
       }
       if (current.length > 0) lines.push(current);
       return lines;
+    }
+
+    // ===== Restaurant Modal =====
+    window.currentRestaurantType = null;
+
+    window.openRestaurantModal = function(typeCode) {
+      window.currentRestaurantType = typeCode;
+      var overlay = document.getElementById('restaurant-modal-overlay');
+      var subtitle = document.getElementById('restaurant-modal-subtitle');
+      subtitle.textContent = '为 ' + typeCode + ' 型人格推荐 · 口味相近的人会看到';
+      document.getElementById('restaurant-name-input').value = '';
+      document.getElementById('restaurant-nick-input').value = '';
+      overlay.classList.remove('hidden');
+      document.getElementById('restaurant-name-input').focus();
+    };
+
+    window.closeRestaurantModal = function() {
+      document.getElementById('restaurant-modal-overlay').classList.add('hidden');
+    };
+
+    function closeRestaurantModalOnOverlay(e) {
+      if (e.target.id === 'restaurant-modal-overlay') closeRestaurantModal();
+    }
+
+    document.getElementById('btn-restaurant-submit').addEventListener('click', function() {
+      var name = document.getElementById('restaurant-name-input').value.trim();
+      var nick = document.getElementById('restaurant-nick-input').value.trim();
+      if (!name) {
+        document.getElementById('restaurant-name-input').style.borderColor = '#D97757';
+        return;
+      }
+      document.getElementById('restaurant-name-input').style.borderColor = '';
+      submitRestaurant(name, nick || '匿名用户');
+    });
+
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') closeRestaurantModal();
+    });
+
+    async function submitRestaurant(name, nick) {
+      var typeCode = window.currentRestaurantType;
+      if (!typeCode || typeof typeCode !== 'string') return;
+      if (!name) return;
+
+      var settings = window.restaurantSettings || { maxPerType: 5 };
+      var max = settings.maxPerType || 5;
+
+      // Get current restaurants from localStorage or rest array
+      var stored = null;
+      try { stored = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null'); } catch(e) {
+        console.warn('[FBTI] localStorage parse failed:', e);
+      }
+      var rest = (stored && typeof stored === 'object') ? stored : {};
+      if (!Array.isArray(rest[typeCode])) rest[typeCode] = [];
+
+      if (rest[typeCode].length >= max) {
+        showToast('该类型已达推荐上限');
+        closeRestaurantModal();
+        return;
+      }
+
+      var today = new Date();
+      var dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
+
+      var newEntry = { name: name, by: nick, date: dateStr };
+      rest[typeCode].push(newEntry);
+
+      try {
+        localStorage.setItem('fbti_restaurants', JSON.stringify(rest));
+      } catch(e) {
+        showToast('保存失败，请清理浏览器存储空间');
+        return;
+      }
+      showToast('推荐已添加 ✓');
+
+      closeRestaurantModal();
+
+      // Re-render restaurant section
+      var container = document.getElementById('restaurant-section-container');
+      if (container && typeof renderRestaurantSection === 'function') {
+        container.innerHTML = '';
+        renderRestaurantSection(container, typeCode, rest[typeCode] || []);
+      }
+
+      // Trigger JSON download for manual deploy
+      downloadRestaurantsJson(rest);
+    }
+
+    function downloadRestaurantsJson(rest) {
+      var blob = new Blob([JSON.stringify(rest, null, 2)], { type: 'application/json' });
+      var url = URL.createObjectURL(blob);
+      var a = document.createElement('a');
+      a.href = url;
+      a.download = 'restaurants.json';
+      a.click();
+      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
     }
 
     function showToast(msg) {

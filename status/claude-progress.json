@@ -55,11 +55,11 @@
       "title": "Add restaurant recommendation feature",
       "description": "Add restaurant recommendation feature",
       "depends_on": [],
-      "passed": false,
+      "passed": true,
       "spec_file": "docs/harness/specs/2026-04-14-restaurant-recommendation-design.md",
       "plan_file": "docs/harness/plans/2026-04-14-milestone-5.md",
       "session_date": "2026-04-14T19:17:09Z",
-      "notes": null
+      "notes": "Completed 2026-04-14T20:45:00Z — all 6 tasks complete, CQR PASS"
     }
   ],
   "version_branch": "v3.0.0"

@@ -794,7 +794,7 @@
                 }
               } catch(e) {}
               var container = document.getElementById('restaurant-section-container');
-              if (container && restaurantsData[urlType] && restaurantsData[urlType].length > 0) {
+              if (container && restaurantsData[urlType]) {
                 renderRestaurantSection(container, urlType, restaurantsData[urlType]);
               }
             } catch(e) {
@@ -870,7 +870,7 @@
             }
           } catch(e) {}
           var container = document.getElementById('restaurant-section-container');
-          if (container && restaurantsData[result.typeCode] && restaurantsData[result.typeCode].length > 0) {
+          if (container && restaurantsData[result.typeCode]) {
             renderRestaurantSection(container, result.typeCode, restaurantsData[result.typeCode]);
           }
         } catch(e) {

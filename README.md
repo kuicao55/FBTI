@@ -153,7 +153,10 @@ FBTI/
 
 ## 开发说明
 
-本项目采用 TDD 开发模式，测试驱动确保计分和渲染逻辑正确。
+本项目使用 [super-harness](https://github.com/kuicao55/super-harness)（超能工作流引擎）开发。super-harness 是一个基于多智能体协作的自动化工作流框架，灵感来自 CLAUDE.md 最佳实践，通过 Orchestrator（编排）、Executor（执行）、Reviewer（审查）三层架构实现高质量的自动化开发。
+
+- [super-harness 仓库](https://github.com/kuicao55/super-harness)
+- [super-harness 文档](https://github.com/kuicao55/super-harness#readme)
 
 ```bash
 # 本地运行

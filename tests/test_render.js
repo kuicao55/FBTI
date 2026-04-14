@@ -179,10 +179,10 @@ describe('renderRadarChart', () => {
     assert.ok(svg.includes('</svg>'), 'should end with </svg>');
   });
 
-  it('has viewBox for 300x300', () => {
+  it('has viewBox for 380x380', () => {
     const svg = renderRadarChart(sampleDimensionResults);
     assert.ok(svg.includes('viewBox'), 'should have viewBox attribute');
-    assert.match(svg, /300.*300/, 'viewBox should reference 300x300');
+    assert.match(svg, /380.*380/, 'viewBox should reference 380x380');
   });
 
   it('contains a polygon for the data area', () => {
@@ -604,11 +604,11 @@ describe('renderRadarChart percentage clamping', () => {
     let outOfBounds = false;
     for (const pt of points) {
       const [x, y] = pt.split(',').map(Number);
-      if (x < 0 || x > 300 || y < 0 || y > 300) {
+      if (x < 0 || x > 380 || y < 0 || y > 380) {
         outOfBounds = true;
       }
     }
-    assert.ok(!outOfBounds, 'all polygon points should be within the 300x300 viewBox');
+    assert.ok(!outOfBounds, 'all polygon points should be within the 380x380 viewBox');
   });
 
   it('handles negative percentage by clamping to 0 (point at center)', () => {
@@ -622,10 +622,10 @@ describe('renderRadarChart percentage clamping', () => {
     const pointsMatch = svg.match(/<polygon points="([^"]+)" fill="rgba/);
     assert.ok(pointsMatch, 'should have data polygon points');
     const points = pointsMatch[1].split(/\s+/);
-    // The stimulus point (first) should be at center (150,150) since -20 should be clamped to 0
+    // The H axis (first point) should be at center (190,190) since -20 should be clamped to 0
     const [x, y] = points[0].split(',').map(Number);
-    assert.equal(x, 150, 'negative pct should clamp to center x');
-    assert.equal(y, 150, 'negative pct should clamp to center y');
+    assert.equal(x, 190, 'negative pct should clamp to center x');
+    assert.equal(y, 190, 'negative pct should clamp to center y');
   });
 
   it('clamps percentage at 0 for zero and negative values', () => {
@@ -636,14 +636,14 @@ describe('renderRadarChart percentage clamping', () => {
       novelty: { dominant: 'E', secondary: null, percentages: { E: 0 } },
     };
     const svg = renderRadarChart(zeroResults);
-    // All data points should collapse to center (150,150) when pct=0
+    // All data points should collapse to center (190,190) when pct=0
     const pointsMatch = svg.match(/<polygon points="([^"]+)" fill="rgba/);
     assert.ok(pointsMatch, 'should have data polygon points');
     const points = pointsMatch[1].split(/\s+/);
     for (const pt of points) {
       const [x, y] = pt.split(',').map(Number);
-      assert.equal(x, 150, 'x should be at center when pct=0');
-      assert.equal(y, 150, 'y should be at center when pct=0');
+      assert.equal(x, 190, 'x should be at center when pct=0');
+      assert.equal(y, 190, 'y should be at center when pct=0');
     }
   });
 });

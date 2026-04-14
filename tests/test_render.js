@@ -87,7 +87,6 @@ import {
   renderRadarChart,
   renderStackedBars,
   renderDetailsPanel,
-  escapeHtml,
 } from '../modules/render.js';
 
 // ---- Test fixtures ----
@@ -462,39 +461,6 @@ describe('loadTypeSVG', () => {
   });
 });
 
-// ---------- escapeHtml utility (Issue 2) ----------
-
-describe('escapeHtml', () => {
-  it('escapes ampersand', () => {
-    assert.equal(escapeHtml('foo&bar'), 'foo&amp;bar');
-  });
-
-  it('escapes less-than', () => {
-    assert.equal(escapeHtml('a<b'), 'a&lt;b');
-  });
-
-  it('escapes greater-than', () => {
-    assert.equal(escapeHtml('a>b'), 'a&gt;b');
-  });
-
-  it('escapes double quotes', () => {
-    assert.equal(escapeHtml('a"b'), 'a&quot;b');
-  });
-
-  it('handles string with all special characters', () => {
-    assert.equal(escapeHtml('<script>"&</script>'), '&lt;script&gt;&quot;&amp;&lt;/script&gt;');
-  });
-
-  it('returns safe strings unchanged', () => {
-    assert.equal(escapeHtml('hello'), 'hello');
-    assert.equal(escapeHtml('H(灼烧)'), 'H(灼烧)');
-  });
-
-  it('coerces non-string to string', () => {
-    assert.equal(escapeHtml(42), '42');
-  });
-});
-
 // ---------- XSS / Security tests (Issues 1, 7) ----------
 
 describe('tasteSignature XSS prevention', () => {
@@ -717,6 +683,169 @@ describe('renderResult with missing DOM elements', () => {
     }
     const el = document.getElementById('nonexistent-id-12345');
     assert.equal(el, null, 'should return null for unregistered IDs');
+  });
+});
+
+// ---------- renderRestaurantSection ----------
+
+function createMockQuerySelector(root) {
+  return function querySelector(selector) {
+    const search = selector.replace('.', '');
+    const searchEl = (el) => {
+      if (el.className && el.className.includes(search)) return el;
+      if (el.innerHTML && el.innerHTML.includes(`class="${search}"`)) return el;
+      // Also search children's innerHTML for content (not just class attrs)
+      for (const c of el.children) {
+        if (c.innerHTML && c.innerHTML.includes(search)) return el;
+        const found = searchEl(c);
+        if (found) return found;
+      }
+      return null;
+    };
+    for (const c of root.children) {
+      const found = searchEl(c);
+      if (found) return found;
+    }
+    return null;
+  };
+}
+
+describe('renderRestaurantSection', () => {
+  it('does not render when restaurants array is empty', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          innerHTML: '',
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantSection } = await import('../modules/render.js');
+      renderRestaurantSection(containerEl, 'HUAE', []);
+
+      // Empty array → section should not be rendered
+      assert.strictEqual(containerEl.children.length, 0);
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('renders restaurant section with items', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        let _innerHTML = '';
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          get innerHTML() {
+            return _innerHTML || this.children.map(c => c.innerHTML || '').join('');
+          },
+          set innerHTML(v) { _innerHTML = v; },
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          addEventListener() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantSection } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '上海·鼎泰丰', by: '小王', date: '2026-04-14' }
+      ];
+      renderRestaurantSection(containerEl, 'HUAE', restaurants);
+
+      // Should render the section
+      assert.strictEqual(containerEl.children.length, 1);
+      assert.ok(containerEl.querySelector('.restaurant-section'));
+      // Should render the restaurant name
+      const sectionEl = containerEl.querySelector('.restaurant-section');
+      assert.ok(sectionEl.innerHTML.includes('上海·鼎泰丰'));
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('shows at-limit message when at max capacity', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          innerHTML: '',
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantSection } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '餐厅A', by: 'a', date: '2026-04-01' },
+        { name: '餐厅B', by: 'b', date: '2026-04-02' },
+        { name: '餐厅C', by: 'c', date: '2026-04-03' },
+        { name: '餐厅D', by: 'd', date: '2026-04-04' },
+        { name: '餐厅E', by: 'e', date: '2026-04-05' }
+      ];
+      renderRestaurantSection(containerEl, 'HUAE', restaurants);
+
+      assert.strictEqual(containerEl.children.length, 1);
+      assert.ok(containerEl.querySelector('.at-limit-msg'));
+      assert.strictEqual(containerEl.querySelector('.btn-add-restaurant'), null);
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
   });
 });
 

@@ -22,36 +22,30 @@ export const CODE_COLORS = {
   O: '#F0C87A', A: '#E07B54', E: '#E07B54',
 };
 
-// Code labels differ by dimension context for S and C
 const CODE_LABELS = {
   H: '灼烧', N: '麻感', C: '清凉', M: '温和',
-  U: '鲜味', S: '咸味', W: '甜味', B: '苦醇',
-  O: '酸味', A: '加法烹饪', E: '探索者',
+  U: '鲜味', S: '咸味', W: '甜味', B: '苦醇', O: '酸味',
 };
 
-// Philosophy-specific S label
 const CODE_LABELS_PHILOSOPHY = {
-  A: '加法烹饪', S: '减法烹饪',
+  A: '加法烹饪',
+  S: '减法烹饪',
 };
 
-// Novelty-specific C label
 const CODE_LABELS_NOVELTY = {
-  E: '探索者', C: '经典派',
+  E: '探索者',
+  C: '经典派',
 };
 
 export function getCodeLabel(code, dimension) {
-  if (dimension === 'philosophy' && CODE_LABELS_PHILOSOPHY[code]) {
-    return CODE_LABELS_PHILOSOPHY[code];
-  }
-  if (dimension === 'novelty' && CODE_LABELS_NOVELTY[code]) {
-    return CODE_LABELS_NOVELTY[code];
-  }
-  return CODE_LABELS[code] || code;
+  if (dimension === 'philosophy') return CODE_LABELS_PHILOSOPHY[code] || '';
+  if (dimension === 'novelty') return CODE_LABELS_NOVELTY[code] || '';
+  return CODE_LABELS[code] || '';
 }
 
-// ---- escapeHtml utility (Issue 2) ----
+// ---- escapeHtml utility ----
 
-export function escapeHtml(str) {
+function escapeHtml(str) {
   return String(str)
     .replace(/&/g, '&amp;')
     .replace(/</g, '&lt;')
@@ -412,6 +406,58 @@ export function loadTypeSVG(typeCode) {
 
 // ---- drawRadarToCanvas ----
 // Draws radar chart directly onto a canvas 2D context (used for share image generation)
+export function renderRestaurantSection(container, typeCode, restaurants) {
+  if (!restaurants || restaurants.length === 0) return;
+
+  const section = document.createElement('div');
+  section.className = 'restaurant-section';
+
+  const header = document.createElement('div');
+  header.className = 'restaurant-section-header';
+  header.innerHTML = `
+    <div class="restaurant-section-title">
+      <svg class="restaurant-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;opacity:0.8;color:rgba(255,255,255,0.9)">
+        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
+        <path d="M7 2v20"/>
+        <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
+      </svg>
+      推荐餐厅
+    </div>
+    <span class="restaurant-count">${restaurants.length} / ${window.restaurantMaxPerType || 5}</span>
+  `;
+  section.appendChild(header);
+
+  const list = document.createElement('div');
+  list.className = 'restaurant-list';
+  restaurants.forEach(r => {
+    const item = document.createElement('div');
+    item.className = 'restaurant-item';
+    item.innerHTML = `
+      <div class="restaurant-dot" style="width:6px;height:6px;border-radius:50%;background:#D97757;flex-shrink:0;"></div>
+      <span class="restaurant-name" style="flex:1;font-family:var(--font-heading);font-size:14px;font-weight:500;color:white;">${escapeHtml(r.name)}</span>
+      <span class="restaurant-meta" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.4);">by ${escapeHtml(r.by || '匿名用户')}</span>
+    `;
+    list.appendChild(item);
+  });
+  section.appendChild(list);
+
+  // Submit button or limit message
+  const btnWrap = document.createElement('div');
+  const max = window.restaurantMaxPerType || 5;
+  if (restaurants.length >= max) {
+    btnWrap.innerHTML = `<div class="at-limit-msg" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.35);text-align:center;padding:8px;">该人格已有 ${max} 条推荐上限，不再接受新的推荐</div>`;
+  } else {
+    const btn = document.createElement('button');
+    btn.className = 'btn-add-restaurant';
+    btn.style.cssText = 'width:100%;background:rgba(217,119,87,0.15);color:#D97757;border:1px dashed rgba(217,119,87,0.4);border-radius:10px;padding:10px;font-family:var(--font-heading);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 150ms,border-color 150ms;';
+    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 添加推荐`;
+    btn.addEventListener('click', () => openRestaurantModal(typeCode));
+    btnWrap.appendChild(btn);
+  }
+  section.appendChild(btnWrap);
+  container.appendChild(section);
+}
+
 export function drawRadarToCanvas(ctx, dimensionResults, cx, cy, size) {
   const maxRadius = size * 0.32;
   const labelR = maxRadius + size * 0.075;

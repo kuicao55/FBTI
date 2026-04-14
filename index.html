@@ -751,6 +751,7 @@
       ctx.fillStyle = '#ECE9E0';
       ctx.fillRect(0, 0, W, H);
 
+
       // 4. Avatar (200px, result page match) — tries svg, png, jpg
       var avatarReady = false;
       var avatarImg = new Image();
@@ -792,7 +793,7 @@
         }),
         new Promise(function(_, reject) { setTimeout(function() { reject(new Error('avatar timeout')); }, 5000); })
       ]).catch(function() {});
-      var avatarSize = 200;
+      var avatarSize = 280;
       var avatarY = 30;
       ctx.save();
       ctx.beginPath();
@@ -808,31 +809,31 @@
 
       // 5. Type code
       var curY = avatarY + avatarSize + 56;
-      ctx.font = '700 56px Poppins, Arial, sans-serif';
+      ctx.font = '700 80px Poppins, Arial, sans-serif';
       ctx.fillStyle = '#141413';
       ctx.textAlign = 'center';
-      ctx.fillText(typeCode.split('').join(' '), W / 2, curY);
+      ctx.fillText(typeCode.split('').join('  '), W / 2, curY);
 
       // 6. Sub-code
       if (subCode) {
-        curY += 28;
+        curY += 44;
         ctx.font = '400 24px Poppins, Arial, sans-serif';
         ctx.fillStyle = 'rgba(20,20,19,0.4)';
         ctx.fillText(subCode, W / 2, curY);
       }
 
       // 7. Name
-      curY += 36;
-      ctx.font = 'italic 600 28px Lora, "Noto Serif SC", serif';
+      curY += 56;
+      ctx.font = 'italic 600 48px Lora, "Noto Serif SC", serif';
       ctx.fillStyle = '#141413';
       ctx.fillText(typeData.name, W / 2, curY);
 
       // 8. Primary tags (orange pills)
-      curY += 38;
-      var tagRadius = 16;
-      var tagPadX = 10, tagGapH = 8, tagGapV = 6;
+      curY += 66;
+      var tagRadius = 22;
+      var tagPadX = 16, tagGapH = 14, tagGapV = 12;
       var rowW = W - 80;
-      ctx.font = '500 13px Poppins, Arial, sans-serif';
+      ctx.font = '500 18px Poppins, Arial, sans-serif';
       var lineH = tagRadius * 2 + tagGapV;
       var currentLineW = 0;
       var tagsByLine = [[]];
@@ -864,10 +865,10 @@
 
       // 9. Secondary tags (small muted pills)
       if (secondaryTags.length > 0) {
-        curY += 8;
-        var secRadius = 14;
+        curY += 16;
+        var secRadius = 20;
         var secPadX = 8, secGapH = 6, secGapV = 4;
-        ctx.font = '400 12px Poppins, Arial, sans-serif';
+        ctx.font = '400 16px Poppins, Arial, sans-serif';
         var secLineH = secRadius * 2 + secGapV;
         var secByLine = [[]];
         var secLineW = 0;
@@ -902,120 +903,111 @@
       curY += 16;
       if (typeData.selfDescription) {
         var sqX = 40, sqW = W - 80;
-        ctx.font = 'italic 400 15px Lora, "Noto Serif SC", serif';
+        ctx.font = 'italic 400 22px Lora, "Noto Serif SC", serif';
         ctx.fillStyle = 'rgba(20,20,19,0.75)';
         ctx.textAlign = 'left';
         var sqLines = wrapText(ctx, '\u201C' + typeData.selfDescription + '\u201D', sqW - 20);
         sqLines.forEach(function(line, i) {
-          ctx.fillText(line, sqX + 16, curY + 20 + i * 24);
+          ctx.fillText(line, sqX + 16, curY + 28 + i * 32);
         });
         ctx.strokeStyle = '#D97757';
         ctx.lineWidth = 3;
         ctx.beginPath();
         ctx.moveTo(sqX + 3, curY);
-        ctx.lineTo(sqX + 3, curY + sqLines.length * 24 + 10);
+        ctx.lineTo(sqX + 3, curY + sqLines.length * 32 + 14);
         ctx.stroke();
-        curY += sqLines.length * 24 + 28;
+        curY += sqLines.length * 32 + 40;
       }
 
       // 11. Analysis (italic, no border)
       if (typeData.analysis) {
-        ctx.font = 'italic 400 14px Lora, "Noto Serif SC", serif';
+        ctx.font = 'italic 400 20px Lora, "Noto Serif SC", serif';
         ctx.fillStyle = 'rgba(20,20,19,0.65)';
         ctx.textAlign = 'left';
         var anaLines = wrapText(ctx, typeData.analysis, W - 80);
         anaLines.slice(0, 5).forEach(function(line, i) {
-          ctx.fillText(line, 40, curY + 18 + i * 22);
+          ctx.fillText(line, 40, curY + 26 + i * 30);
         });
-        curY += anaLines.slice(0, 5).length * 22 + 24;
+        curY += anaLines.slice(0, 5).length * 30 + 34;
       }
 
-      // 12. Stacked bars (4 dimensions, flex layout — each row tracks its actual bottom)
-      curY += 12;
+      // 12. Stacked bars (4 dimensions, 2 columns)
+      curY += 16;
       var barX = 40;
-      var barW = W - barX * 2;
-      var barH = 28;
-      var dimLabels = ['\u7B2C\u4E00\u7EF4\u5EA6 \u00B7 \u523A\u6FC0\u504F\u597D', '\u7B2C\u4E8C\u7EF4\u5EA6 \u00B7 \u6838\u5FC3\u5473\u89C9\u5F15\u529B', '\u7B2C\u4E09\u7EF4\u5EA6 \u00B7 \u98CE\u5473\u6784\u5EFA\u54F2\u5B66', '\u7B2C\u56DB\u7EF4\u5EA6 \u00B7 \u65B0\u5947\u63A2\u7D22\u6307\u6570'];
+      var halfW = (W - barX * 2 - 24) / 2;
+      var barH = 26;
+      var dimLabels = ['刺激', '味觉', '风味', '新奇'];
       var dimKeys = ['stimulus', 'taste', 'philosophy', 'novelty'];
-      var barRadius = 6;
-      var rowBottom = curY; // tracks the actual bottom edge of each row
+      var barRadius = 5;
+      var rowBottom = curY;
 
       dimKeys.forEach(function(dimKey, idx) {
         var dr = dimensionResults ? dimensionResults[dimKey] : null;
+        var col = idx % 2;
+        var row = Math.floor(idx / 2);
+        var rowY = rowBottom + row * 62;
+        var x = barX + col * (halfW + 24);
 
-        // Each row title starts below previous row's bottom, with a gap
-        var rowY = rowBottom + 14;
-        var barRowY = rowY + 12; // label above bar
-
-        // Dimension label
         ctx.font = '600 11px Poppins, Arial, sans-serif';
         ctx.fillStyle = 'rgba(20,20,19,0.5)';
         ctx.textAlign = 'left';
-        ctx.fillText(dimLabels[idx], barX, rowY);
+        ctx.fillText(dimLabels[idx], x, rowY + 10);
 
-        // Bar: clip all segments to rounded rectangle, background shows through at rounded corners
+        var barRowY = rowY + 14;
         ctx.save();
-        // Background (shows at corners where segments don't reach)
         ctx.fillStyle = 'rgba(20,20,19,0.08)';
-        rrect(ctx, barX, barRowY, barW, barH, barRadius);
+        rrect(ctx, x, barRowY, halfW, barH, barRadius);
         ctx.fill();
-        // Clip for segments
-        rrect(ctx, barX, barRowY, barW, barH, barRadius);
+        rrect(ctx, x, barRowY, halfW, barH, barRadius);
         ctx.clip();
         if (dr && dr.percentages) {
           var sorted = Object.entries(dr.percentages).sort(function(a, b) { return b[1] - a[1]; });
-          var x = barX;
+          var bx = x;
           sorted.forEach(function(entry) {
             var pct = Math.round(entry[1]);
             if (pct <= 0) return;
             var color = CODE_COLORS[entry[0]] || '#ccc';
-            var w = barW * pct / 100;
+            var w = halfW * pct / 100;
             ctx.fillStyle = color;
-            ctx.fillRect(x, barRowY, w, barH);
-            x += w;
+            ctx.fillRect(bx, barRowY, w, barH);
+            bx += w;
           });
         }
         ctx.restore();
 
-        // Legend with wrapping — updates rowBottom to track actual height
-        var legY = barRowY + barH + 6;
-        var legX = barX;
-        var legLineH = 14;
-        ctx.font = '400 11px Poppins, Arial, sans-serif';
+        ctx.font = '400 10px Poppins, Arial, sans-serif';
+        var legY = barRowY + barH + 4;
+        var legX = x;
         if (dr && dr.percentages) {
           var sorted = Object.entries(dr.percentages).sort(function(a, b) { return b[1] - a[1]; });
           sorted.forEach(function(entry) {
             var pct = Math.round(entry[1]);
             if (pct <= 0) return;
             var color = CODE_COLORS[entry[0]] || '#ccc';
-            var label = entry[0] + '(' + getCodeLabel(entry[0], dimKey) + ') ' + pct + '%';
-            var lw = ctx.measureText(label).width + 18;
-            if (legX + lw > barX + barW) {
-              legX = barX;
-              legY += legLineH;
+            var label = entry[0] + getCodeLabel(entry[0], dimKey) + pct + '%';
+            var lw = ctx.measureText(label).width + 12;
+            if (legX + lw > x + halfW) {
+              legX = x;
+              legY += 12;
             }
-            ctx.fillStyle = color;
             ctx.beginPath();
-            ctx.arc(legX + 5, legY + 5, 4, 0, Math.PI * 2);
+            ctx.arc(legX + 4, legY + 4, 3, 0, Math.PI * 2);
+            ctx.fillStyle = color;
             ctx.fill();
-            ctx.fillStyle = 'rgba(20,20,19,0.7)';
+            ctx.fillStyle = 'rgba(20,20,19,0.6)';
             ctx.textAlign = 'left';
-            ctx.fillText(label, legX + 14, legY + 8);
+            ctx.fillText(label, legX + 10, legY + 7);
             legX += lw;
           });
-          rowBottom = legY + legLineH;
-        } else {
-          rowBottom = legY;
         }
-        // Gap between rows
-        rowBottom += 8;
       });
-      curY = rowBottom;
+      curY = rowBottom + 2 * 62 + 10;
+
 
       // 13. QR Code (read from assets/QR.png — placeholder until real file is added)
-      var qrSize = 100;
+      var qrSize = 110;
       var qrX = (W - qrSize) / 2;
-      var qrY = H - 140;
+      var qrY = H - 150;
       var qrReady = false;
       var qrImg = new Image();
       qrImg.onload = function() { qrReady = true; };
@@ -1031,14 +1023,14 @@
         ctx.fillStyle = 'rgba(20,20,19,0.08)';
         rrect(ctx, qrX, qrY, qrSize, qrSize, 8);
         ctx.fill();
-        ctx.font = '400 11px Poppins, Arial, sans-serif';
+        ctx.font = '400 16px Poppins, Arial, sans-serif';
         ctx.fillStyle = 'rgba(20,20,19,0.3)';
         ctx.textAlign = 'center';
         ctx.textBaseline = 'middle';
         ctx.fillText('QR', W / 2, qrY + qrSize / 2);
         ctx.textBaseline = 'alphabetic';
       }
-      ctx.font = '400 12px Poppins, Arial, sans-serif';
+      ctx.font = '400 16px Poppins, Arial, sans-serif';
       ctx.fillStyle = 'rgba(20,20,19,0.4)';
       ctx.textAlign = 'center';
       ctx.fillText('\u626B\u7801\u6D4B\u8BD5fbti', W / 2, qrY + qrSize + 18);

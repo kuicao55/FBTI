@@ -45,96 +45,80 @@ describe('selectQuestions', () => {
     }
   });
 
-  it('distributes 6 stimulus questions', () => {
+  it('distributes 8 stimulus questions', () => {
     const selected = selectQuestions(questionsData);
-    const stimulus = selected.filter(q => q.dimension === 'stimulus');
-    assert.equal(stimulus.length, 6);
+    const stimulus = selected.filter(q => q.dimension.startsWith('stimulus'));
+    assert.equal(stimulus.length, 8);
   });
 
   it('distributes 8 taste questions', () => {
     const selected = selectQuestions(questionsData);
-    const taste = selected.filter(q => q.dimension === 'taste');
+    const taste = selected.filter(q => q.dimension.startsWith('taste'));
     assert.equal(taste.length, 8);
   });
 
   it('distributes 4 philosophy questions', () => {
     const selected = selectQuestions(questionsData);
-    const philosophy = selected.filter(q => q.dimension === 'philosophy');
+    const philosophy = selected.filter(q => q.dimension.startsWith('philosophy'));
     assert.equal(philosophy.length, 4);
   });
 
-  it('distributes 6 novelty questions', () => {
+  it('distributes 4 novelty questions', () => {
     const selected = selectQuestions(questionsData);
-    const novelty = selected.filter(q => q.dimension === 'novelty');
-    assert.equal(novelty.length, 6);
+    const novelty = selected.filter(q => q.dimension.startsWith('novelty'));
+    assert.equal(novelty.length, 4);
   });
 
-  it('ensures at least 1 H, 1 N, 1 C, 1 M in stimulus questions', () => {
+  it('ensures at least 2 H, 2 N, 2 C, 2 M primaryTag in stimulus questions', () => {
     const selected = selectQuestions(questionsData);
-    const stimulus = selected.filter(q => q.dimension === 'stimulus');
-    const codes = new Set();
+    const stimulus = selected.filter(q => q.dimension.startsWith('stimulus'));
+    const tagCount = { H: 0, N: 0, C: 0, M: 0 };
     for (const q of stimulus) {
-      for (const opt of q.options) {
-        for (const code of Object.keys(opt.scores)) {
-          codes.add(code);
-        }
-      }
+      // dimension format: "stimulus-H" -> extract the tag letter after dash
+      const tag = q.dimension.split('-').slice(1).join('-');
+      if (tag in tagCount) tagCount[tag]++;
     }
-    for (const code of ['H', 'N', 'C', 'M']) {
-      assert.ok(codes.has(code), `stimulus questions should cover code ${code}`);
-    }
+    assert.ok(tagCount.H >= 2, `stimulus should have at least 2 H-tagged questions, got ${tagCount.H}`);
+    assert.ok(tagCount.N >= 2, `stimulus should have at least 2 N-tagged questions, got ${tagCount.N}`);
+    assert.ok(tagCount.C >= 2, `stimulus should have at least 2 C-tagged questions, got ${tagCount.C}`);
+    assert.ok(tagCount.M >= 2, `stimulus should have at least 2 M-tagged questions, got ${tagCount.M}`);
   });
 
-  it('ensures at least 1 U, 1 S, 1 W, 1 B, 1 O in taste questions', () => {
+  it('ensures at least 1 of each primaryTag in taste questions', () => {
     const selected = selectQuestions(questionsData);
-    const taste = selected.filter(q => q.dimension === 'taste');
-    const codes = new Set();
+    const taste = selected.filter(q => q.dimension.startsWith('taste'));
+    const tagCount = { U: 0, S: 0, W: 0, B: 0, O: 0 };
     for (const q of taste) {
-      for (const opt of q.options) {
-        for (const code of Object.keys(opt.scores)) {
-          codes.add(code);
-        }
-      }
+      const tag = q.dimension.split('-').slice(1).join('-');
+      if (tag in tagCount) tagCount[tag]++;
     }
     for (const code of ['U', 'S', 'W', 'B', 'O']) {
-      assert.ok(codes.has(code), `taste questions should cover code ${code}`);
+      assert.ok(tagCount[code] >= 1, `taste should have at least 1 ${code}-tagged question, got ${tagCount[code]}`);
     }
   });
 
-  it('ensures at least 1 A, 1 S in philosophy questions', () => {
+  it('ensures at least 2 A, 2 S primaryTag in philosophy questions', () => {
     const selected = selectQuestions(questionsData);
-    const philosophy = selected.filter(q => q.dimension === 'philosophy');
-    const codes = new Set();
+    const philosophy = selected.filter(q => q.dimension.startsWith('philosophy'));
+    const tagCount = { A: 0, S: 0 };
     for (const q of philosophy) {
-      for (const opt of q.options) {
-        for (const code of Object.keys(opt.scores)) {
-          codes.add(code);
-        }
-      }
+      const tag = q.dimension.split('-').slice(1).join('-');
+      if (tag in tagCount) tagCount[tag]++;
     }
-    for (const code of ['A', 'S']) {
-      assert.ok(codes.has(code), `philosophy questions should cover code ${code}`);
-    }
+    assert.ok(tagCount.A >= 2, `philosophy should have at least 2 A-tagged questions, got ${tagCount.A}`);
+    assert.ok(tagCount.S >= 2, `philosophy should have at least 2 S-tagged questions, got ${tagCount.S}`);
   });
 
-  it('ensures at least 2 E, 2 C in novelty questions', () => {
+  it('ensures at least 2 E, 2 C primaryTag in novelty questions', () => {
     const selected = selectQuestions(questionsData);
-    const novelty = selected.filter(q => q.dimension === 'novelty');
-    // Count questions that have at least one option scoring E or C
-    let eQuestions = 0;
-    let cQuestions = 0;
+    const novelty = selected.filter(q => q.dimension.startsWith('novelty'));
+    const tagCount = { E: 0, C: 0 };
     for (const q of novelty) {
-      let hasE = false;
-      let hasC = false;
-      for (const opt of q.options) {
-        if (opt.scores['E']) hasE = true;
-        if (opt.scores['C']) hasC = true;
-      }
-      if (hasE) eQuestions++;
-      if (hasC) cQuestions++;
+      const tag = q.dimension.split('-').slice(1).join('-');
+      if (tag in tagCount) tagCount[tag]++;
     }
-    assert.ok(eQuestions >= 2, `novelty should have at least 2 questions scoring E, got ${eQuestions}`);
-    assert.ok(cQuestions >= 2, `novelty should have at least 2 questions scoring C, got ${cQuestions}`);
+    assert.ok(tagCount.E >= 2, `novelty should have at least 2 E-tagged questions, got ${tagCount.E}`);
+    assert.ok(tagCount.C >= 2, `novelty should have at least 2 C-tagged questions, got ${tagCount.C}`);
   });
 
   it('returns different selections on multiple calls (randomness)', () => {
@@ -169,22 +153,23 @@ describe('calculateScores', () => {
     assert.ok(scores.philosophy, 'should have philosophy');
     assert.ok(scores.novelty, 'should have novelty');
 
-    assert.equal(typeof scores.stimulus.H, 'number');
-    assert.equal(typeof scores.stimulus.N, 'number');
-    assert.equal(typeof scores.stimulus.C, 'number');
-    assert.equal(typeof scores.stimulus.M, 'number');
+    assert.equal(typeof scores.stimulus.H, 'object');
+    assert.ok('sum' in scores.stimulus.H && 'count' in scores.stimulus.H && 'avg' in scores.stimulus.H);
+    assert.equal(typeof scores.stimulus.N, 'object');
+    assert.equal(typeof scores.stimulus.C, 'object');
+    assert.equal(typeof scores.stimulus.M, 'object');
 
-    assert.equal(typeof scores.taste.U, 'number');
-    assert.equal(typeof scores.taste.S, 'number');
-    assert.equal(typeof scores.taste.W, 'number');
-    assert.equal(typeof scores.taste.B, 'number');
-    assert.equal(typeof scores.taste.O, 'number');
+    assert.equal(typeof scores.taste.U, 'object');
+    assert.equal(typeof scores.taste.S, 'object');
+    assert.equal(typeof scores.taste.W, 'object');
+    assert.equal(typeof scores.taste.B, 'object');
+    assert.equal(typeof scores.taste.O, 'object');
 
-    assert.equal(typeof scores.philosophy.A, 'number');
-    assert.equal(typeof scores.philosophy.S, 'number');
+    assert.equal(typeof scores.philosophy.A, 'object');
+    assert.equal(typeof scores.philosophy.S, 'object');
 
-    assert.equal(typeof scores.novelty.E, 'number');
-    assert.equal(typeof scores.novelty.C, 'number');
+    assert.equal(typeof scores.novelty.E, 'object');
+    assert.equal(typeof scores.novelty.C, 'object');
   });
 
   it('handles empty scores {} without error', () => {
@@ -193,7 +178,7 @@ describe('calculateScores', () => {
       {
         id: 1,
         text: 'test',
-        dimension: 'stimulus',
+        dimension: 'stimulus-H',
         options: [
           { label: 'A', text: 'neutral', scores: {} },
           { label: 'B', text: 'scoring', scores: { H: 1 } }
@@ -203,8 +188,12 @@ describe('calculateScores', () => {
     const answers = ['A'];
     // Should not throw and all codes should be 0
     const scores = calculateScores(answers, questions);
-    assert.equal(scores.stimulus.H, 0);
-    assert.equal(scores.stimulus.N, 0);
+    assert.equal(scores.stimulus.H.sum, 0);
+    assert.equal(scores.stimulus.H.count, 0);
+    assert.equal(scores.stimulus.H.avg, 0);
+    assert.equal(scores.stimulus.N.sum, 0);
+    assert.equal(scores.stimulus.N.count, 0);
+    assert.equal(scores.stimulus.N.avg, 0);
   });
 
   it('handles multi-code scores like { "M": 0.5, "N": 0.5 }', () => {
@@ -212,7 +201,7 @@ describe('calculateScores', () => {
       {
         id: 1,
         text: 'test',
-        dimension: 'stimulus',
+        dimension: 'stimulus-M',
         options: [
           { label: 'A', text: 'multi', scores: { M: 0.5, N: 0.5 } }
         ]
@@ -220,24 +209,101 @@ describe('calculateScores', () => {
     ];
     const answers = ['A'];
     const scores = calculateScores(answers, questions);
-    assert.equal(scores.stimulus.M, 0.5);
-    assert.equal(scores.stimulus.N, 0.5);
+    assert.equal(scores.stimulus.M.avg, 0.5);
+    assert.equal(scores.stimulus.M.sum, 0.5);
+    assert.equal(scores.stimulus.M.count, 1);
+    assert.equal(scores.stimulus.N.avg, 0.5);
+    assert.equal(scores.stimulus.N.sum, 0.5);
+    assert.equal(scores.stimulus.N.count, 1);
   });
 
   it('accumulates scores across multiple questions in same dimension', () => {
     const questions = [
       {
-        id: 1, text: 'q1', dimension: 'stimulus',
+        id: 1, text: 'q1', dimension: 'stimulus-H',
         options: [{ label: 'A', text: 'a', scores: { H: 1 } }]
       },
       {
-        id: 2, text: 'q2', dimension: 'stimulus',
+        id: 2, text: 'q2', dimension: 'stimulus-H',
         options: [{ label: 'A', text: 'a', scores: { H: 1 } }]
       }
     ];
     const answers = ['A', 'A'];
     const scores = calculateScores(answers, questions);
-    assert.equal(scores.stimulus.H, 2);
+    assert.equal(scores.stimulus.H.sum, 2);
+    assert.equal(scores.stimulus.H.count, 2);
+    assert.equal(scores.stimulus.H.avg, 1);
+  });
+
+  it('computes cumulative average correctly', () => {
+    const questions = [
+      {
+        id: 1, text: 'q1', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 3 } }]
+      },
+      {
+        id: 2, text: 'q2', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 1 } }]
+      },
+      {
+        id: 3, text: 'q3', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 2 } }]
+      }
+    ];
+    const answers = ['A', 'A', 'A'];
+    const scores = calculateScores(answers, questions);
+    assert.equal(scores.stimulus.H.sum, 6);
+    assert.equal(scores.stimulus.H.count, 3);
+    assert.equal(scores.stimulus.H.avg, 2);
+  });
+
+  it('counts explicit zero scores toward count (lowering avg)', () => {
+    const questions = [
+      {
+        id: 1, text: 'q1', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 3, M: 0 } }]
+      },
+      {
+        id: 2, text: 'q2', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 0, M: 3 } }]
+      }
+    ];
+    const answers = ['A', 'A'];
+    const scores = calculateScores(answers, questions);
+    // H: first Q gives H:3, second Q gives H:0 → avg = 3/2 = 1.5
+    assert.equal(scores.stimulus.H.sum, 3);
+    assert.equal(scores.stimulus.H.count, 2);
+    assert.equal(scores.stimulus.H.avg, 1.5);
+    // M: first Q gives M:0, second Q gives M:3 → avg = 3/2 = 1.5
+    assert.equal(scores.stimulus.M.sum, 3);
+    assert.equal(scores.stimulus.M.count, 2);
+    assert.equal(scores.stimulus.M.avg, 1.5);
+  });
+
+  it('code with fewer ratings can beat code with more ratings via higher avg', () => {
+    const questions = [
+      {
+        id: 1, text: 'q1', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 3 } }]
+      },
+      {
+        id: 2, text: 'q2', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { H: 3 } }]
+      },
+      {
+        id: 3, text: 'q3', dimension: 'stimulus-H',
+        options: [{ label: 'A', text: 'a', scores: { N: 3 } }]
+      }
+    ];
+    const answers = ['A', 'A', 'A'];
+    const scores = calculateScores(answers, questions);
+    const percentages = calculatePercentages(scores);
+    // H: avg=3, N: avg=3 → both have same avg → equal percentage
+    // This proves N isn't penalized for being scored fewer times
+    assert.equal(scores.stimulus.H.avg, 3);
+    assert.equal(scores.stimulus.N.avg, 3);
+    assert.ok(Math.abs(percentages.stimulus.H - percentages.stimulus.N) < 0.01,
+      'codes with same avg should have same percentage regardless of count');
   });
 });
 
@@ -246,30 +312,30 @@ describe('calculateScores', () => {
 describe('calculatePercentages', () => {
   it('calculates percentages that sum to ~100 per dimension', () => {
     const scores = {
-      stimulus: { H: 3, N: 2, C: 1, M: 0 },
-      taste: { U: 2, S: 1, W: 1, B: 0, O: 0 },
-      philosophy: { A: 3, S: 1 },
-      novelty: { E: 2, C: 4 }
+      stimulus: { H: { sum: 6, count: 2, avg: 3 }, N: { sum: 4, count: 2, avg: 2 }, C: { sum: 2, count: 2, avg: 1 }, M: { sum: 0, count: 1, avg: 0 } },
+      taste: { U: { sum: 2, count: 1, avg: 2 }, S: { sum: 1, count: 1, avg: 1 }, W: { sum: 1, count: 1, avg: 1 }, B: { sum: 0, count: 0, avg: 0 }, O: { sum: 0, count: 0, avg: 0 } },
+      philosophy: { A: { sum: 3, count: 1, avg: 3 }, S: { sum: 1, count: 1, avg: 1 } },
+      novelty: { E: { sum: 2, count: 1, avg: 2 }, C: { sum: 4, count: 1, avg: 4 } }
     };
     const percentages = calculatePercentages(scores);
 
-    // stimulus: total=6, H=50, N=33.33, C=16.67, M=0
+    // stimulus: avg total=3+2+1+0=6, H=50, N=33.33, C=16.67, M=0
     assert.ok(Math.abs(percentages.stimulus.H - 50) < 0.01);
     assert.ok(Math.abs(percentages.stimulus.N - 33.33) < 0.1);
     assert.ok(Math.abs(percentages.stimulus.C - 16.67) < 0.1);
     assert.equal(percentages.stimulus.M, 0);
 
-    // philosophy: total=4, A=75, S=25
+    // philosophy: avg total=3+1=4, A=75, S=25
     assert.equal(percentages.philosophy.A, 75);
     assert.equal(percentages.philosophy.S, 25);
   });
 
-  it('handles zero total in a dimension (all scores zero)', () => {
+  it('handles zero total in a dimension (all avgs zero)', () => {
     const scores = {
-      stimulus: { H: 0, N: 0, C: 0, M: 0 },
-      taste: { U: 1, S: 0, W: 0, B: 0, O: 0 },
-      philosophy: { A: 0, S: 0 },
-      novelty: { E: 0, C: 0 }
+      stimulus: { H: { sum: 0, count: 0, avg: 0 }, N: { sum: 0, count: 0, avg: 0 }, C: { sum: 0, count: 0, avg: 0 }, M: { sum: 0, count: 0, avg: 0 } },
+      taste: { U: { sum: 1, count: 1, avg: 1 }, S: { sum: 0, count: 0, avg: 0 }, W: { sum: 0, count: 0, avg: 0 }, B: { sum: 0, count: 0, avg: 0 }, O: { sum: 0, count: 0, avg: 0 } },
+      philosophy: { A: { sum: 0, count: 0, avg: 0 }, S: { sum: 0, count: 0, avg: 0 } },
+      novelty: { E: { sum: 0, count: 0, avg: 0 }, C: { sum: 0, count: 0, avg: 0 } }
     };
     const percentages = calculatePercentages(scores);
     // When total is 0, all percentages should be 0
@@ -408,17 +474,17 @@ describe('calculateType', () => {
   it('handles philosophy questions with only 2 options (A/B)', () => {
     // Create questions where philosophy dimension has only A/B options
     const questions = [
-      { id: 1, text: 'q1', dimension: 'stimulus', options: [
+      { id: 1, text: 'q1', dimension: 'stimulus-H', options: [
         { label: 'A', text: 'a', scores: { H: 1 } }
       ]},
-      { id: 2, text: 'q2', dimension: 'taste', options: [
+      { id: 2, text: 'q2', dimension: 'taste-U', options: [
         { label: 'A', text: 'a', scores: { U: 1 } }
       ]},
-      { id: 3, text: 'q3', dimension: 'philosophy', options: [
+      { id: 3, text: 'q3', dimension: 'philosophy-A', options: [
         { label: 'A', text: 'a', scores: { A: 1 } },
         { label: 'B', text: 'b', scores: { S: 1 } }
       ]},
-      { id: 4, text: 'q4', dimension: 'novelty', options: [
+      { id: 4, text: 'q4', dimension: 'novelty-E', options: [
         { label: 'A', text: 'a', scores: { E: 1 } }
       ]}
     ];
@@ -464,7 +530,7 @@ describe('calculateScores inherited keys', () => {
   it('ignores inherited property keys like constructor in option.scores', () => {
     const questions = [
       {
-        id: 1, text: 'q1', dimension: 'stimulus',
+        id: 1, text: 'q1', dimension: 'stimulus-H',
         options: [
           { label: 'A', text: 'a', scores: { constructor: 1, H: 1 } }
         ]
@@ -473,7 +539,7 @@ describe('calculateScores inherited keys', () => {
     const answers = ['A'];
     // Should not add to constructor or crash; only H should be incremented
     const scores = calculateScores(answers, questions);
-    assert.equal(scores.stimulus.H, 1);
+    assert.equal(scores.stimulus.H.sum, 1);
     // Verify no pollution — dimScores should only have H, N, C, M
     const keys = Object.keys(scores.stimulus);
     assert.deepEqual(keys.sort(), ['C', 'H', 'M', 'N']);
@@ -484,14 +550,14 @@ describe('calculateScores inherited keys', () => {
 
 describe('selectQuestions undersized pool', () => {
   it('throws when question pool is too small to select required total', () => {
-    // Build a minimal questionsData with only 2 stimulus questions (need 6)
+    // Build a minimal questionsData with only 2 stimulus questions (need 8)
     const tinyData = {
       dimensions: ['stimulus'],
       questions: [
-        { id: 1, text: 'q1', dimension: 'stimulus', options: [
+        { id: 1, text: 'q1', dimension: 'stimulus-H', options: [
           { label: 'A', text: 'a', scores: { H: 1 } }
         ]},
-        { id: 2, text: 'q2', dimension: 'stimulus', options: [
+        { id: 2, text: 'q2', dimension: 'stimulus-N', options: [
           { label: 'A', text: 'a', scores: { N: 1 } }
         ]}
       ]
@@ -507,145 +573,88 @@ describe('selectQuestions undersized pool', () => {
 
 describe('selectQuestions minPerTendency not met', () => {
   it('throws when a code does not have enough questions to meet minPerTendency', () => {
-    // Build questionsData where philosophy has no 'S'-scoring question at all
+    // Build questionsData where philosophy has no 'S'-tagged questions at all
+    // (minPerTendency requires A:2 and S:2, but all philosophy questions are tagged A)
     const noSecondaryData = {
       dimensions: ['stimulus', 'taste', 'philosophy', 'novelty'],
       questions: [
-        // stimulus: 6 questions with H, N, C, M coverage
-        { id: 1, text: 'q1', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        // stimulus: 8 questions with H, N, C, M coverage (2 each)
+        { id: 1, text: 'q1', dimension: 'stimulus-H', options: [
+          { label: 'A', text: 'a', scores: { H: 1 } }
         ]},
-        { id: 2, text: 'q2', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        { id: 2, text: 'q2', dimension: 'stimulus-H', options: [
+          { label: 'A', text: 'a', scores: { H: 1 } }
         ]},
-        { id: 3, text: 'q3', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        { id: 3, text: 'q3', dimension: 'stimulus-N', options: [
+          { label: 'A', text: 'a', scores: { N: 1 } }
         ]},
-        { id: 4, text: 'q4', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        { id: 4, text: 'q4', dimension: 'stimulus-N', options: [
+          { label: 'A', text: 'a', scores: { N: 1 } }
         ]},
-        { id: 5, text: 'q5', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        { id: 5, text: 'q5', dimension: 'stimulus-C', options: [
+          { label: 'A', text: 'a', scores: { C: 1 } }
         ]},
-        { id: 6, text: 'q6', dimension: 'stimulus', options: [
-          { label: 'A', text: 'a', scores: { H: 1 } },
-          { label: 'B', text: 'b', scores: { N: 1 } },
-          { label: 'C', text: 'c', scores: { C: 1 } },
-          { label: 'D', text: 'd', scores: { M: 1 } }
+        { id: 6, text: 'q6', dimension: 'stimulus-C', options: [
+          { label: 'A', text: 'a', scores: { C: 1 } }
         ]},
-        // taste: 8 questions with U, S, W, B, O
-        { id: 10, text: 'q10', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 7, text: 'q7', dimension: 'stimulus-M', options: [
+          { label: 'A', text: 'a', scores: { M: 1 } }
         ]},
-        { id: 11, text: 'q11', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 8, text: 'q8', dimension: 'stimulus-M', options: [
+          { label: 'A', text: 'a', scores: { M: 1 } }
         ]},
-        { id: 12, text: 'q12', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        // taste: 8 questions with U, S, W, B, O (at least 1 each)
+        { id: 10, text: 'q10', dimension: 'taste-U', options: [
+          { label: 'A', text: 'a', scores: { U: 1 } }
         ]},
-        { id: 13, text: 'q13', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 11, text: 'q11', dimension: 'taste-S', options: [
+          { label: 'A', text: 'a', scores: { S: 1 } }
         ]},
-        { id: 14, text: 'q14', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 12, text: 'q12', dimension: 'taste-W', options: [
+          { label: 'A', text: 'a', scores: { W: 1 } }
         ]},
-        { id: 15, text: 'q15', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 13, text: 'q13', dimension: 'taste-B', options: [
+          { label: 'A', text: 'a', scores: { B: 1 } }
         ]},
-        { id: 16, text: 'q16', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 14, text: 'q14', dimension: 'taste-O', options: [
+          { label: 'A', text: 'a', scores: { O: 1 } }
         ]},
-        { id: 17, text: 'q17', dimension: 'taste', options: [
-          { label: 'A', text: 'a', scores: { U: 1 } },
-          { label: 'B', text: 'b', scores: { S: 1 } },
-          { label: 'C', text: 'c', scores: { W: 1 } },
-          { label: 'D', text: 'd', scores: { B: 1 } },
-          { label: 'E', text: 'e', scores: { O: 1 } }
+        { id: 15, text: 'q15', dimension: 'taste-U', options: [
+          { label: 'A', text: 'a', scores: { U: 1 } }
         ]},
-        // philosophy: 4 questions but ALL score only A, never S
-        { id: 20, text: 'q20', dimension: 'philosophy', options: [
+        { id: 16, text: 'q16', dimension: 'taste-S', options: [
+          { label: 'A', text: 'a', scores: { S: 1 } }
+        ]},
+        { id: 17, text: 'q17', dimension: 'taste-W', options: [
+          { label: 'A', text: 'a', scores: { W: 1 } }
+        ]},
+        // philosophy: 4 questions but ALL are A-tagged, NO S-tagged
+        // minPerTendency requires A:2, S:2 — S will fail
+        { id: 20, text: 'q20', dimension: 'philosophy-A', options: [
           { label: 'A', text: 'a', scores: { A: 1 } },
-          { label: 'B', text: 'b', scores: { A: 1 } }
+          { label: 'B', text: 'b', scores: { S: 1 } }
         ]},
-        { id: 21, text: 'q21', dimension: 'philosophy', options: [
-          { label: 'A', text: 'a', scores: { A: 1 } },
-          { label: 'B', text: 'b', scores: { A: 1 } }
+        { id: 21, text: 'q21', dimension: 'philosophy-A', options: [
+          { label: 'A', text: 'a', scores: { A: 1 } }
         ]},
-        { id: 22, text: 'q22', dimension: 'philosophy', options: [
-          { label: 'A', text: 'a', scores: { A: 1 } },
-          { label: 'B', text: 'b', scores: { A: 1 } }
+        { id: 22, text: 'q22', dimension: 'philosophy-A', options: [
+          { label: 'A', text: 'a', scores: { A: 1 } }
         ]},
-        { id: 23, text: 'q23', dimension: 'philosophy', options: [
-          { label: 'A', text: 'a', scores: { A: 1 } },
-          { label: 'B', text: 'b', scores: { A: 1 } }
+        { id: 23, text: 'q23', dimension: 'philosophy-A', options: [
+          { label: 'A', text: 'a', scores: { A: 1 } }
         ]},
-        // novelty: 6 questions with E, C
-        { id: 30, text: 'q30', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
+        // novelty: 4 questions with E, C (2 each)
+        { id: 30, text: 'q30', dimension: 'novelty-E', options: [
+          { label: 'A', text: 'a', scores: { E: 1 } }
         ]},
-        { id: 31, text: 'q31', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
+        { id: 31, text: 'q31', dimension: 'novelty-E', options: [
+          { label: 'A', text: 'a', scores: { E: 1 } }
         ]},
-        { id: 32, text: 'q32', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
+        { id: 32, text: 'q32', dimension: 'novelty-C', options: [
+          { label: 'A', text: 'a', scores: { C: 1 } }
         ]},
-        { id: 33, text: 'q33', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
-        ]},
-        { id: 34, text: 'q34', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
-        ]},
-        { id: 35, text: 'q35', dimension: 'novelty', options: [
-          { label: 'A', text: 'a', scores: { E: 1 } },
-          { label: 'B', text: 'b', scores: { C: 1 } }
+        { id: 33, text: 'q33', dimension: 'novelty-C', options: [
+          { label: 'A', text: 'a', scores: { C: 1 } }
         ]}
       ]
     };
@@ -662,7 +671,7 @@ describe('calculateScores input validation', () => {
   it('throws when an option score is negative', () => {
     const questions = [
       {
-        id: 1, text: 'q1', dimension: 'stimulus',
+        id: 1, text: 'q1', dimension: 'stimulus-H',
         options: [
           { label: 'A', text: 'a', scores: { H: -1 } }
         ]
@@ -678,7 +687,7 @@ describe('calculateScores input validation', () => {
   it('throws when an option score is NaN', () => {
     const questions = [
       {
-        id: 1, text: 'q1', dimension: 'stimulus',
+        id: 1, text: 'q1', dimension: 'stimulus-H',
         options: [
           { label: 'A', text: 'a', scores: { H: NaN } }
         ]
@@ -694,7 +703,7 @@ describe('calculateScores input validation', () => {
   it('throws when an option score is Infinity', () => {
     const questions = [
       {
-        id: 1, text: 'q1', dimension: 'stimulus',
+        id: 1, text: 'q1', dimension: 'stimulus-H',
         options: [
           { label: 'A', text: 'a', scores: { H: Infinity } }
         ]
@@ -714,17 +723,17 @@ describe('calculateType mismatched length', () => {
   it('handles answers array shorter than questions array gracefully', () => {
     // Create a small set of questions
     const questions = [
-      { id: 1, text: 'q1', dimension: 'stimulus', options: [
+      { id: 1, text: 'q1', dimension: 'stimulus-H', options: [
         { label: 'A', text: 'a', scores: { H: 1 } }
       ]},
-      { id: 2, text: 'q2', dimension: 'stimulus', options: [
+      { id: 2, text: 'q2', dimension: 'stimulus-N', options: [
         { label: 'A', text: 'a', scores: { N: 1 } }
       ]},
-      { id: 3, text: 'q3', dimension: 'taste', options: [
+      { id: 3, text: 'q3', dimension: 'taste-U', options: [
         { label: 'A', text: 'a', scores: { U: 1 } }
       ]},
-      { id: 4, text: 'q4', dimension: 'philosophy', options: [
-        { label: 'A', text: 'a', scores: { A: 1 } }
+      { id: 4, text: 'q4', dimension: 'novelty-E', options: [
+        { label: 'A', text: 'a', scores: { E: 1 } }
       ]}
     ];
     // Only 2 answers for 4 questions

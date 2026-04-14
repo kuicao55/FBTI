@@ -8,6 +8,46 @@
  * across 4 dimensions: stimulus, taste, philosophy, novelty.
  */
 
+// Unambiguous code → dimension mapping for cross-dimension routing.
+// Ambiguous codes (C: stimulus/novelty, S: taste/philosophy) are resolved
+// at routing time by excluding the question's own dimension.
+const CODE_TO_DIMENSION = {
+  H: 'stimulus', N: 'stimulus', M: 'stimulus',
+  U: 'taste',    W: 'taste',    B: 'taste',   O: 'taste',
+  A: 'philosophy',
+  E: 'novelty'
+};
+
+/**
+ * Resolve which dimension a code should be scored in, given the question's dimension.
+ * For codes that are native to the question's dimension → return the question's dimension.
+ * For codes only in one other dimension → return that dimension.
+ * For ambiguous codes (C, S) not native to the question's dimension → return the other candidate.
+ */
+function resolveCodeDimension(code, questionDim) {
+  // Native: code belongs to the question's own dimension
+  if (DIMENSION_CONFIG[questionDim] && DIMENSION_CONFIG[questionDim].codes.includes(code)) {
+    return questionDim;
+  }
+  // Unambiguous: code maps to exactly one dimension
+  if (CODE_TO_DIMENSION[code]) {
+    return CODE_TO_DIMENSION[code];
+  }
+  // Ambiguous code (C or S) not native — pick the candidate that isn't the question's dimension
+  const candidates = AMBIGUOUS_CODE_DIMENSIONS[code];
+  if (candidates) {
+    const other = candidates.find(d => d !== questionDim);
+    return other || null;
+  }
+  return null;
+}
+
+// Ambiguous codes and their candidate dimensions
+const AMBIGUOUS_CODE_DIMENSIONS = {
+  C: ['stimulus', 'novelty'],
+  S: ['taste', 'philosophy']
+};
+
 // Dimension configuration: total questions, codes, minimum per code
 const DIMENSION_CONFIG = {
   stimulus:   { total: 8,  codes: ['H', 'N', 'C', 'M'],  minPerTendency: { H: 2, N: 2, C: 2, M: 2 } },
@@ -122,14 +162,14 @@ export function selectQuestions(questionsData) {
  *
  * @param {Array<string>} answers — option labels like ['A','B',...]
  * @param {Array<Object>} questions — 24 selected question objects
- * @returns {Object} nested scores { stimulus: {H,N,C,M}, taste: {U,S,W,B,O}, ... }
+ * @returns {Object} nested scores { stimulus: {H:{sum,count,avg}, ...}, taste: {...}, ... }
  */
 export function calculateScores(answers, questions) {
   const scores = {
-    stimulus:   { H: 0, N: 0, C: 0, M: 0 },
-    taste:      { U: 0, S: 0, W: 0, B: 0, O: 0 },
-    philosophy: { A: 0, S: 0 },
-    novelty:    { E: 0, C: 0 }
+    stimulus:   { H: { sum: 0, count: 0, avg: 0 }, N: { sum: 0, count: 0, avg: 0 }, C: { sum: 0, count: 0, avg: 0 }, M: { sum: 0, count: 0, avg: 0 } },
+    taste:      { U: { sum: 0, count: 0, avg: 0 }, S: { sum: 0, count: 0, avg: 0 }, W: { sum: 0, count: 0, avg: 0 }, B: { sum: 0, count: 0, avg: 0 }, O: { sum: 0, count: 0, avg: 0 } },
+    philosophy: { A: { sum: 0, count: 0, avg: 0 }, S: { sum: 0, count: 0, avg: 0 } },
+    novelty:    { E: { sum: 0, count: 0, avg: 0 }, C: { sum: 0, count: 0, avg: 0 } }
   };
 
   for (let i = 0; i < questions.length; i++) {
@@ -140,16 +180,18 @@ export function calculateScores(answers, questions) {
     const option = question.options.find(opt => opt.label === answer);
     if (!option) continue;
 
-    const { dim } = parseDimension(question.dimension);
-    const dimScores = scores[dim];
-    if (!dimScores) continue;
+    const { dim: questionDim } = parseDimension(question.dimension);
 
     for (const [code, value] of Object.entries(option.scores)) {
       if (typeof value !== 'number' || !Number.isFinite(value) || value < 0) {
         throw new Error(`Invalid score value for code "${code}" in question ${question.id}: expected finite non-negative number, got ${value}`);
       }
-      if (Object.prototype.hasOwnProperty.call(dimScores, code)) {
-        dimScores[code] += value;
+      const targetDim = resolveCodeDimension(code, questionDim);
+      if (targetDim && scores[targetDim] && Object.prototype.hasOwnProperty.call(scores[targetDim], code)) {
+        const entry = scores[targetDim][code];
+        entry.sum += value;
+        entry.count += 1;
+        entry.avg = entry.sum / entry.count;
       }
     }
   }
@@ -160,20 +202,20 @@ export function calculateScores(answers, questions) {
 /**
  * calculatePercentages(scores) — Percentage per code
  *
- * For each dimension, percentage = (code score / dimension total) * 100.
+ * For each dimension, percentage = (code avg / dimension total avg) * 100.
  * If dimension total is 0, all percentages are 0.
  *
- * @param {Object} scores — output of calculateScores
+ * @param {Object} scores — output of calculateScores (with {sum,count,avg} entries)
  * @returns {Object} same structure with percentages instead of raw scores
  */
 export function calculatePercentages(scores) {
   const percentages = {};
 
   for (const [dimName, dimScores] of Object.entries(scores)) {
-    const total = Object.values(dimScores).reduce((sum, v) => sum + v, 0);
+    const total = Object.values(dimScores).reduce((sum, e) => sum + e.avg, 0);
     percentages[dimName] = {};
-    for (const [code, value] of Object.entries(dimScores)) {
-      percentages[dimName][code] = total > 0 ? (value / total) * 100 : 0;
+    for (const [code, entry] of Object.entries(dimScores)) {
+      percentages[dimName][code] = total > 0 ? (entry.avg / total) * 100 : 0;
     }
   }
 

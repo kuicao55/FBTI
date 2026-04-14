@@ -72,6 +72,7 @@
     .screen {
       display: none;
       min-height: 100vh;
+      position: relative;
     }
 
     .screen.active {
@@ -170,7 +171,7 @@
       display: flex;
       align-items: center;
       gap: var(--space-4);
-      margin-bottom: var(--space-10);
+      width: 100%;
     }
     .progress-track {
       flex: 1;
@@ -253,8 +254,23 @@
       justify-content: center;
       padding: var(--space-16) 0;
     }
-    .quiz-header {
-      margin-bottom: var(--space-10);
+    .quiz-topbar {
+      display: flex;
+      align-items: center;
+      padding: 0 var(--space-6);
+      height: 56px;
+      box-sizing: border-box;
+    }
+    .quiz-logo {
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      flex-shrink: 0;
+    }
+    .quiz-progress {
+      flex: 1;
+      min-width: 0;
+      margin-left: var(--space-4);
     }
     .quiz-question-text {
       font-family: var(--font-body);
@@ -355,15 +371,13 @@
       }
 
       /* Quiz screen: reduce padding to fit viewport */
+      .quiz-topbar {
+        padding: 0 var(--space-6) !important;
+        height: 48px !important;
+      }
       .quiz-wrap {
         padding: var(--space-4) 0 !important;
         justify-content: flex-start !important;
-      }
-      .quiz-header {
-        margin-bottom: var(--space-6) !important;
-      }
-      .progress-wrap {
-        margin-bottom: var(--space-6) !important;
       }
       .quiz-question-text {
         font-size: 16px !important;
@@ -426,17 +440,20 @@
     </div>
   </section>
   <section id="screen-quiz" class="screen">
+    <div class="quiz-topbar">
+      <img src="assets/FBTI_logo.png" alt="FBTI" class="quiz-logo" id="btn-logo-back" style="cursor:pointer;">
+      <div class="quiz-progress">
+        <div class="progress-wrap">
+          <div class="progress-track">
+            <div class="progress-fill" id="progress-fill" style="width:0%"></div>
+          </div>
+          <span class="progress-label" id="progress-label">1 / 24</span>
+        </div>
+      </div>
+    </div>
     <div class="container" style="flex:1;display:flex;flex-direction:column;justify-content:center;">
       <div class="quiz-wrap">
-        <div class="quiz-header fade-in-up stagger-1">
-          <div class="progress-wrap">
-            <div class="progress-track">
-              <div class="progress-fill" id="progress-fill" style="width:0%"></div>
-            </div>
-            <span class="progress-label" id="progress-label">1 / 24</span>
-          </div>
-          <p class="quiz-question-text" id="question-text">题目加载中…</p>
-        </div>
+        <p class="quiz-question-text" id="question-text">题目加载中…</p>
         <div class="quiz-options" id="quiz-options">
           <!-- Options populated by JS -->
         </div>
@@ -509,6 +526,14 @@
           showScreen('quiz');
           showQuestion(0);
         });
+
+        // Logo click: return to home
+        var logoBtn = document.getElementById('btn-logo-back');
+        if (logoBtn) {
+          logoBtn.addEventListener('click', function() {
+            showScreen('welcome');
+          });
+        }
 
         // Attach result screen button handlers (depend on window.types/window.selectedQuestions)
         document.getElementById('btn-copy-link').addEventListener('click', copyLink);
@@ -609,9 +634,12 @@
         typeCode = urlParams2.get('type') || 'SCNU';
         var dataParam = urlParams2.get('data');
         if (dataParam) {
-          try {
-            dimensionResults = JSON.parse(decodeURIComponent(atob(dataParam)));
-          } catch(e) {}
+          // Try compact format first (same as page load logic)
+          try { dimensionResults = decodeDimensionResults(dataParam); } catch(e) {}
+          // Fall back to old base64+JSON format
+          if (!dimensionResults) {
+            try { dimensionResults = JSON.parse(decodeURIComponent(atob(dataParam))); } catch(e) {}
+          }
         }
       }
       var url = new URL(window.location.href);

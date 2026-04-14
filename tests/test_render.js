@@ -721,15 +721,18 @@ describe('renderRestaurantSection', () => {
     const doc = {
       getElementById(id) { return id === 'container' ? containerEl : null; },
       createElement(tag) {
+        let _innerHTML = '';
         return {
           tagName: tag.toUpperCase(),
           textContent: '',
-          innerHTML: '',
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
           style: {},
           classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
           children: [],
           appendChild(child) { this.children.push(child); },
           setAttribute() {},
+          addEventListener() {},
           querySelector() { return null; },
           querySelectorAll() { return []; },
         };
@@ -742,8 +745,10 @@ describe('renderRestaurantSection', () => {
       const { renderRestaurantSection } = await import('../modules/render.js');
       renderRestaurantSection(containerEl, 'HUAE', []);
 
-      // Empty array → section should not be rendered
-      assert.strictEqual(containerEl.children.length, 0);
+      // Empty array → section IS rendered (with "添加推荐" button)
+      assert.strictEqual(containerEl.children.length, 1);
+      assert.ok(containerEl.querySelector('.btn-add-restaurant'), 'should show add button');
+      assert.strictEqual(containerEl.querySelector('.at-limit-msg'), null, 'should not show at-limit msg');
     } finally {
       globalThis.document = undefined;
       globalThis.window = undefined;

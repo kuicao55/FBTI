@@ -408,7 +408,7 @@ export function loadTypeSVG(typeCode) {
 // ---- drawRadarToCanvas ----
 // Draws radar chart directly onto a canvas 2D context (used for share image generation)
 export function renderRestaurantSection(container, typeCode, restaurants) {
-  if (!restaurants || restaurants.length === 0) return;
+  const list = restaurants || [];
 
   const section = document.createElement('div');
   section.className = 'restaurant-section';
@@ -424,13 +424,13 @@ export function renderRestaurantSection(container, typeCode, restaurants) {
       </svg>
       推荐餐厅
     </div>
-    <span class="restaurant-count">${restaurants.length} / ${window.restaurantMaxPerType || 5}</span>
+    <span class="restaurant-count">${list.length} / ${window.restaurantMaxPerType || 5}</span>
   `;
   section.appendChild(header);
 
-  const list = document.createElement('div');
-  list.className = 'restaurant-list';
-  restaurants.forEach(r => {
+  const listEl = document.createElement('div');
+  listEl.className = 'restaurant-list';
+  list.forEach(r => {
     const item = document.createElement('div');
     item.className = 'restaurant-item';
     item.innerHTML = `
@@ -438,14 +438,14 @@ export function renderRestaurantSection(container, typeCode, restaurants) {
       <span class="restaurant-name" style="flex:1;font-family:var(--font-heading);font-size:14px;font-weight:500;color:white;">${escapeHtml(r.name)}</span>
       <span class="restaurant-meta" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.4);">by ${escapeHtml(r.by || '匿名用户')}</span>
     `;
-    list.appendChild(item);
+    listEl.appendChild(item);
   });
-  section.appendChild(list);
+  section.appendChild(listEl);
 
   // Submit button or limit message
   const btnWrap = document.createElement('div');
   const max = window.restaurantMaxPerType || 5;
-  if (restaurants.length >= max) {
+  if (list.length >= max) {
     btnWrap.innerHTML = `<div class="at-limit-msg" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.35);text-align:center;padding:8px;">该人格已有 ${max} 条推荐上限，不再接受新的推荐</div>`;
   } else {
     const btn = document.createElement('button');

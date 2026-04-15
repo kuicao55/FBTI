@@ -405,60 +405,134 @@ export function loadTypeSVG(typeCode) {
   return loadTypeImage(typeCode);
 }
 
-// ---- drawRadarToCanvas ----
-// Draws radar chart directly onto a canvas 2D context (used for share image generation)
-export function renderRestaurantSection(container, typeCode, restaurants) {
+// ---- renderRestaurantCarousel ----
+export function renderRestaurantCarousel(container, typeCode, restaurants, maxPerType) {
   const list = restaurants || [];
 
-  const section = document.createElement('div');
-  section.className = 'restaurant-section';
-
-  const header = document.createElement('div');
-  header.className = 'restaurant-section-header';
-  header.innerHTML = `
-    <div class="restaurant-section-title">
-      <svg class="restaurant-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="width:20px;height:20px;opacity:0.8;color:rgba(255,255,255,0.9)">
-        <path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2"/>
-        <path d="M7 2v20"/>
-        <path d="M21 15V2v0a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/>
-      </svg>
-      推荐餐厅
-    </div>
-    <span class="restaurant-count">${list.length} / ${window.restaurantMaxPerType || 5}</span>
-  `;
-  section.appendChild(header);
-
-  const listEl = document.createElement('div');
-  listEl.className = 'restaurant-list';
-  list.forEach(r => {
-    const item = document.createElement('div');
-    item.className = 'restaurant-item';
-    item.innerHTML = `
-      <div class="restaurant-dot" style="width:6px;height:6px;border-radius:50%;background:#D97757;flex-shrink:0;"></div>
-      <span class="restaurant-name" style="flex:1;font-family:var(--font-heading);font-size:14px;font-weight:500;color:white;">${escapeHtml(r.name)}</span>
-      <span class="restaurant-meta" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.4);">by ${escapeHtml(r.by || '匿名用户')}</span>
-    `;
-    listEl.appendChild(item);
-  });
-  section.appendChild(listEl);
-
-  // Submit button or limit message
-  const btnWrap = document.createElement('div');
-  const max = window.restaurantMaxPerType || 5;
-  if (list.length >= max) {
-    btnWrap.innerHTML = `<div class="at-limit-msg" style="font-family:var(--font-heading);font-size:12px;color:rgba(255,255,255,0.35);text-align:center;padding:8px;">该人格已有 ${max} 条推荐上限，不再接受新的推荐</div>`;
-  } else {
-    const btn = document.createElement('button');
-    btn.className = 'btn-add-restaurant';
-    btn.style.cssText = 'width:100%;background:rgba(217,119,87,0.15);color:#D97757;border:1px dashed rgba(217,119,87,0.4);border-radius:10px;padding:10px;font-family:var(--font-heading);font-size:13px;font-weight:500;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;transition:background 150ms,border-color 150ms;';
-    btn.innerHTML = `<svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg> 添加推荐`;
-    btn.addEventListener('click', () => openRestaurantModal(typeCode));
-    btnWrap.appendChild(btn);
+  // restaurants.length === 0 → directly return, do not render
+  if (list.length === 0) {
+    return;
   }
-  section.appendChild(btnWrap);
-  container.appendChild(section);
+
+  // Shuffle array to show a random restaurant first
+  const shuffled = [...list];
+  for (let i = shuffled.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+  }
+
+  const carousel = document.createElement('div');
+  carousel.className = 'restaurant-carousel';
+
+  const nameEl = document.createElement('div');
+  nameEl.className = 'restaurant-carousel-name';
+
+  const byEl = document.createElement('div');
+  byEl.className = 'restaurant-carousel-by';
+
+  carousel.appendChild(nameEl);
+  carousel.appendChild(byEl);
+
+  // Bottom indicator dots (only when multiple restaurants)
+  const dotsEl = document.createElement('div');
+  dotsEl.className = 'restaurant-carousel-dots';
+  carousel.appendChild(dotsEl);
+
+  container.appendChild(carousel);
+
+  let currentIndex = 0;
+  let timerId = null;
+  let paused = false;
+  const INTERVAL_MS = 5000;
+  const FADE_MS = 300;
+
+  function updateContent(index) {
+    const r = shuffled[index];
+    nameEl.textContent = r.name;
+    byEl.textContent = 'by ' + (r.by || '匿名用户');
+  }
+
+  function showNext() {
+    if (paused) return;
+    // Fade out
+    carousel.style.opacity = '0';
+    setTimeout(() => {
+      currentIndex = (currentIndex + 1) % shuffled.length;
+      updateContent(currentIndex);
+      // Fade in
+      carousel.style.opacity = '1';
+    }, FADE_MS);
+  }
+
+  function startTimer() {
+    stopTimer();
+    if (shuffled.length > 1) {
+      timerId = setInterval(showNext, INTERVAL_MS);
+    }
+  }
+
+  function stopTimer() {
+    if (timerId !== null) {
+      clearInterval(timerId);
+      timerId = null;
+    }
+  }
+
+  // Initial content
+  updateContent(0);
+  carousel.style.transition = 'opacity ' + FADE_MS + 'ms ease';
+  carousel.style.opacity = '1';
+
+  // Hover pause
+  carousel.addEventListener('mouseenter', () => { paused = true; });
+  carousel.addEventListener('mouseleave', () => { paused = false; });
+
+  // Click to copy restaurant name
+  nameEl.style.cursor = 'pointer';
+  nameEl.addEventListener('click', async () => {
+    try {
+      if (window.clipboard && window.clipboard.writeText) {
+        await window.clipboard.writeText(shuffled[currentIndex].name);
+      } else {
+        // Fallback for older browsers
+        const ta = document.createElement('textarea');
+        ta.value = shuffled[currentIndex].name;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+      }
+    } catch (e) {
+      // Clipboard may not be available in non-secure contexts
+    }
+  });
+
+  // Build dots
+  if (shuffled.length > 1) {
+    for (let i = 0; i < shuffled.length; i++) {
+      const dot = document.createElement('span');
+      dot.className = 'restaurant-carousel-dot';
+      if (i === 0) dot.classList.add('active');
+      dotsEl.appendChild(dot);
+    }
+  }
+
+  startTimer();
+
+  return {
+    destroy() {
+      stopTimer();
+      if (carousel.parentNode) {
+        carousel.parentNode.removeChild(carousel);
+      }
+    }
+  };
 }
 
+// ---- drawRadarToCanvas ----
+// Draws radar chart directly onto a canvas 2D context (used for share image generation)
 export function drawRadarToCanvas(ctx, dimensionResults, cx, cy, size) {
   const maxRadius = size * 0.32;
   const labelR = maxRadius + size * 0.075;

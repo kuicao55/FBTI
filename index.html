@@ -427,98 +427,6 @@
       }
     }
 
-/* === RESTAURANT SECTION === */
-.restaurant-section {
-  width: 100%;
-  max-width: 540px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 20px 24px;
-  margin: 0 auto 20px;
-  text-align: left;
-}
-.restaurant-section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 16px;
-}
-.restaurant-section-title {
-  font-family: var(--font-heading);
-  font-size: 15px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.9);
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.restaurant-count {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-}
-.restaurant-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 14px;
-}
-.restaurant-item {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  background: rgba(255,255,255,0.06);
-  border-radius: 10px;
-  padding: 10px 14px;
-}
-.restaurant-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  flex-shrink: 0;
-}
-.restaurant-name {
-  font-family: var(--font-heading);
-  font-size: 14px;
-  font-weight: 500;
-  color: white;
-  flex: 1;
-}
-.restaurant-meta {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  color: rgba(255,255,255,0.4);
-}
-.btn-add-restaurant {
-  width: 100%;
-  background: rgba(217,119,87,0.15);
-  color: var(--color-accent);
-  border: 1px dashed rgba(217,119,87,0.4);
-  border-radius: 10px;
-  padding: 10px;
-  font-family: var(--font-heading);
-  font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  transition: background var(--duration-fast), border-color var(--duration-fast);
-}
-.btn-add-restaurant:hover {
-  background: rgba(217,119,87,0.25);
-  border-color: rgba(217,119,87,0.6);
-}
-.at-limit-msg {
-  font-family: var(--font-heading);
-  font-size: 12px;
-  color: rgba(255,255,255,0.35);
-  text-align: center;
-  padding: 8px;
-}
 
 /* === RESTAURANT MODAL === */
 .restaurant-modal-overlay {
@@ -619,6 +527,50 @@
   cursor: pointer;
   margin-top: 4px;
 }
+
+/* === RESTAURANT CAROUSEL === */
+.restaurant-carousel {
+  width: 100%;
+  max-width: 540px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 16px;
+  padding: 20px 24px;
+  margin: 0 auto 20px;
+  text-align: left;
+}
+.restaurant-carousel-name {
+  font-family: var(--font-heading);
+  font-size: 15px;
+  font-weight: 600;
+  color: white;
+  cursor: pointer;
+  display: inline-block;
+}
+.restaurant-carousel-name:hover {
+  color: var(--color-accent);
+}
+.restaurant-carousel-by {
+  font-family: var(--font-heading);
+  font-size: 12px;
+  color: rgba(255,255,255,0.4);
+  margin-top: 4px;
+}
+.restaurant-carousel-dots {
+  display: flex;
+  gap: 6px;
+  margin-top: 12px;
+}
+.restaurant-carousel-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  transition: background var(--duration-fast);
+}
+.restaurant-carousel-dot.active {
+  background: var(--color-accent);
+}
   </style>
 </head>
 <body>
@@ -671,16 +623,17 @@
     <div id="result-self-description" class="fade-in-up stagger-4" style="border-left:3px solid #D97757;padding-left:16px;max-width:480px;text-align:left;font-style:italic;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.85);"></div>
     <!-- Analysis -->
     <div id="result-analysis" class="fade-in-up stagger-4" style="max-width:480px;text-align:left;line-height:1.7;margin-bottom:24px;color:rgba(255,255,255,0.75);"></div>
-    <!-- Restaurant recommendation section -->
-    <div id="restaurant-section-container"></div>
+    <!-- Restaurant carousel container (populated by JS after API load) -->
+    <div id="restaurant-carousel-container"></div>
     <!-- Details toggle button -->
     <button id="btn-details" class="fade-in-up stagger-5" style="background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:10px 20px;border-radius:20px;cursor:pointer;margin-bottom:16px;font-family:var(--font-heading);font-size:14px;" aria-expanded="false" aria-controls="details-panel">查看详细分析 ▼</button>
     <!-- Collapsed details panel -->
     <div id="details-panel" class="fade-in-up" style="display:none;width:100%;max-width:640px;margin:0 auto 32px;text-align:left;" role="region" aria-label="详细分析"></div>
     <!-- Share buttons -->
-    <div class="fade-in-up stagger-5" style="display:flex;gap:var(--space-4);width:100%;max-width:360px;margin-bottom:var(--space-4);">
+    <div id="share-buttons" class="fade-in-up stagger-5" style="display:flex;gap:var(--space-4);width:100%;max-width:360px;margin-bottom:var(--space-4);">
       <button id="btn-copy-link" class="btn-primary" style="flex:1;">分享链接</button>
       <button id="btn-share-image" class="btn-primary" style="flex:1;">保存图片</button>
+      <button id="btn-add-restaurant" class="btn-primary" style="flex:1;display:none;">推荐餐厅</button>
     </div>
     <!-- Retake button -->
     <div class="fade-in-up stagger-6" style="width:100%;max-width:360px;">
@@ -696,7 +649,7 @@
   <div id="restaurant-modal-overlay" class="restaurant-modal-overlay hidden" onclick="closeRestaurantModalOnOverlay(event)">
     <div class="restaurant-modal" onclick="event.stopPropagation()">
       <div class="restaurant-modal-title">推荐餐厅</div>
-      <div class="restaurant-modal-subtitle" id="restaurant-modal-subtitle">为 HUAE 型人格推荐 · 口味相近的人会看到</div>
+      <div class="restaurant-modal-subtitle" id="restaurant-modal-subtitle">为 HUAE 型人格推荐 · 提交后审核可见</div>
 
       <div class="restaurant-form-group">
         <label class="restaurant-form-label">地名·餐厅名称 *</label>
@@ -719,9 +672,9 @@
 
   <!-- Main script -->
   <script type="module">
-    import { loadTypes, loadQuestions, loadRestaurants, loadRestaurantSettings } from './modules/loader.js';
+    import { loadTypes, loadQuestions, fetchRestaurants, submitRestaurant } from './modules/loader.js';
     import { selectQuestions, calculateType, encodeDimensionResults, decodeDimensionResults } from './modules/scoring.js';
-    import { renderQuestion, renderResult, renderRestaurantSection, loadTypeSVG, buildSubCode, drawRadarToCanvas, CODE_COLORS, getCodeLabel } from './modules/render.js';
+    import { renderQuestion, renderResult, renderRestaurantCarousel, loadTypeSVG, buildSubCode, drawRadarToCanvas, CODE_COLORS, getCodeLabel } from './modules/render.js';
 
     function showScreen(name) {
       document.querySelectorAll('.screen').forEach(function(s) {
@@ -756,6 +709,17 @@
         document.getElementById('btn-copy-link').addEventListener('click', copyLink);
         document.getElementById('btn-share-image').addEventListener('click', generateShareImage);
         document.getElementById('btn-retake').addEventListener('click', retakeQuiz);
+        document.getElementById('btn-add-restaurant').addEventListener('click', function() {
+          var typeCode;
+          if (answers.length === (window.selectedQuestions ? window.selectedQuestions.length : 24)) {
+            var result = calculateType(answers, window.selectedQuestions, window.types);
+            typeCode = result.typeCode;
+          } else {
+            var urlParams = new URLSearchParams(window.location.search);
+            typeCode = urlParams.get('type') || '';
+          }
+          if (typeCode) openRestaurantModal(typeCode);
+        });
 
         var urlParams = new URLSearchParams(window.location.search);
         var urlType = urlParams.get('type');
@@ -775,30 +739,23 @@
           renderResult(urlType, window.types[urlType], dimensionResults);
           // Wire up details panel toggle for URL-loaded results
           bindDetailsToggle();
-          // Load and render restaurant section
+          // Load and render restaurant carousel
           (async function() {
             try {
-              var settings = await loadRestaurantSettings();
-              window.restaurantSettings = settings;
-              window.restaurantMaxPerType = settings.maxPerType || 5;
-              var restaurantsData = await loadRestaurants();
-              // Merge with localStorage overrides
-              try {
-                var local = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null');
-                if (local) {
-                  Object.keys(local).forEach(function(k) {
-                    if (Array.isArray(local[k]) && local[k].length > 0) {
-                      restaurantsData[k] = local[k];
-                    }
-                  });
+              var result = await fetchRestaurants(urlType);
+              if (result.ok && result.data && result.data.length > 0) {
+                var container = document.getElementById('restaurant-carousel-container');
+                if (container) {
+                  renderRestaurantCarousel(container, urlType, result.data, result.maxPerType);
                 }
-              } catch(e) {}
-              var container = document.getElementById('restaurant-section-container');
-              if (container && restaurantsData[urlType]) {
-                renderRestaurantSection(container, urlType, restaurantsData[urlType]);
+              }
+              // Control add-restaurant button visibility
+              if (result.count < result.maxPerType) {
+                var btnAdd = document.getElementById('btn-add-restaurant');
+                if (btnAdd) btnAdd.style.display = '';
               }
             } catch(e) {
-              console.warn('[FBTI] Restaurant section error:', e);
+              console.warn('[FBTI] Restaurant load error:', e);
             }
           })();
         } else {
@@ -851,30 +808,23 @@
       showScreen('result');
       renderResult(result.typeCode, window.types[result.typeCode], result.dimensionResults);
       bindDetailsToggle();
-      // Load and render restaurant section
+      // Load and render restaurant carousel
       (async function() {
         try {
-          var settings = await loadRestaurantSettings();
-          window.restaurantSettings = settings;
-          window.restaurantMaxPerType = settings.maxPerType || 5;
-          var restaurantsData = await loadRestaurants();
-          // Merge with localStorage overrides
-          try {
-            var local = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null');
-            if (local) {
-              Object.keys(local).forEach(function(k) {
-                if (Array.isArray(local[k]) && local[k].length > 0) {
-                  restaurantsData[k] = local[k];
-                }
-              });
+          var result2 = await fetchRestaurants(result.typeCode);
+          if (result2.ok && result2.data && result2.data.length > 0) {
+            var container = document.getElementById('restaurant-carousel-container');
+            if (container) {
+              renderRestaurantCarousel(container, result.typeCode, result2.data, result2.maxPerType);
             }
-          } catch(e) {}
-          var container = document.getElementById('restaurant-section-container');
-          if (container && restaurantsData[result.typeCode]) {
-            renderRestaurantSection(container, result.typeCode, restaurantsData[result.typeCode]);
+          }
+          // Control add-restaurant button visibility
+          if (result2.count < result2.maxPerType) {
+            var btnAdd = document.getElementById('btn-add-restaurant');
+            if (btnAdd) btnAdd.style.display = '';
           }
         } catch(e) {
-          console.warn('[FBTI] Restaurant section error:', e);
+          console.warn('[FBTI] Restaurant load error:', e);
         }
       })();
     }
@@ -1367,7 +1317,7 @@
       window.currentRestaurantType = typeCode;
       var overlay = document.getElementById('restaurant-modal-overlay');
       var subtitle = document.getElementById('restaurant-modal-subtitle');
-      subtitle.textContent = '为 ' + typeCode + ' 型人格推荐 · 口味相近的人会看到';
+      subtitle.textContent = '为 ' + typeCode + ' 型人格推荐 · 提交后审核可见';
       document.getElementById('restaurant-name-input').value = '';
       document.getElementById('restaurant-nick-input').value = '';
       overlay.classList.remove('hidden');
@@ -1390,70 +1340,28 @@
         return;
       }
       document.getElementById('restaurant-name-input').style.borderColor = '';
-      submitRestaurant(name, nick || '匿名用户');
+      submitRestaurantAPI(name, nick || '匿名用户');
     });
 
     document.addEventListener('keydown', function(e) {
       if (e.key === 'Escape') closeRestaurantModal();
     });
 
-    async function submitRestaurant(name, nick) {
+    async function submitRestaurantAPI(name, nick) {
       var typeCode = window.currentRestaurantType;
-      if (!typeCode || typeof typeCode !== 'string') return;
-      if (!name) return;
-
-      var settings = window.restaurantSettings || { maxPerType: 5 };
-      var max = settings.maxPerType || 5;
-
-      // Get current restaurants from localStorage or rest array
-      var stored = null;
-      try { stored = JSON.parse(localStorage.getItem('fbti_restaurants') || 'null'); } catch(e) {
-        console.warn('[FBTI] localStorage parse failed:', e);
-      }
-      var rest = (stored && typeof stored === 'object') ? stored : {};
-      if (!Array.isArray(rest[typeCode])) rest[typeCode] = [];
-
-      if (rest[typeCode].length >= max) {
-        showToast('该类型已达推荐上限');
-        closeRestaurantModal();
-        return;
-      }
-
-      var today = new Date();
-      var dateStr = today.getFullYear() + '-' + String(today.getMonth() + 1).padStart(2, '0') + '-' + String(today.getDate()).padStart(2, '0');
-
-      var newEntry = { name: name, by: nick, date: dateStr };
-      rest[typeCode].push(newEntry);
+      if (!typeCode) return;
 
       try {
-        localStorage.setItem('fbti_restaurants', JSON.stringify(rest));
+        var result = await submitRestaurant(typeCode, name, nick || '匿名');
+        if (result.ok) {
+          showToast('推荐已提交，审核后可见');
+          closeRestaurantModal();
+        } else {
+          showToast(result.message || '提交失败');
+        }
       } catch(e) {
-        showToast('保存失败，请清理浏览器存储空间');
-        return;
+        showToast('网络错误，请稍后重试');
       }
-      showToast('推荐已添加 ✓');
-
-      closeRestaurantModal();
-
-      // Re-render restaurant section
-      var container = document.getElementById('restaurant-section-container');
-      if (container && typeof renderRestaurantSection === 'function') {
-        container.innerHTML = '';
-        renderRestaurantSection(container, typeCode, rest[typeCode] || []);
-      }
-
-      // Trigger JSON download for manual deploy
-      downloadRestaurantsJson(rest);
-    }
-
-    function downloadRestaurantsJson(rest) {
-      var blob = new Blob([JSON.stringify(rest, null, 2)], { type: 'application/json' });
-      var url = URL.createObjectURL(blob);
-      var a = document.createElement('a');
-      a.href = url;
-      a.download = 'restaurants.json';
-      a.click();
-      setTimeout(function() { URL.revokeObjectURL(url); }, 1000);
     }
 
     function showToast(msg) {

@@ -65,20 +65,31 @@ export async function loadQuestions() {
   return loadJSON('./data/questions.json');
 }
 
-export async function loadRestaurants() {
-  try {
-    return await loadJSON('./data/restaurants.json');
-  } catch (e) {
-    console.warn('[FBTI] loadRestaurants failed, returning {}:', e instanceof Error ? e.message : String(e));
-    return {};
-  }
+/**
+ * Fetch restaurants for a given category from the API.
+ * @param {string} category - The taste type category code (e.g. 'HUAE')
+ * @returns {Promise<{ok: boolean, data: Array, count: number, maxPerType: number}>}
+ */
+export async function fetchRestaurants(category) {
+  const url = `./api/restaurants.php?category=${encodeURIComponent(category)}`;
+  const response = await fetch(url);
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  return response.json();
 }
 
-export async function loadRestaurantSettings() {
-  try {
-    return await loadJSON('./data/restaurant-settings.json');
-  } catch (e) {
-    console.warn('[FBTI] loadRestaurantSettings failed, returning defaults:', e instanceof Error ? e.message : String(e));
-    return Object.assign({}, { maxPerType: 5 });
-  }
+/**
+ * Submit a new restaurant recommendation.
+ * @param {string} category - The taste type category code
+ * @param {string} name - Restaurant name
+ * @param {string} [by] - Submitter name, defaults to '匿名'
+ * @returns {Promise<{ok: boolean, message?: string, res_id?: number, error?: string}>}
+ */
+export async function submitRestaurant(category, name, by) {
+  const response = await fetch('./api/restaurants.php', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ category, name, by: by || '匿名' })
+  });
+  if (!response.ok) throw new Error(`API error: ${response.status}`);
+  return response.json();
 }

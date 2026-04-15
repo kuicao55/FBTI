@@ -710,7 +710,9 @@ function createMockQuerySelector(root) {
   };
 }
 
-describe('renderRestaurantSection', () => {
+// ---------- renderRestaurantCarousel ----------
+
+describe('renderRestaurantCarousel', () => {
   it('does not render when restaurants array is empty', async () => {
     const containerEl = {
       id: 'container',
@@ -742,20 +744,19 @@ describe('renderRestaurantSection', () => {
     globalThis.window = { restaurantMaxPerType: 5 };
 
     try {
-      const { renderRestaurantSection } = await import('../modules/render.js');
-      renderRestaurantSection(containerEl, 'HUAE', []);
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
+      const result = renderRestaurantCarousel(containerEl, 'HUAE', [], 5);
 
-      // Empty array → section IS rendered (with "添加推荐" button)
-      assert.strictEqual(containerEl.children.length, 1);
-      assert.ok(containerEl.querySelector('.btn-add-restaurant'), 'should show add button');
-      assert.strictEqual(containerEl.querySelector('.at-limit-msg'), null, 'should not show at-limit msg');
+      // Should return early without rendering anything
+      assert.strictEqual(containerEl.children.length, 0, 'should not append any children');
+      assert.strictEqual(result, undefined, 'should return undefined when no restaurants');
     } finally {
       globalThis.document = undefined;
       globalThis.window = undefined;
     }
   });
 
-  it('renders restaurant section with items', async () => {
+  it('creates .restaurant-carousel container with one restaurant', async () => {
     const containerEl = {
       id: 'container',
       children: [],
@@ -769,9 +770,7 @@ describe('renderRestaurantSection', () => {
         return {
           tagName: tag.toUpperCase(),
           textContent: '',
-          get innerHTML() {
-            return _innerHTML || this.children.map(c => c.innerHTML || '').join('');
-          },
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
           set innerHTML(v) { _innerHTML = v; },
           style: {},
           classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
@@ -788,25 +787,22 @@ describe('renderRestaurantSection', () => {
     globalThis.window = { restaurantMaxPerType: 5 };
 
     try {
-      const { renderRestaurantSection } = await import('../modules/render.js');
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
       const restaurants = [
-        { name: '上海·鼎泰丰', by: '小王', date: '2026-04-14' }
+        { name: '鼎泰丰', by: '小王', date: '2026-04-14' }
       ];
-      renderRestaurantSection(containerEl, 'HUAE', restaurants);
+      const result = renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
 
-      // Should render the section
-      assert.strictEqual(containerEl.children.length, 1);
-      assert.ok(containerEl.querySelector('.restaurant-section'));
-      // Should render the restaurant name
-      const sectionEl = containerEl.querySelector('.restaurant-section');
-      assert.ok(sectionEl.innerHTML.includes('上海·鼎泰丰'));
+      assert.ok(result, 'should return carousel instance');
+      assert.strictEqual(containerEl.children.length, 1, 'should append one child');
+      assert.ok(containerEl.querySelector('.restaurant-carousel'), 'should have carousel container');
     } finally {
       globalThis.document = undefined;
       globalThis.window = undefined;
     }
   });
 
-  it('shows at-limit message when at max capacity', async () => {
+  it('shows restaurant name and by nickname', async () => {
     const containerEl = {
       id: 'container',
       children: [],
@@ -816,15 +812,20 @@ describe('renderRestaurantSection', () => {
     const doc = {
       getElementById(id) { return id === 'container' ? containerEl : null; },
       createElement(tag) {
+        let _innerHTML = '';
+        let _textContent = '';
         return {
           tagName: tag.toUpperCase(),
-          textContent: '',
-          innerHTML: '',
+          get textContent() { return _textContent; },
+          set textContent(v) { _textContent = v; },
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
           style: {},
-          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {}, get length() { return this._classes.length; }, contains(c) { return this._classes.includes(c); } },
           children: [],
           appendChild(child) { this.children.push(child); },
           setAttribute() {},
+          addEventListener() {},
           querySelector() { return null; },
           querySelectorAll() { return []; },
         };
@@ -834,19 +835,217 @@ describe('renderRestaurantSection', () => {
     globalThis.window = { restaurantMaxPerType: 5 };
 
     try {
-      const { renderRestaurantSection } = await import('../modules/render.js');
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '鼎泰丰', by: '小王', date: '2026-04-14' }
+      ];
+      renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
+
+      const carouselEl = containerEl.querySelector('.restaurant-carousel');
+      // Check children: nameEl (index 0) and byEl (index 1)
+      const nameEl = carouselEl.children[0];
+      const byEl = carouselEl.children[1];
+      assert.strictEqual(nameEl.textContent, '鼎泰丰', 'name element should contain restaurant name');
+      assert.ok(byEl.textContent.includes('小王'), 'by element should contain nickname');
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('shows dots container when multiple restaurants', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        let _innerHTML = '';
+        let _className = '';
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          get className() { return _className; },
+          set className(v) { _className = v; },
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {}, get length() { return this._classes.length; }, contains(c) { return this._classes.includes(c); } },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          addEventListener() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
       const restaurants = [
         { name: '餐厅A', by: 'a', date: '2026-04-01' },
         { name: '餐厅B', by: 'b', date: '2026-04-02' },
-        { name: '餐厅C', by: 'c', date: '2026-04-03' },
-        { name: '餐厅D', by: 'd', date: '2026-04-04' },
-        { name: '餐厅E', by: 'e', date: '2026-04-05' }
       ];
-      renderRestaurantSection(containerEl, 'HUAE', restaurants);
+      renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
 
-      assert.strictEqual(containerEl.children.length, 1);
-      assert.ok(containerEl.querySelector('.at-limit-msg'));
-      assert.strictEqual(containerEl.querySelector('.btn-add-restaurant'), null);
+      const carouselEl = containerEl.querySelector('.restaurant-carousel');
+      // dotsEl is the 3rd child (index 2)
+      const dotsEl = carouselEl.children[2];
+      assert.strictEqual(dotsEl.className, 'restaurant-carousel-dots', 'third child should be dots container');
+      assert.strictEqual(dotsEl.children.length, 2, 'dots container should have 2 dots for 2 restaurants');
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('returns carousel instance with destroy() method', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        let _innerHTML = '';
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          addEventListener() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '鼎泰丰', by: '小王', date: '2026-04-14' }
+      ];
+      const instance = renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
+
+      assert.ok(instance, 'should return an object');
+      assert.strictEqual(typeof instance.destroy, 'function', 'should have destroy method');
+      assert.doesNotThrow(() => { instance.destroy(); }, 'destroy should not throw');
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('registers mouseenter/mouseleave listeners for pause on hover', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const listeners = {};
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        let _innerHTML = '';
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          addEventListener(evt, handler) {
+            if (!listeners[evt]) listeners[evt] = [];
+            listeners[evt].push(handler);
+          },
+          removeEventListener() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5 };
+
+    try {
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '鼎泰丰', by: '小王', date: '2026-04-14' },
+        { name: '鼎泰丰2', by: '小王2', date: '2026-04-15' },
+      ];
+      renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
+
+      assert.ok(listeners['mouseenter'], 'should register mouseenter listener for pause');
+      assert.ok(listeners['mouseleave'], 'should register mouseleave listener for resume');
+    } finally {
+      globalThis.document = undefined;
+      globalThis.window = undefined;
+    }
+  });
+
+  it('registers click listener on restaurant name for clipboard copy', async () => {
+    const containerEl = {
+      id: 'container',
+      children: [],
+      appendChild(child) { this.children.push(child); },
+    };
+    containerEl.querySelector = createMockQuerySelector(containerEl);
+    const listeners = {};
+    const doc = {
+      getElementById(id) { return id === 'container' ? containerEl : null; },
+      createElement(tag) {
+        let _innerHTML = '';
+        return {
+          tagName: tag.toUpperCase(),
+          textContent: '',
+          get innerHTML() { return _innerHTML || this.children.map(c => c.innerHTML || '').join(''); },
+          set innerHTML(v) { _innerHTML = v; },
+          style: {},
+          classList: { _classes: [], add(...c) { this._classes.push(...c); }, remove() {} },
+          children: [],
+          appendChild(child) { this.children.push(child); },
+          setAttribute() {},
+          addEventListener(evt, handler) {
+            if (!listeners[evt]) listeners[evt] = [];
+            listeners[evt].push(handler);
+          },
+          removeEventListener() {},
+          querySelector() { return null; },
+          querySelectorAll() { return []; },
+        };
+      },
+    };
+    globalThis.document = doc;
+    globalThis.window = { restaurantMaxPerType: 5, clipboard: { writeText: async () => {} } };
+
+    try {
+      const { renderRestaurantCarousel } = await import('../modules/render.js');
+      const restaurants = [
+        { name: '鼎泰丰', by: '小王', date: '2026-04-14' }
+      ];
+      renderRestaurantCarousel(containerEl, 'HUAE', restaurants, 5);
+
+      // The click listener should be registered on the name element
+      assert.ok(listeners['click'], 'should register click listener for clipboard copy');
     } finally {
       globalThis.document = undefined;
       globalThis.window = undefined;
@@ -854,93 +1053,177 @@ describe('renderRestaurantSection', () => {
   });
 });
 
-// ---------- loadRestaurants and loadRestaurantSettings ----------
+// ---------- fetchRestaurants ----------
 
-describe('loadRestaurants', () => {
+describe('fetchRestaurants', () => {
   beforeEach(async () => {
     const { clearCache } = await import('../modules/loader.js');
     clearCache();
   });
 
-  it('loadRestaurants returns {} when file fetch fails (graceful fallback)', async () => {
+  it('fetchRestaurants returns restaurants data from API', async () => {
+    const mockData = {
+      ok: true,
+      data: [
+        { id: 1, name: '鼎泰丰', by: '小王', date: '2026-04-14' },
+        { id: 2, name: '绿茶餐厅', by: '小李', date: '2026-04-15' }
+      ],
+      count: 2,
+      maxPerType: 5
+    };
     const originalFetch = globalThis.fetch;
     globalThis.fetch = async (url) => {
-      if (url.includes('restaurants.json')) {
-        throw new Error('fetch error');
+      if (url.includes('api/restaurants.php')) {
+        return { ok: true, json: async () => mockData };
       }
       return originalFetch(url);
     };
 
     try {
-      const { loadRestaurants } = await import('../modules/loader.js');
-      const result = await loadRestaurants();
-      assert.strictEqual(Object.keys(result).length, 0);
+      const { fetchRestaurants } = await import('../modules/loader.js');
+      const result = await fetchRestaurants('HUAE');
+      assert.strictEqual(result.ok, true);
+      assert.strictEqual(result.count, 2);
+      assert.strictEqual(result.data[0].name, '鼎泰丰');
+      assert.strictEqual(result.data[1].name, '绿茶餐厅');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('fetchRestaurants throws error on API failure', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      if (url.includes('api/restaurants.php')) {
+        throw new Error('API error: 500');
+      }
+      return originalFetch(url);
+    };
+
+    try {
+      const { fetchRestaurants } = await import('../modules/loader.js');
+      await assert.rejects(
+        async () => await fetchRestaurants('HUAE'),
+        /API error/
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('fetchRestaurants encodes category parameter in URL', async () => {
+    const capturedUrls = [];
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url) => {
+      capturedUrls.push(url);
+      // Return a valid response to prevent unhandled rejection
+      return { ok: true, json: async () => ({ ok: true, data: [], count: 0, maxPerType: 5 }) };
+    };
+
+    try {
+      const { fetchRestaurants } = await import('../modules/loader.js');
+      await fetchRestaurants('HUAE');
+      // Should have called the API with encoded category
+      assert.ok(capturedUrls.some(u => u.includes('category=HUAE')), 'URL should contain encoded category');
     } finally {
       globalThis.fetch = originalFetch;
     }
   });
 });
 
-describe('loadRestaurants happy path', () => {
+// ---------- submitRestaurant ----------
+
+describe('submitRestaurant', () => {
   beforeEach(async () => {
     const { clearCache } = await import('../modules/loader.js');
     clearCache();
   });
 
-  it('loadRestaurants returns data from restaurants.json', async () => {
-    const originalFetch = globalThis.fetch;
-    globalThis.fetch = async (url) => {
-      if (url.includes('restaurants.json')) {
-        return { ok: true, json: async () => ({ HUAE: [{ name: '测试', by: '测试', date: '2026-04-14' }] }) };
-      }
-      return originalFetch(url);
+  it('submitRestaurant returns success response from API', async () => {
+    const mockData = {
+      ok: true,
+      message: 'Restaurant added',
+      res_id: 42
     };
-    try {
-      const { loadRestaurants } = await import('../modules/loader.js');
-      const result = await loadRestaurants();
-      assert.strictEqual(result.HUAE[0].name, '测试');
-    } finally {
-      globalThis.fetch = originalFetch;
-    }
-  });
-});
-
-describe('loadRestaurantSettings', () => {
-  beforeEach(async () => {
-    const { clearCache } = await import('../modules/loader.js');
-    clearCache();
-  });
-
-  it('loadRestaurantSettings returns data from restaurant-settings.json', async () => {
     const originalFetch = globalThis.fetch;
-    globalThis.fetch = async (url) => {
-      if (url.includes('restaurant-settings.json')) {
-        return { ok: true, json: async () => ({ maxPerType: 3 }) };
+    let capturedBody;
+    globalThis.fetch = async (url, options) => {
+      if (url.includes('api/restaurants.php')) {
+        capturedBody = JSON.parse(options.body);
+        return { ok: true, json: async () => mockData };
       }
-      return originalFetch(url);
+      return originalFetch(url, options);
     };
+
     try {
-      const { loadRestaurantSettings } = await import('../modules/loader.js');
-      const result = await loadRestaurantSettings();
-      assert.strictEqual(result.maxPerType, 3);
+      const { submitRestaurant } = await import('../modules/loader.js');
+      const result = await submitRestaurant('HUAE', '新餐厅', '小明');
+      assert.strictEqual(result.ok, true);
+      assert.strictEqual(result.res_id, 42);
+      assert.strictEqual(capturedBody.category, 'HUAE');
+      assert.strictEqual(capturedBody.name, '新餐厅');
+      assert.strictEqual(capturedBody.by, '小明');
     } finally {
       globalThis.fetch = originalFetch;
     }
   });
 
-  it('loadRestaurantSettings returns defaults on failure', async () => {
+  it('submitRestaurant uses default "匿名" when by is not provided', async () => {
+    let capturedBody;
     const originalFetch = globalThis.fetch;
-    globalThis.fetch = async (url) => {
-      if (url.includes('restaurant-settings.json')) {
-        throw new Error('network error');
+    globalThis.fetch = async (url, options) => {
+      if (url.includes('api/restaurants.php')) {
+        capturedBody = JSON.parse(options.body);
+        return { ok: true, json: async () => ({ ok: true }) };
       }
-      return originalFetch(url);
+      return originalFetch(url, options);
     };
+
     try {
-      const { loadRestaurantSettings } = await import('../modules/loader.js');
-      const result = await loadRestaurantSettings();
-      assert.strictEqual(result.maxPerType, 5);
-      assert.strictEqual(Object.keys(result).length, 1);
+      const { submitRestaurant } = await import('../modules/loader.js');
+      await submitRestaurant('HUAE', '新餐厅');
+      assert.strictEqual(capturedBody.by, '匿名');
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('submitRestaurant throws error on API failure', async () => {
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url, options) => {
+      if (url.includes('api/restaurants.php')) {
+        throw new Error('API error: 500');
+      }
+      return originalFetch(url, options);
+    };
+
+    try {
+      const { submitRestaurant } = await import('../modules/loader.js');
+      await assert.rejects(
+        async () => await submitRestaurant('HUAE', '新餐厅'),
+        /API error/
+      );
+    } finally {
+      globalThis.fetch = originalFetch;
+    }
+  });
+
+  it('submitRestaurant uses POST method with JSON body', async () => {
+    let capturedOptions;
+    const originalFetch = globalThis.fetch;
+    globalThis.fetch = async (url, options) => {
+      if (url.includes('api/restaurants.php')) {
+        capturedOptions = options;
+        return { ok: true, json: async () => ({ ok: true }) };
+      }
+      return originalFetch(url, options);
+    };
+
+    try {
+      const { submitRestaurant } = await import('../modules/loader.js');
+      await submitRestaurant('HUAE', '新餐厅', '小明');
+      assert.strictEqual(capturedOptions.method, 'POST');
+      assert.strictEqual(capturedOptions.headers['Content-Type'], 'application/json');
     } finally {
       globalThis.fetch = originalFetch;
     }

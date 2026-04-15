@@ -8,7 +8,7 @@
 **Repository:** https://github.com/kuicao55/FBTI
 **Harness Version:** 3.3.0
 **Generated:** 2026-04-11
-**Last Updated:** 2026-04-14
+**Last Updated:** 2026-04-15
 
 ## Tech Stack
 
@@ -28,8 +28,7 @@
 | entry | App initialization, event binding, share image generation, restaurant modal | `index.html` (inline `<script>`) |
 | types data | 80 personality type definitions (name, selfDescription, tasteSignature, analysis, dimensions) | `data/types.json` |
 | questions data | 100 situational questions across 4 dimensions (stimulus/taste/philosophy/novelty) | `data/questions.json` |
-| restaurants data | User-submitted restaurant recommendations per personality type | `data/restaurants.json` |
-| restaurant settings | Max recommendations per type (default: 5) | `data/restaurant-settings.json` |
+| restaurants API | PHP REST API for restaurant CRUD (MySQL backend) | `api/restaurants.php` |
 | SVG avatars | Placeholder (16 type avatar SVGs pending) | `assets/*.svg` |
 | scoring tests | 40 TDD tests for scoring module | `tests/test_scoring.js` |
 | render tests | 60+ TDD tests for render module (incl. restaurant section) | `tests/test_render.js` |
@@ -45,7 +44,7 @@
 - **TTL-cached data loading**: loader.js caches fetch results for 5 minutes to avoid redundant requests
 - **TasteType 3.1 stratified sampling**: 24 questions per quiz (6 stimulus / 8 taste / 4 philosophy / 6 novelty) with min-per-tendency guarantees
 - **TasteType 3.1 percentage scoring**: Each dimension scores independently; dominant = highest %, secondary = 2nd if ≥70% of dominant
-- **Restaurant recommendations via localStorage + JSON download**: User submits recommendations → saved to localStorage for immediate display → JSON file downloaded for manual deploy (no backend required)
+- **Restaurant recommendations via MySQL + PHP API**: User submits recommendations → POST to PHP API → stored in Aliyun RDS MySQL (suspended=1 pending review) → GET returns approved restaurants → fade carousel UI with 5s auto-switch, hover pause, clipboard copy
 
 ## Project Structure
 
@@ -61,9 +60,13 @@ FBTI/
 │   └── render.js           # Question + result UI rendering
 ├── data/
 │   ├── types.json          # 80 personality types (TasteType 3.1)
-│   ├── questions.json      # 100 questions across 4 dimensions
-│   ├── restaurants.json    # User-submitted restaurant recommendations (keyed by type code)
-│   └── restaurant-settings.json # Max recommendations per type
+│   └── questions.json      # 100 questions across 4 dimensions
+├── api/
+│   ├── config.example.php  # DB config template
+│   ├── config.php          # DB config (auto-detect Aliyun RDS internal/external)
+│   ├── restaurants.php     # REST API (GET/POST with PDO, rate limiting)
+│   └── tests/              # PHP API tests
+│       └── restaurants_test.php
 ├── tests/
 │   ├── test_scoring.js     # 40 tests for scoring module
 │   └── test_render.js      # 60 tests for render module
@@ -93,6 +96,7 @@ FBTI/
 | milestone-3 | Update data layer (questions + types) | 2 | 2026-04-12 |
 | milestone-4 | Update logic layer (scoring + render + entry) | 4 | 2026-04-12 |
 | milestone-5 | Add restaurant recommendation feature | 6 | 2026-04-14 |
+| milestone-6 | Restaurant MySQL migration + carousel UI | 6 | 2026-04-15 |
 
 ## Key Design Specs
 
@@ -100,6 +104,7 @@ FBTI/
 - `docs/harness/specs/2026-04-11-fbti-modular-design.md` — Modular refactor design (5-layer architecture, module boundaries)
 - `docs/harness/specs/2026-04-12-tastetype-3.1-design.md` — TasteType 3.1 upgrade design (80 types, 100 questions, stratified sampling, percentage scoring, new result page)
 - `docs/harness/specs/2026-04-14-restaurant-recommendation-design.md` — Restaurant recommendation feature design (localStorage + JSON download, per-type recommendations, submission modal)
+- `docs/harness/specs/2026-04-15-restaurant-mysql-redesign.md` — Restaurant MySQL migration + carousel UI redesign (PHP API + fade carousel + three-button layout)
 
 ## Harness Reference
 

@@ -29,7 +29,7 @@
       /* Colors */
       --color-bg-base: #ECE9E0;
       --color-bg-raised: #F5F3EC;
-      --color-bg-inverted: #141413;
+      --color-bg-inverted: #242424;
       --color-accent: #D97757;
       --color-text-primary: #141413;
       --color-text-secondary: #6B6860;
@@ -532,20 +532,37 @@
 .restaurant-carousel {
   width: 100%;
   max-width: 540px;
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: 16px;
-  padding: 20px 24px;
+  text-align: center;
   margin: 0 auto 20px;
-  text-align: left;
+}
+.restaurant-carousel-title {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 10px;
+}
+.restaurant-carousel-laurel {
+  width: 40px;
+  height: auto;
+  flex-shrink: 0;
+}
+.restaurant-carousel-title-text {
+  font-family: var(--font-heading);
+  font-size: 13px;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 2px;
+}
+.restaurant-carousel-content {
+  /* opacity animated by JS */
 }
 .restaurant-carousel-name {
-  font-family: var(--font-heading);
-  font-size: 15px;
-  font-weight: 600;
+  font-family: var(--font-body);
+  font-size: 18px;
+  font-style: italic;
   color: white;
   cursor: pointer;
-  display: inline-block;
+  display: block;
 }
 .restaurant-carousel-name:hover {
   color: var(--color-accent);
@@ -553,23 +570,8 @@
 .restaurant-carousel-by {
   font-family: var(--font-heading);
   font-size: 12px;
-  color: rgba(255,255,255,0.4);
-  margin-top: 4px;
-}
-.restaurant-carousel-dots {
-  display: flex;
-  gap: 6px;
-  margin-top: 12px;
-}
-.restaurant-carousel-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-  background: rgba(255,255,255,0.2);
-  transition: background var(--duration-fast);
-}
-.restaurant-carousel-dot.active {
-  background: var(--color-accent);
+  color: rgba(255,255,255,0.35);
+  margin-top: 6px;
 }
   </style>
 </head>

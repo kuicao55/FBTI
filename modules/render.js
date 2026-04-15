@@ -406,23 +406,53 @@ export function loadTypeSVG(typeCode) {
 }
 
 // ---- renderRestaurantCarousel ----
+// Breathing restaurant display: fade in 2s → display 5s → fade out 2s → next
+// Single restaurant: fixed display, no animation
+// Title is fixed, only content fades
 export function renderRestaurantCarousel(container, typeCode, restaurants, maxPerType) {
   const list = restaurants || [];
+  if (list.length === 0) return;
 
-  // restaurants.length === 0 → directly return, do not render
-  if (list.length === 0) {
-    return;
-  }
+  const FADE_IN_MS = 2000;
+  const DISPLAY_MS = 5000;
+  const FADE_OUT_MS = 2000;
 
-  // Shuffle array to show a random restaurant first
+  // Shuffle once
   const shuffled = [...list];
   for (let i = shuffled.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
-    [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    [shuffled[i], shuffled[j]] = [shuffled[i], shuffled[j]];
   }
 
-  const carousel = document.createElement('div');
-  carousel.className = 'restaurant-carousel';
+  // Build DOM: title (fixed) + content (animated)
+  const wrapper = document.createElement('div');
+  wrapper.className = 'restaurant-carousel';
+
+  // Title row - fixed, not animated
+  const title = document.createElement('div');
+  title.className = 'restaurant-carousel-title';
+
+  const laurelLeft = document.createElement('img');
+  laurelLeft.src = 'assets/laurel_left.png';
+  laurelLeft.className = 'restaurant-carousel-laurel';
+  laurelLeft.alt = '';
+
+  const titleText = document.createElement('span');
+  titleText.className = 'restaurant-carousel-title-text';
+  titleText.textContent = typeCode + '推荐餐厅';
+
+  const laurelRight = document.createElement('img');
+  laurelRight.src = 'assets/laurel_right.png';
+  laurelRight.className = 'restaurant-carousel-laurel';
+  laurelRight.alt = '';
+
+  title.appendChild(laurelLeft);
+  title.appendChild(titleText);
+  title.appendChild(laurelRight);
+
+  // Content that fades
+  const content = document.createElement('div');
+  content.className = 'restaurant-carousel-content';
 
   const nameEl = document.createElement('div');
   nameEl.className = 'restaurant-carousel-name';
@@ -430,21 +460,17 @@ export function renderRestaurantCarousel(container, typeCode, restaurants, maxPe
   const byEl = document.createElement('div');
   byEl.className = 'restaurant-carousel-by';
 
-  carousel.appendChild(nameEl);
-  carousel.appendChild(byEl);
+  content.appendChild(nameEl);
+  content.appendChild(byEl);
 
-  // Bottom indicator dots (only when multiple restaurants)
-  const dotsEl = document.createElement('div');
-  dotsEl.className = 'restaurant-carousel-dots';
-  carousel.appendChild(dotsEl);
-
-  container.appendChild(carousel);
+  wrapper.appendChild(title);
+  wrapper.appendChild(content);
+  container.appendChild(wrapper);
 
   let currentIndex = 0;
   let timerId = null;
   let paused = false;
-  const INTERVAL_MS = 5000;
-  const FADE_MS = 300;
+  let fading = false;
 
   function updateContent(index) {
     const r = shuffled[index];
@@ -452,81 +478,81 @@ export function renderRestaurantCarousel(container, typeCode, restaurants, maxPe
     byEl.textContent = 'by ' + (r.by || '匿名用户');
   }
 
-  function showNext() {
-    if (paused) return;
-    // Fade out
-    carousel.style.opacity = '0';
+  function fadeIn(callback) {
+    content.style.opacity = '0';
+    content.style.transition = `opacity ${FADE_IN_MS}ms ease-in-out`;
+    fading = true;
     setTimeout(() => {
-      currentIndex = (currentIndex + 1) % shuffled.length;
       updateContent(currentIndex);
-      // Fade in
-      carousel.style.opacity = '1';
-    }, FADE_MS);
+      content.style.opacity = '1';
+      fading = false;
+      if (callback) callback();
+    }, 50);
   }
 
-  function startTimer() {
-    stopTimer();
-    if (shuffled.length > 1) {
-      timerId = setInterval(showNext, INTERVAL_MS);
-    }
+  function fadeOut(callback) {
+    content.style.opacity = '0';
+    content.style.transition = `opacity ${FADE_OUT_MS}ms ease-in-out`;
+    fading = true;
+    setTimeout(() => {
+      fading = false;
+      if (callback) callback();
+    }, FADE_OUT_MS);
   }
 
-  function stopTimer() {
-    if (timerId !== null) {
-      clearInterval(timerId);
-      timerId = null;
-    }
+  function showNext() {
+    if (paused || fading || shuffled.length <= 1) return;
+    fadeOut(() => {
+      currentIndex = (currentIndex + 1) % shuffled.length;
+      fadeIn(() => {
+        if (!paused) timerId = setTimeout(showNext, DISPLAY_MS);
+      });
+    });
   }
 
-  // Initial content
+  // Single restaurant: just display once, no animation
   updateContent(0);
-  carousel.style.transition = 'opacity ' + FADE_MS + 'ms ease';
-  carousel.style.opacity = '1';
+  content.style.opacity = '1';
+  content.style.transition = '';
+
+  if (shuffled.length > 1) {
+    timerId = setTimeout(showNext, DISPLAY_MS);
+  }
 
   // Hover pause
-  carousel.addEventListener('mouseenter', () => { paused = true; });
-  carousel.addEventListener('mouseleave', () => { paused = false; });
+  content.addEventListener('mouseenter', () => {
+    paused = true;
+    clearTimeout(timerId);
+  });
+  content.addEventListener('mouseleave', () => {
+    paused = false;
+    if (!fading) {
+      timerId = setTimeout(showNext, DISPLAY_MS);
+    }
+  });
 
-  // Click to copy restaurant name
+  // Click to copy
   nameEl.style.cursor = 'pointer';
   nameEl.addEventListener('click', async () => {
     try {
-      if (window.clipboard && window.clipboard.writeText) {
-        await window.clipboard.writeText(shuffled[currentIndex].name);
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        await navigator.clipboard.writeText(shuffled[currentIndex].name);
       } else {
-        // Fallback for older browsers
         const ta = document.createElement('textarea');
         ta.value = shuffled[currentIndex].name;
-        ta.style.position = 'fixed';
-        ta.style.opacity = '0';
+        ta.style.cssText = 'position:fixed;opacity:0';
         document.body.appendChild(ta);
         ta.select();
         document.execCommand('copy');
         document.body.removeChild(ta);
       }
-    } catch (e) {
-      // Clipboard may not be available in non-secure contexts
-    }
+    } catch (e) { /* clipboard unavailable */ }
   });
-
-  // Build dots
-  if (shuffled.length > 1) {
-    for (let i = 0; i < shuffled.length; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'restaurant-carousel-dot';
-      if (i === 0) dot.classList.add('active');
-      dotsEl.appendChild(dot);
-    }
-  }
-
-  startTimer();
 
   return {
     destroy() {
-      stopTimer();
-      if (carousel.parentNode) {
-        carousel.parentNode.removeChild(carousel);
-      }
+      clearTimeout(timerId);
+      if (wrapper.parentNode) wrapper.parentNode.removeChild(wrapper);
     }
   };
 }

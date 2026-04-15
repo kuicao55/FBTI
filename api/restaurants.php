@@ -30,19 +30,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
 $config_path = __DIR__ . '/config.php';
 $config = [];
 if (file_exists($config_path)) {
-    require_once $config_path;
-    // Extract config values if available
-    if (defined('DB_HOST')) $config['host'] = DB_HOST;
-    if (defined('DB_PORT')) $config['port'] = DB_PORT;
-    if (defined('DB_NAME')) $config['database'] = DB_NAME;
-    if (defined('DB_USER')) $config['user'] = DB_USER;
-    if (defined('DB_PASS')) $config['password'] = DB_PASS;
-    if (defined('DB_CHARSET')) $config['charset'] = DB_CHARSET;
-    if (defined('DB_TIMEOUT')) $config['timeout'] = DB_TIMEOUT;
+    $config = require_once $config_path;
 }
 
 /**
- * Validate category format (must be 4 uppercase letters)
+ * Valres_idate category format (must be 4 uppercase letters)
  */
 function is_valid_category($category) {
     return preg_match('/^[A-Z]{4}$/', $category);
@@ -60,9 +52,9 @@ function get_db_connection($config) {
         $dsn = sprintf(
             'mysql:host=%s;port=%d;dbname=%s;charset=%s',
             $config['host'],
-            $config['port'] ?? 3306,
-            $config['database'] ?? 'fbti',
-            $config['charset'] ?? 'utf8mb4'
+            isset($config['port']) ? $config['port'] : 3306,
+            isset($config['database']) ? $config['database'] : 'fbti',
+            isset($config['charset']) ? $config['charset'] : 'utf8mb4'
         );
 
         $options = [
@@ -79,8 +71,8 @@ function get_db_connection($config) {
 
         return new PDO(
             $dsn,
-            $config['user'] ?? 'root',
-            $config['password'] ?? '',
+            isset($config['user']) ? $config['user'] : 'root',
+            isset($config['password']) ? $config['password'] : '',
             $options
         );
     } catch (PDOException $e) {
@@ -135,8 +127,8 @@ function check_ip_rate_limit($db, $ip) {
     try {
         $stmt = $db->prepare(
             "SELECT COUNT(*) as cnt FROM restaurants
-             WHERE ip_address = :ip
-             AND created_at >= CURDATE()"
+             WHERE ip = :ip
+             AND date >= CURDATE()"
         );
         $stmt->execute([':ip' => $ip]);
         $result = $stmt->fetch();
@@ -184,10 +176,10 @@ function get_restaurants_by_category($db, $category) {
     try {
         // Use SQL_CALC_FOUND_ROWS to get count in same query
         $stmt = $db->prepare(
-            "SELECT SQL_CALC_FOUND_ROWS id, category, name, submitted_by, created_at
+            "SELECT SQL_CALC_FOUND_ROWS res_id, category, name, user, date
              FROM restaurants
              WHERE category = :category AND suspended = 0
-             ORDER BY created_at DESC"
+             ORDER BY date DESC"
         );
         $stmt->execute([':category' => $category]);
         $restaurants = $stmt->fetchAll();
@@ -206,20 +198,20 @@ function get_restaurants_by_category($db, $category) {
 /**
  * Insert a new restaurant
  */
-function insert_restaurant($db, $category, $name, $submitted_by, $ip) {
+function insert_restaurant($db, $category, $name, $user, $ip) {
     if (!$db) {
         return false;
     }
 
     try {
         $stmt = $db->prepare(
-            "INSERT INTO restaurants (category, name, submitted_by, ip_address, suspended, created_at)
-             VALUES (:category, :name, :submitted_by, :ip, 1, NOW())"
+            "INSERT INTO restaurants (category, name, user, ip, suspended, date)
+             VALUES (:category, :name, :user, :ip, 1, NOW())"
         );
         return $stmt->execute([
             ':category' => $category,
             ':name' => $name,
-            ':submitted_by' => $submitted_by,
+            ':user' => $user,
             ':ip' => $ip
         ]);
     } catch (PDOException $e) {
@@ -252,11 +244,11 @@ if ($method === 'GET') {
     // Apply htmlspecialchars to all output values for XSS prevention
     $safe_restaurants = array_map(function($r) {
         return [
-            'id' => (int)$r['id'],
+            'res_id' => (int)$r['res_id'],
             'category' => htmlspecialchars($r['category'], ENT_QUOTES, 'UTF-8'),
             'name' => htmlspecialchars($r['name'], ENT_QUOTES, 'UTF-8'),
-            'by' => htmlspecialchars($r['submitted_by'] ?? '', ENT_QUOTES, 'UTF-8'),
-            'date' => isset($r['created_at']) ? date('Y-m-d', strtotime($r['created_at'])) : ''
+            'by' => htmlspecialchars(isset($r['user']) ? $r['user'] : '', ENT_QUOTES, 'UTF-8'),
+            'date' => isset($r['date']) ? date('Y-m-d', strtotime($r['date'])) : ''
         ];
     }, $restaurants);
 
@@ -277,7 +269,7 @@ if ($method === 'GET') {
         error_response('Invalid JSON');
     }
 
-    // Validate required fields
+    // Valres_idate required fields
     $category = isset($data['category']) ? strtoupper($data['category']) : '';
     $name = isset($data['name']) ? trim($data['name']) : '';
     $by = isset($data['by']) ? trim($data['by']) : '';
@@ -315,10 +307,10 @@ if ($method === 'GET') {
 
     if ($inserted) {
         // Get the inserted ID
-        $insert_id = $db->lastInsertId();
+        $insert_res_id = $db->lastInsertId();
         // Escape at output time
         success_response([
-            'id' => (int)$insert_id,
+            'res_id' => (int)$insert_res_id,
             'category' => htmlspecialchars($category, ENT_QUOTES, 'UTF-8'),
             'name' => htmlspecialchars($raw_name, ENT_QUOTES, 'UTF-8'),
             'by' => htmlspecialchars($raw_by, ENT_QUOTES, 'UTF-8'),

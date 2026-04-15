@@ -1,7 +1,7 @@
 {
   "project": "FBTI Web Quiz",
   "created_at": "2026-04-11T01:38:43Z",
-  "updated_at": "2026-04-14T20:34:15Z",
+  "updated_at": "2026-04-15T13:37:05Z",
   "spec_file": "docs/harness/specs/2026-04-11-fbti-web-design.md",
   "current_session_handoff": "docs/harness/handoffs/handoff.md",
   "worktree": null,
@@ -60,6 +60,17 @@
       "plan_file": "docs/harness/plans/2026-04-14-milestone-5.md",
       "session_date": "2026-04-14T19:17:09Z",
       "notes": "Completed 2026-04-14T20:45:00Z \u2014 all 6 tasks complete, CQR PASS"
+    },
+    {
+      "id": "milestone-6",
+      "title": "Restaurant MySQL migration + carousel UI",
+      "description": "Migrate restaurant data from JSON to MySQL via PHP API, replace list UI with fade carousel, merge recommend button with share buttons",
+      "depends_on": [],
+      "passed": true,
+      "spec_file": "docs/harness/specs/2026-04-15-restaurant-mysql-redesign.md",
+      "plan_file": "docs/harness/plans/2026-04-15-milestone-6.md",
+      "session_date": "2026-04-15T10:00:00Z",
+      "notes": "Completed 2026-04-15T12:30:00Z \u2014 all 6 tasks complete, CQR PASS"
     }
   ],
   "version_branch": "v3.0.0"
